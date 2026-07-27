@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
+    <title>Agent Evaluation with MLflow and EvalHub on Red Hat OpenShift AI :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
     <link rel="next" href="LABENV/index.html">
     <meta name="generator" content="Antora 3.2.0-alpha.12">
     <link rel="stylesheet" href="../../_/css/site.css">
@@ -168,12 +168,12 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI</h1>
+<h1 class="page">Agent Evaluation with MLflow and EvalHub on Red Hat OpenShift AI</h1>
 <div class="sect1">
 <h2 id="_goal"><a class="anchor" href="#_goal"></a>Goal</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This course teaches how to deploy MLFlow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLFlow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.</p>
+<p>This course teaches how to deploy MLflow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLflow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.</p>
 </div>
 <div class="paragraph">
 <p>Total estimated reading time: <span class="course-total-duration" aria-live="polite">…</span></p>
@@ -204,16 +204,16 @@ Red Hat associates must enroll using the <a href="https://training-lms.redhat.co
 <div class="ulist">
 <ul>
 <li>
-<p>Understand how MLFlow and EvalHub relate to agentic applications and to Red Hat OpenShift AI</p>
+<p>Understand how MLflow and EvalHub relate to agentic applications and to Red Hat OpenShift AI</p>
 </li>
 <li>
-<p>Deploy a development environment with MLFlow and EvalHub</p>
+<p>Deploy a development environment with MLflow and EvalHub</p>
 </li>
 <li>
 <p>Evaluate LLMs using EvalHub</p>
 </li>
 <li>
-<p>Evaluate agents using MLFlow</p>
+<p>Evaluate agents using MLflow</p>
 </li>
 </ul>
 </div>
@@ -228,10 +228,10 @@ Red Hat associates must enroll using the <a href="https://training-lms.redhat.co
 <p>Software developers working on agentic applications and agentic harnesses.</p>
 </li>
 <li>
-<p>Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLFlow with Red Hat OpenShift AI, such as Solutions Architects.</p>
+<p>Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLflow with Red Hat OpenShift AI, such as Solutions Architects.</p>
 </li>
 <li>
-<p>Red Hat and Partner roles that implement and support MLFlow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.</p>
+<p>Red Hat and Partner roles that implement and support MLflow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.</p>
 </li>
 </ul>
 </div>
@@ -268,18 +268,28 @@ Red Hat associates must enroll using the <a href="https://training-lms.redhat.co
 <p>This course uses the <a href="https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.openshift-ai-v3.prod&amp;utm_source=webapp&amp;utm_medium=share-link" target="_blank" rel="noopener">Red Hat OpenShift AI 3.4</a> demo catalog entry, which provides an SNO OpenShift cluster based on an AWS instance with a single GPU and a predeployed llama-32-3b-instruct model.</p>
 </div>
 <div class="paragraph">
-<p>Any additional components required by MLFlow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.</p>
+<p>Any additional components required by MLflow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_other_sources_of_information_about_mlflow_and_evalhub"><a class="anchor" href="#_other_sources_of_information_about_mlflow_and_evalhub"></a>Other sources of information about MLFlow and EvalHub</h2>
+<h2 id="_other_sources_of_information_about_mlflow_and_evalhub"><a class="anchor" href="#_other_sources_of_information_about_mlflow_and_evalhub"></a>Other sources of information about MLflow and EvalHub</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For documentation about Red Hat OpenShift AI, see its <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed" target="_blank" rel="noopener">product documentation</a>.</p>
+<p>For documentation about Red Hat OpenShift AI, see its <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed" target="_blank" rel="noopener">product documentation</a>, especially:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/index" target="_blank" rel="noopener">Working with MLflow</a></p>
+</li>
+<li>
+<p>Chapter 2 of Evaluating AI systems: <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate" target="_blank" rel="noopener">Evaluate LLMs with EvalHub</a></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>For documentation about MLFlow, see its <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener">upstream project documentation</a>.</p>
+<p>Also refer to upstream documentation ofhttps://mlflow.org/docs/latest/index.html[MLflow^] and <a href="https://eval-hub.github.io/" target="_blank" rel="noopener">EvalHub</a>.</p>
 </div>
 </div>
 </div>
@@ -305,7 +315,7 @@ Red Hat - Product Portfolio Marketing &amp; Learning</p>
 </footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
 <script defer src="../../_/js/vendor/tabs.js"></script>
-<script>window.__courseDuration = {"totalSeconds":728,"pageCount":18};</script>
+<script>window.__courseDuration = {"totalSeconds":737,"pageCount":18};</script>
 <script defer src="../../_/js/vendor/course-total-duration.js"></script>
   </body>
 </html>
