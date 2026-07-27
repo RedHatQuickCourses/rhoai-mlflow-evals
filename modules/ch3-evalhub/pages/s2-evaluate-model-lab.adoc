@@ -1,0 +1,56 @@
+= Lab: Evaluate a Self-Hosted Model
+
+Objective::
+
+Run evaluation jobs on a self-hosted model using EvalHub, monitor their progress, and inspect results and metrics from the RHOAI dashboard.
+
+WARNING: Not started  yet.
+
+== Before you begin
+
+Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.
+
+== Instructions
+
+High-level summary of what you will perform in this lab, but more detailed than the objective.
+
+1. Task or outcome.
+
+.. Something to do, using a graphical or web UI.
+Click menu:Save As[] to save your work.
+
+.. More things to do
+
+2. Task or outcome.
+
+.. Something to do, using a shell.
++
+[source,console,subs="verbatim,quotes"]
+--
+$ *command --options fixed-arguments _variable-arguments_*
+output of the command
+highlight *something* in the output
+--
+
+
+.. More things to do.
+Press kbd:[Ctrl+C] to interrupt.
+
+Summary of what you acomplished.
+
+== What's next
+
+Having evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLFlow SDK.
+
+////
+Evaluate a self-hosted model
+Label the user project so it gets EvalHub sa and role bindings
+Run a "smoke test" evaluation to prove EvalHub is functional using garak quick
+Run a real (but quick) evaluation test to view results and metrics using garak cwe
+Maybe do one of the evaluations using the dashboard and another using the CLI
+Monitor progress and completion of evaluation jobs
+Inspect Kubernetes jobs and pods related to an evaluation job for troubleshooting
+View results and metrics using the Evaluations page and EvalHub CLI
+View results and metrics using the Experiments (MLflow) page
+CANNOT run any benchmark from lm_evaluation_harness or guidellm, need working end-to-end examples or just restrict activities to using garak
+////

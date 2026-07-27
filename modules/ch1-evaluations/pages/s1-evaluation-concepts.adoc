@@ -1,0 +1,39 @@
+= Evaluation Concepts for AI Applications
+
+Objective::
+
+Describe how evaluating AI-enabled applications differs from testing traditional applications and identify the roles of MLFlow and EvalHub in Red Hat OpenShift AI.
+
+WARNING: Not started  yet.
+
+== Heading
+
+Lorem ipsum
+
+== Another heading
+
+Lorem ipsum
+
+== What's Next
+
+Now that you understand the key evaluation concepts for AI applications, test your knowledge with a quiz on MLFlow and EvalHub fundamentals.
+
+////
+The need for evaluations
+How testing AI-enabled applications (evaluation) differs from testing traditional applications (unit/integration/functional/scalability testing)
+Evaluating models as a step in a larger process which also includes evaluating agents
+Silent failures and AIOps concepts
+Evaluation-Driven Development (EDD)
+Introduction to MLFlow in Red Hat OpenShift AI
+Summary of MLFlow features supported or recommended in an RHOAI instance. Focus on MLFlow features for generative AI applications, especially observability and reproducibility.
+Quick introduction to the concept of experiments in MLFlow and how it applies to agentic application development.
+Refer to the previous curious for a deeper introduction to MLflow and its SDK
+Introduction to EvalHub in Red Hat OpenShift AI
+EvalHub is a hub for all kinds of evaluation tasks, but currently (RHOAI 3.4) only supports model evaluation.
+Summary of the EvalHub features
+Different kinds of evaluations, ex: safety, security, and performance.
+Quick introduction to the concepts of providers, benchmarks, collections, metrics, and BYOF on EvalHub
+Observability: EvalHub can/should stores data from evaluation jobs as Experiment runs in MLflow
+Governance: EvalHub can/should store cryptographically signed evaluation results on an OCI registry
+There's a note in RHOAI 3.5EA known issues about the need of installing/enabling MLflow before EvalHub. In fact, I experienced, with RHOAI 3.4, some of the known issues listed only for 3.5EA
+////

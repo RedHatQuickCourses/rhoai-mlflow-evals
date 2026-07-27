@@ -1,0 +1,7 @@
+= Model Evaluation with EvalHub
+
+Goal::
+
+Evaluate LLMs using EvalHub providers, benchmarks, and collections on Red Hat OpenShift AI.
+
+WARNING: Not started  yet.

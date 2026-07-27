@@ -1,27 +1,66 @@
-= An Example Quick Course
+= Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI
 :navtitle: Home
 
-== Introduction
+== Goal
 
-Course Title: Course title FIXME
+This course teaches how to deploy MLFlow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLFlow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.
 
-Description:
-Course description FIXME
+Total estimated reading time: pass:[<span class="course-total-duration" aria-live="polite">…</span>]
 
-Duration: pass:[<span class="course-total-duration" aria-live="polite">…</span>]
+You should reserve between 4 hours to one working day to complete this course.
+
+IMPORTANT: Red Hat associates must enroll using the https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3DRHTP_COURSE_ID[Red Hat Learning Portal^], and Red Hat Partners must enroll using https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3DPTP_COURSE_ID[Red Hat Partner Connect^] to register this course in their learning history.
 
 == Objectives
 
 On completing this course, you should be able to:
 
-* Observable, measurable objective...
-* Observable, measurable objective...
-* Observable, measurable objective...
+* Understand how MLFlow and EvalHub relate to agentic applications and to Red Hat OpenShift AI
+
+* Deploy a development environment with MLFlow and EvalHub
+
+* Evaluate LLMs using EvalHub
+
+* Evaluate agents using MLFlow
+
+== Audience
+
+* Software developers working on agentic applications and agentic harnesses.
+
+* Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLFlow with Red Hat OpenShift AI, such as Solutions Architects.
+
+* Red Hat and Partner roles that implement and support MLFlow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.
 
 == Prerequisites
 
-This course assumes that you have the following prior experience:
+This course assumes that you have the following experience:
 
-* Course or experience...
-* Course or experience...
-* Course or experience...
+* Familiarity with generative AI and agentic application concepts.
+
+* Familiarity with the basic operation of Red Hat OpenShift AI.
+
+* Python programming skills are recommended but not required, because this training provides sample code which is ready to run.
+
+It is recommended, but not required, to attend a prerequisite course about agentic traces with MLflow.
+
+== Classroom environment
+
+This course uses the https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.openshift-ai-v3.prod&utm_source=webapp&utm_medium=share-link[Red Hat OpenShift AI 3.4^] demo catalog entry, which provides an SNO OpenShift cluster based on an AWS instance with a single GPU and a predeployed llama-32-3b-instruct model.
+
+Any additional components required by MLFlow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.
+
+== Other sources of information about MLFlow and EvalHub
+
+For documentation about Red Hat OpenShift AI, see its https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[product documentation^].
+
+For documentation about MLFlow, see its https://mlflow.org/docs/latest/index.html[upstream project documentation^].
+
+== Author
+
+*Fernando Lozano* +
+Training Content Architect +
+Red Hat - Product Portfolio Marketing & Learning
+
+////
+Special thanks to people for their support while designing and writing this course.
+////

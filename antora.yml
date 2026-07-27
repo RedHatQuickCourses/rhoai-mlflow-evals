@@ -1,10 +1,10 @@
-name: REPLACEREPONAME
-title: FIXME Course Title
+name: rhoai-mlflow-evals
+title: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI
 version: 1
 nav:
 - modules/ROOT/nav.adoc
 - modules/LABENV/nav.adoc
-- modules/chapter1/nav.adoc
-- modules/chapter2/nav.adoc
-- modules/chapter3/nav.adoc
-- modules/appendix/nav.adoc
+- modules/ch1-evaluations/nav.adoc
+- modules/ch2-deployment/nav.adoc
+- modules/ch3-evalhub/nav.adoc
+- modules/ch4-mlflow/nav.adoc

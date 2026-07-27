@@ -1,0 +1,27 @@
+= EvalHub Architecture and CLI
+
+Objective::
+
+Describe the architecture of EvalHub and explain how to enable, access, and use its CLI with Red Hat OpenShift AI.
+
+WARNING: Not started  yet.
+
+== Heading
+
+Lorem ipsum
+
+== Another heading
+
+Lorem ipsum
+
+== What's Next
+
+Next, you deploy and configure EvalHub on your Red Hat OpenShift AI instance.
+
+////
+How to deploy EvalHib in RHOAI and how to access it from its CLI and web UIs.
+Architecture of EvalHub: server, SDK, CLI, database, kubernetes jobs, adapters, registry, and mlflow observability
+How to enable EvalHub using the TrustyAI operator
+How to access EvalHub server from inside and from outside an RHOAI instance and its OpenShift cluster
+Installation and usage of the EvalHub CLI
+////

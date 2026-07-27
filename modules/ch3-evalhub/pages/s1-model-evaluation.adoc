@@ -1,0 +1,27 @@
+= Model Evaluation Concepts
+
+Objective::
+
+Describe the evaluation providers and benchmarks available in EvalHub and explain how to manage evaluation jobs and interpret their results.
+
+WARNING: Not started  yet.
+
+== Heading
+
+Lorem ipsum
+
+== Another heading
+
+Lorem ipsum
+
+== What's Next
+
+Next, you run evaluation jobs on a self-hosted model and inspect the results.
+
+////
+Evaluating models
+Quick introduction to lm_evaluation_harness, guidelm, and garak providers and their benchmarks
+Evalhub job parameter and provider/benchmark parameters
+Starting, monitoring, and canceling evaluation jobs
+Results and metrics of evaluation jobs
+////

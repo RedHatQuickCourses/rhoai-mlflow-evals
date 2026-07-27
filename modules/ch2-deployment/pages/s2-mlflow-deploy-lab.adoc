@@ -1,0 +1,51 @@
+= Lab: Deploy MLFlow for Development
+
+Objective::
+
+Enable MLFlow on Red Hat OpenShift AI, configure it with local storage, and verify the deployment is functional.
+
+WARNING: Not started  yet.
+
+== Before you begin
+
+Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.
+
+== Instructions
+
+High-level summary of what you will perform in this lab, but more detailed than the objective.
+
+1. Task or outcome.
+
+.. Something to do, using a graphical or web UI.
+Click menu:Save As[] to save your work.
+
+.. More things to do
+
+2. Task or outcome.
+
+.. Something to do, using a shell.
++
+[source,console,subs="verbatim,quotes"]
+--
+$ *command --options fixed-arguments _variable-arguments_*
+output of the command
+highlight *something* in the output
+--
+
+
+.. More things to do.
+Press kbd:[Ctrl+C] to interrupt.
+
+Summary of what you acomplished.
+
+== What's next
+
+With MLFlow deployed and verified, the next section introduces the architecture and setup of EvalHub.
+
+////
+Deploy MLFlow on Red Hat OpenShift AI for development
+Edit the DSC resource to enable MLFlow
+Configure MLFlow with a local SQL lite database and file-based storage using a PVC and the default storage class.
+Verify the healthy of the MLFlow server deployment
+Create an experiment using the RHOAI web UI to prove that the MLFlow server is functional
+////

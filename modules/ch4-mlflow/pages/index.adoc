@@ -1,0 +1,7 @@
+= Agent Evaluation with MLFlow
+
+Goal::
+
+Evaluate agentic applications using the MLFlow SDK with deterministic scorers and LLM judges on Red Hat OpenShift AI.
+
+WARNING: Not started  yet.

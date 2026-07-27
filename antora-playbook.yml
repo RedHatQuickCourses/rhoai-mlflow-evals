@@ -1,6 +1,6 @@
 site:
-  title: FIXME Course Title
-  start_page: REPLACEREPONAME::index.adoc
+  title: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI
+  start_page: rhoai-mlflow-evals::index.adoc
 
 content:
   sources:
@@ -11,6 +11,7 @@ asciidoc:
   - '@asciidoctor/tabs'
   attributes:
     page-pagination: true
+    experimental: true
 
 ui:
   bundle:

@@ -1,0 +1,29 @@
+= Agentic Evaluation Concepts
+
+Objective::
+
+Describe the different kinds of assessment for agentic applications and explain how to code MLFlow evaluations using scorers, judges, and data sets.
+
+WARNING: Not started  yet.
+
+== Heading
+
+Lorem ipsum
+
+== Another heading
+
+Lorem ipsum
+
+== What's Next
+
+Next, you evaluate a chat application using a deterministic scorer and view the results as MLFlow traces.
+
+////
+Evaluating agentic applications
+Kinds of assessment: human, deterministic, and LLM judge.
+MLflow evaluation scorers (deterministic) and prediction functions
+MLflow built-in and custom LLM judges
+Evaluation data sets: inline, in MLflow database, and extracted from traces
+Coding an MLflow evaluation in Python
+How to run MLflow evaluations with agents coded using runtimes other than Python and TypeScript
+////

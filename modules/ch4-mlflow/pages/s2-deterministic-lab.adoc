@@ -1,0 +1,55 @@
+= Lab: Evaluate an Agent with Deterministic Scoring
+
+Objective::
+
+Add tracing to a chat application, create a deterministic scorer, and run an MLFlow evaluation to verify response quality.
+
+WARNING: Not started  yet.
+
+== Before you begin
+
+Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.
+
+== Instructions
+
+High-level summary of what you will perform in this lab, but more detailed than the objective.
+
+1. Task or outcome.
+
+.. Something to do, using a graphical or web UI.
+Click menu:Save As[] to save your work.
+
+.. More things to do
+
+2. Task or outcome.
+
+.. Something to do, using a shell.
++
+[source,console,subs="verbatim,quotes"]
+--
+$ *command --options fixed-arguments _variable-arguments_*
+output of the command
+highlight *something* in the output
+--
+
+
+.. More things to do.
+Press kbd:[Ctrl+C] to interrupt.
+
+Summary of what you acomplished.
+
+== What's next
+
+Next, you evaluate the same application using built-in and custom LLM judges for more nuanced assessment.
+
+////
+Evaluate an agent with a deterministic function
+Start from a ready-to-run chat application and validate it's fine
+Add tracing to the chat app
+CANNOT USE the RHOAI 3.4 index for MLflow and evals – there's a bug with using self-hosted models. Show how to switch to upstream package indexes.
+Encapsulate the function in a prediction function and evaluate using a deterministic scorer for "short responses"
+Provide evaluation data inline as Python code
+Run the evaluation and view its results on MLflow traces
+Show how changes to the system prompt change scores from fail to pass
+Tentative: use MLflow prompt registry to fetch different system prompts for different experiments
+////

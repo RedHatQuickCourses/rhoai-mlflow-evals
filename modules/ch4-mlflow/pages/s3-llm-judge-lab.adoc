@@ -1,0 +1,55 @@
+= Lab: Evaluate an Agent with an LLM Judge
+
+Objective::
+
+Perform evaluations using built-in and custom LLM judges with self-hosted models, and inspect evaluation results through MLFlow traces.
+
+WARNING: Not started  yet.
+
+== Before you begin
+
+Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.
+
+== Instructions
+
+High-level summary of what you will perform in this lab, but more detailed than the objective.
+
+1. Task or outcome.
+
+.. Something to do, using a graphical or web UI.
+Click menu:Save As[] to save your work.
+
+.. More things to do
+
+2. Task or outcome.
+
+.. Something to do, using a shell.
++
+[source,console,subs="verbatim,quotes"]
+--
+$ *command --options fixed-arguments _variable-arguments_*
+output of the command
+highlight *something* in the output
+--
+
+
+.. More things to do.
+Press kbd:[Ctrl+C] to interrupt.
+
+Summary of what you acomplished.
+
+== What's next
+
+Congratulations on completing this course! You are now able to deploy MLFlow and EvalHub on Red Hat OpenShift AI, evaluate both models and agentic applications, and visualize results using the RHOAI dashboard.
+
+////
+Evaluate an agent with an LLM judge
+Start from the same application as the previous example
+Perform an evaluation using a built-in LLM judge (Correctness), but using self-hosted models instead of external frontier models
+View evaluation results on MLflow traces
+Create a custom LLM judge (no acronyms?) using make_judge and test it with a direct call
+Perform an evaluation using the custom LLM judge
+View evaluation results on MLflow traces
+Enable traces of evaluations
+Tentative: use a MCP-enabled agentic app and a tool judge from MLflow
+////

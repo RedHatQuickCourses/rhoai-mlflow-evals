@@ -1,0 +1,7 @@
+= Introduction to MLFlow and EvalHub
+
+Goal::
+
+Understand how MLFlow and EvalHub relate to agentic applications and to Red Hat OpenShift AI.
+
+WARNING: Not started  yet.
