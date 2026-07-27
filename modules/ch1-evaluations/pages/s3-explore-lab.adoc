@@ -2,41 +2,130 @@
 
 Objective::
 
-Navigate the provided demo environment, identify enabled Red Hat OpenShift AI features, and verify that the predeployed model is functional.
-
-WARNING: Not started  yet.
+Navigate the provided demo environment, identify enabled features of Red Hat OpenShift AI 3.4, and verify the predeployed llama model.
 
 == Before you begin
 
-Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.
+You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:
+
+* Access credentials for the RHOAI dashboard
+* A web browser to access the RHOAI dashboard
+* A web browser to access the OpenShift web console
 
 == Instructions
 
-High-level summary of what you will perform in this lab, but more detailed than the objective.
+In this lab, you will log in to the RHOAI dashboard and explore its main features and components to understand the platform's capabilities.
+You will also install the Web Terminal operator in your OpenShift cluster to use for activities which require command-line tools.
 
-1. Task or outcome.
+=== Inspect the existing projects and deployed models
 
-.. Something to do, using a graphical or web UI.
-Click menu:Save As[] to save your work.
+1. Access the RHOAI Dashboard.
 
-.. More things to do
+.. Navigate to the RHOAI dashboard URL of your demo environment.
 
-2. Task or outcome.
+.. Log in using the `admin` user, from the credentials provided for your demo environment.
 
-.. Something to do, using a shell.
+2. Explore the precreated project.
++
+Your RHOAI instance contains a model which is already deployed in a regular project named `my-first-model` -- which is *not* an AI project.
++
+That model takes up all GPU capacity available to your RHOAI instance, so any change to the model deployment requires that you stop it and restart after making changes.
+
+.. In the left pane, select menu:AI hub[Models] and then select the menu:Deployments[] tab.
+
+.. In the menu:Project[] field, enter `my` and select the menu:my-first-model[] project.
++
+WARNING: Depending on the current page of the RHOAI dashboard, it may be necessary to first select `All projects` before you can search and select the `my-first-model` project.
+
+.. Verify that there is a model deployment named `llama-32-3b-instruct` and its status is `Ready`. 
+
+.. Click menu:View[], under the *Endpoints* column for the model row, and verify that it provides only an internal endpoint.
+This means the model cannot be accessed from outside of its OpenShift cluster, unless you change its model deployment.
+
+3. Try the model with a Gen AI studio playground.
+
+.. In the left pane, select menu:Gen AI studio[Playground].
+
+.. In the menu:Project[] field, enter `my` and select the menu:my-first-model[] project.
++
+WARNING: The project previously selected in one page of the RHOAI dashboard may not be the current selection in another page of the RHOAI dashboard.
+
+.. If you do not see a *Configure* pane, click menu:Settings[].
+In the *Configure* pane, select the menu:Model[] tab and verify that the selected model is named `llama-32-3b-instruct`.
+Ignore the prefix on the model name.
+
+.. In the right pane, click menu:Send a message...[] and type a prompt, for example:
++
+[source,none,subs="verbatim,quotes"]
+----
+What is RHEL?
+----
+
+.. Type kbd:[Enter] to submit the prompt and see the response from the model.
+The model may return different answers if you attempt the same prompt again, but they all should be correct and reasonable.
+
+=== Confirm that MLflow and EvalHub are not deployed in RHOAI
+
+4. Verify that there are no RHOAI dashboard pages related to MLflow.
+
+.. In the left pane, expand the menu:Gen AI studio[] category, which contains entries named menu:Playground[] and menu:AI asset endpoints[].
++
+Enabling MLflow will add additional entries here.
+
+.. Select menu:Gen AI studio[AI asset endpoints] and then select the menu:MCP servers[] tab.
++
+Verify that there are no MCP servers configured for use by Gen AI studio playgrounds.
+
+.. In the left pane, expand the menu:Develop & train[] category, which contains entries named menu:Feature store[], menu:Pipelines[], menu:Jobs[], and menu:Evaluations[].
+
+.. In the toolbar, to the top right, click the menu:Applications[] icon, which is next to the menu:Question[] icon, and verify that there is *not* an entry named menu:MLflow[].
+
+5. Verify that the Evaluations page from RHOAI dashboard is not functional.
+
+.. In the left pane select the menu:Develop & train[Evaluations].
+
+.. The *Evaluations* page display the messages `Evaluations unavailable` and `To use evaluations, enable the evaluation service using the Trusty AI operator`.
+
+=== Install the Web Terminal operator
+
+6. To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.
+
+.. Navigate to the OpenShift web console URL of your demo environment.
+It should be automatically logged in as the `admin` user that you already authenticated to the RHOAI bashvoard.
+
+.. In the left pane, select menu:Ecosystem[Software Catalog].
+Enter `web terminal` in the search field.
+
+.. Click menu:Web Terminal[] provided by Red Hat and, on the operator details page, click menu:Install[].
+
+.. In the *Install Operator* page, make no changes and click menu:Install[].
+When it displays the `Manual approval required` message, click menu:Approve[].
+
+.. When you see the message `Operator installed successfully`, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.
+
+.. Verify that the toolbar displays the menu:>_[] icon, with tooltip `OpenShift command line` next to the menu:help[] or menu:&quest;[] icon.
+
+.. Click the menu:>_[] icon, which opens the menu:Terminal 1[] tab at the bottom of your OpenShift web console and click menu:Start[].
+
+.. When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.
 +
 [source,console,subs="verbatim,quotes"]
---
-$ *command --options fixed-arguments _variable-arguments_*
-output of the command
-highlight *something* in the output
---
+----
+$ *oc version*
+Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
+Kustomize Version: v5.6.0
+Server Version: 4.20.29
+Kubernetes Version: v1.33.13
+$ *oc get node*
+NAME                          STATUS   ROLES                         AGE    VERSION
+ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13
+----
 
+=== Summary 
 
-.. More things to do.
-Press kbd:[Ctrl+C] to interrupt.
+After completing these steps, you verified that you have a functional RHOAI instance with a pre-deployed model, which is available only for internal access, and that you can submit prompts to the model using an RHOAI playground. 
 
-Summary of what you acomplished.
+In addition, you have also verified that MLflow and EvalHub are is not installed on your RHOAI instance, and that there are no MCP servers deployed.
 
 == What's next
 
