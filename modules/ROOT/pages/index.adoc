@@ -1,9 +1,9 @@
-= Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI
+= Agent Evaluation with MLflow and EvalHub on Red Hat OpenShift AI
 :navtitle: Home
 
 == Goal
 
-This course teaches how to deploy MLFlow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLFlow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.
+This course teaches how to deploy MLflow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLflow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.
 
 Total estimated reading time: pass:[<span class="course-total-duration" aria-live="polite">…</span>]
 
@@ -15,21 +15,21 @@ IMPORTANT: Red Hat associates must enroll using the https://training-lms.redhat.
 
 On completing this course, you should be able to:
 
-* Understand how MLFlow and EvalHub relate to agentic applications and to Red Hat OpenShift AI
+* Understand how MLflow and EvalHub relate to agentic applications and to Red Hat OpenShift AI
 
-* Deploy a development environment with MLFlow and EvalHub
+* Deploy a development environment with MLflow and EvalHub
 
 * Evaluate LLMs using EvalHub
 
-* Evaluate agents using MLFlow
+* Evaluate agents using MLflow
 
 == Audience
 
 * Software developers working on agentic applications and agentic harnesses.
 
-* Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLFlow with Red Hat OpenShift AI, such as Solutions Architects.
+* Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLflow with Red Hat OpenShift AI, such as Solutions Architects.
 
-* Red Hat and Partner roles that implement and support MLFlow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.
+* Red Hat and Partner roles that implement and support MLflow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.
 
 == Prerequisites
 
@@ -47,13 +47,16 @@ It is recommended, but not required, to attend a prerequisite course about agent
 
 This course uses the https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.openshift-ai-v3.prod&utm_source=webapp&utm_medium=share-link[Red Hat OpenShift AI 3.4^] demo catalog entry, which provides an SNO OpenShift cluster based on an AWS instance with a single GPU and a predeployed llama-32-3b-instruct model.
 
-Any additional components required by MLFlow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.
+Any additional components required by MLflow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.
 
-== Other sources of information about MLFlow and EvalHub
+== Other sources of information about MLflow and EvalHub
 
-For documentation about Red Hat OpenShift AI, see its https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[product documentation^].
+For documentation about Red Hat OpenShift AI, see its https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed[product documentation^], especially:
 
-For documentation about MLFlow, see its https://mlflow.org/docs/latest/index.html[upstream project documentation^].
+* https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/index[Working with MLflow^]
+* Chapter 2 of Evaluating AI systems: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate[Evaluate LLMs with EvalHub^]
+
+Also refer to upstream documentation ofhttps://mlflow.org/docs/latest/index.html[MLflow^] and https://eval-hub.github.io/[EvalHub^].
 
 == Author
 
