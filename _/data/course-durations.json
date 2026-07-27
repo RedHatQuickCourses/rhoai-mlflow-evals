@@ -1,6 +1,6 @@
 {
-  "totalSeconds": 809,
-  "pageCount": 18,
+  "totalSeconds": 791,
+  "pageCount": 17,
   "pages": [
     {
       "module": "ROOT",
@@ -24,13 +24,8 @@
     },
     {
       "module": "ch1-evaluations",
-      "page": "s2-concepts-quiz.adoc",
-      "seconds": 20
-    },
-    {
-      "module": "ch1-evaluations",
       "page": "s3-explore-lab.adoc",
-      "seconds": 122
+      "seconds": 124
     },
     {
       "module": "ch2-deployment",
