@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
+    <link rel="next" href="LABENV/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../..">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhoai-mlflow-evals" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="ch1-evaluations/index.html">Introduction to MLFlow and EvalHub</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch1-evaluations/s1-evaluation-concepts.html">Evaluation Concepts for AI Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch1-evaluations/s2-concepts-quiz.html">Quiz: MLFlow and EvalHub Concepts Review</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch1-evaluations/s3-explore-lab.html">Lab: Explore the Learning Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="ch2-deployment/index.html">Deploy MLFlow and EvalHub</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch2-deployment/s1-mlflow-architecture.html">MLFlow Architecture and Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch2-deployment/s2-mlflow-deploy-lab.html">Lab: Deploy MLFlow for Development</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch2-deployment/s3-evalhub-architecture.html">EvalHub Architecture and CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch2-deployment/s4-evalhub-deploy-lab.html">Lab: Deploy EvalHub for Development</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="ch3-evalhub/index.html">Model Evaluation with EvalHub</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch3-evalhub/s1-model-evaluation.html">Model Evaluation Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch3-evalhub/s2-evaluate-model-lab.html">Lab: Evaluate a Self-Hosted Model</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="ch4-mlflow/index.html">Agent Evaluation with MLFlow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch4-mlflow/s1-agentic-evaluation.html">Agentic Evaluation Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch4-mlflow/s2-deterministic-lab.html">Lab: Evaluate an Agent with Deterministic Scoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ch4-mlflow/s3-llm-judge-lab.html">Lab: Evaluate an Agent with an LLM Judge</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
+    <li><a href="index.html">Home</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Agent Evaluation with MLFlow and EvalHub on Red Hat OpenShift AI</h1>
+<div class="sect1">
+<h2 id="_goal"><a class="anchor" href="#_goal"></a>Goal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This course teaches how to deploy MLFlow and EvalHub as included with Red Hat OpenShift AI 3.4; how to run evaluations of a self-hosted model, using EvalHub; how to run evaluations of an agentic application, using the MLFlow SDK with Python; and how to visualize the results of those evaluations as MLflow experiments and traces using the Red Hat OpenShift AI dashboard.</p>
+</div>
+<div class="paragraph">
+<p>Total estimated reading time: <span class="course-total-duration" aria-live="polite">…</span></p>
+</div>
+<div class="paragraph">
+<p>You should reserve between 4 hours to one working day to complete this course.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Red Hat associates must enroll using the <a href="https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3DRHTP_COURSE_ID" target="_blank" rel="noopener">Red Hat Learning Portal</a>, and Red Hat Partners must enroll using <a href="https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3DPTP_COURSE_ID" target="_blank" rel="noopener">Red Hat Partner Connect</a> to register this course in their learning history.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objectives"><a class="anchor" href="#_objectives"></a>Objectives</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On completing this course, you should be able to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Understand how MLFlow and EvalHub relate to agentic applications and to Red Hat OpenShift AI</p>
+</li>
+<li>
+<p>Deploy a development environment with MLFlow and EvalHub</p>
+</li>
+<li>
+<p>Evaluate LLMs using EvalHub</p>
+</li>
+<li>
+<p>Evaluate agents using MLFlow</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_audience"><a class="anchor" href="#_audience"></a>Audience</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Software developers working on agentic applications and agentic harnesses.</p>
+</li>
+<li>
+<p>Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLFlow with Red Hat OpenShift AI, such as Solutions Architects.</p>
+</li>
+<li>
+<p>Red Hat and Partner roles that implement and support MLFlow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This course assumes that you have the following experience:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Familiarity with generative AI and agentic application concepts.</p>
+</li>
+<li>
+<p>Familiarity with the basic operation of Red Hat OpenShift AI.</p>
+</li>
+<li>
+<p>Python programming skills are recommended but not required, because this training provides sample code which is ready to run.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It is recommended, but not required, to attend a prerequisite course about agentic traces with MLflow.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classroom_environment"><a class="anchor" href="#_classroom_environment"></a>Classroom environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This course uses the <a href="https://catalog.demo.redhat.com/catalog/babylon-catalog-prod?item=babylon-catalog-prod/published.openshift-ai-v3.prod&amp;utm_source=webapp&amp;utm_medium=share-link" target="_blank" rel="noopener">Red Hat OpenShift AI 3.4</a> demo catalog entry, which provides an SNO OpenShift cluster based on an AWS instance with a single GPU and a predeployed llama-32-3b-instruct model.</p>
+</div>
+<div class="paragraph">
+<p>Any additional components required by MLFlow, EvalHub, or course activities are configured by learners as part of course activities, using sample Python code and Kubernetes manifests provided in a public Git repository.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_other_sources_of_information_about_mlflow_and_evalhub"><a class="anchor" href="#_other_sources_of_information_about_mlflow_and_evalhub"></a>Other sources of information about MLFlow and EvalHub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For documentation about Red Hat OpenShift AI, see its <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed" target="_blank" rel="noopener">product documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>For documentation about MLFlow, see its <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener">upstream project documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author"><a class="anchor" href="#_author"></a>Author</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Fernando Lozano</strong><br>
+Training Content Architect<br>
+Red Hat - Product Portfolio Marketing &amp; Learning</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="LABENV/index.html">Lab Environment</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script defer src="../../_/js/vendor/tabs.js"></script>
+<script>window.__courseDuration = {"totalSeconds":728,"pageCount":18};</script>
+<script defer src="../../_/js/vendor/course-total-duration.js"></script>
+  </body>
+</html>

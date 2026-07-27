@@ -1,11 +1,11 @@
 {
-  "totalSeconds": 3998,
-  "pageCount": 15,
+  "totalSeconds": 728,
+  "pageCount": 18,
   "pages": [
     {
       "module": "ROOT",
       "page": "index.adoc",
-      "seconds": 15
+      "seconds": 121
     },
     {
       "module": "LABENV",
@@ -13,69 +13,84 @@
       "seconds": 4
     },
     {
-      "module": "chapter1",
+      "module": "ch1-evaluations",
       "page": "index.adoc",
-      "seconds": 9
+      "seconds": 6
     },
     {
-      "module": "chapter1",
-      "page": "section1.adoc",
-      "seconds": 3009
+      "module": "ch1-evaluations",
+      "page": "s1-evaluation-concepts.adoc",
+      "seconds": 80
     },
     {
-      "module": "chapter1",
-      "page": "section2.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter1",
-      "page": "section3.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter1",
-      "page": "tabs-demo.adoc",
+      "module": "ch1-evaluations",
+      "page": "s2-concepts-quiz.adoc",
       "seconds": 20
     },
     {
-      "module": "chapter1",
-      "page": "collapsible-demo.adoc",
-      "seconds": 36
+      "module": "ch1-evaluations",
+      "page": "s3-explore-lab.adoc",
+      "seconds": 50
     },
     {
-      "module": "chapter1",
-      "page": "images.adoc",
-      "seconds": 841
-    },
-    {
-      "module": "chapter2",
+      "module": "ch2-deployment",
       "page": "index.adoc",
-      "seconds": 9
+      "seconds": 5
     },
     {
-      "module": "chapter2",
-      "page": "section1.adoc",
-      "seconds": 9
+      "module": "ch2-deployment",
+      "page": "s1-mlflow-architecture.adoc",
+      "seconds": 33
     },
     {
-      "module": "chapter3",
+      "module": "ch2-deployment",
+      "page": "s2-mlflow-deploy-lab.adoc",
+      "seconds": 52
+    },
+    {
+      "module": "ch2-deployment",
+      "page": "s3-evalhub-architecture.adoc",
+      "seconds": 32
+    },
+    {
+      "module": "ch2-deployment",
+      "page": "s4-evalhub-deploy-lab.adoc",
+      "seconds": 54
+    },
+    {
+      "module": "ch3-evalhub",
       "page": "index.adoc",
-      "seconds": 9
+      "seconds": 5
     },
     {
-      "module": "chapter3",
-      "page": "section1.adoc",
-      "seconds": 9
+      "module": "ch3-evalhub",
+      "page": "s1-model-evaluation.adoc",
+      "seconds": 23
     },
     {
-      "module": "chapter3",
-      "page": "section2.adoc",
-      "seconds": 9
+      "module": "ch3-evalhub",
+      "page": "s2-evaluate-model-lab.adoc",
+      "seconds": 71
     },
     {
-      "module": "appendix",
-      "page": "appendix.adoc",
-      "seconds": 1
+      "module": "ch4-mlflow",
+      "page": "index.adoc",
+      "seconds": 7
+    },
+    {
+      "module": "ch4-mlflow",
+      "page": "s1-agentic-evaluation.adoc",
+      "seconds": 31
+    },
+    {
+      "module": "ch4-mlflow",
+      "page": "s2-deterministic-lab.adoc",
+      "seconds": 68
+    },
+    {
+      "module": "ch4-mlflow",
+      "page": "s3-llm-judge-lab.adoc",
+      "seconds": 66
     }
   ]
 }
