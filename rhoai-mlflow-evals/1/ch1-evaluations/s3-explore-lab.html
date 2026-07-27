@@ -177,21 +177,9 @@
 <dl>
 <dt class="hdlist1">Objective</dt>
 <dd>
-<p>Navigate the provided demo environment, identify enabled Red Hat OpenShift AI features, and verify that the predeployed model is functional.</p>
+<p>Navigate the provided demo environment, identify enabled features of Red Hat OpenShift AI 3.4, and verify the predeployed llama model.</p>
 </dd>
 </dl>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Not started  yet.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -199,7 +187,20 @@ Not started  yet.
 <h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.</p>
+<p>You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access credentials for the RHOAI dashboard</p>
+</li>
+<li>
+<p>A web browser to access the RHOAI dashboard</p>
+</li>
+<li>
+<p>A web browser to access the OpenShift web console</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -207,49 +208,215 @@ Not started  yet.
 <h2 id="_instructions"><a class="anchor" href="#_instructions"></a>Instructions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>High-level summary of what you will perform in this lab, but more detailed than the objective.</p>
+<p>In this lab, you will log in to the RHOAI dashboard and explore its main features and components to understand the platform&#8217;s capabilities.
+You will also install the Web Terminal operator in your OpenShift cluster to use for activities which require command-line tools.</p>
 </div>
+<div class="sect2">
+<h3 id="_inspect_the_existing_projects_and_deployed_models"><a class="anchor" href="#_inspect_the_existing_projects_and_deployed_models"></a>Inspect the existing projects and deployed models</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Task or outcome.</p>
+<p>Access the RHOAI Dashboard.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a graphical or web UI.
-Click <b class="menuref">Save As</b> to save your work.</p>
+<p>Navigate to the RHOAI dashboard URL of your demo environment.</p>
 </li>
 <li>
-<p>More things to do</p>
+<p>Log in using the <code>admin</code> user, from the credentials provided for your demo environment.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Task or outcome.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Something to do, using a shell.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>command --options fixed-arguments <em>variable-arguments</em></strong>
-output of the command
-highlight <strong>something</strong> in the output</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>More things to do.
-Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to interrupt.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
+<p>Explore the precreated project.</p>
+<div class="paragraph">
+<p>Your RHOAI instance contains a model which is already deployed in a regular project named <code>my-first-model</code>&#8201;&#8212;&#8201;which is <strong>not</strong> an AI project.</p>
 </div>
 <div class="paragraph">
-<p>Summary of what you acomplished.</p>
+<p>That model takes up all GPU capacity available to your RHOAI instance, so any change to the model deployment requires that you stop it and restart after making changes.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the left pane, select <span class="menuseq"><b class="menu">AI hub</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Models</b></span> and then select the <b class="menuref">Deployments</b> tab.</p>
+</li>
+<li>
+<p>In the <b class="menuref">Project</b> field, enter <code>my</code> and select the <b class="menuref">my-first-model</b> project.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Depending on the current page of the RHOAI dashboard, it may be necessary to first select <code>All projects</code> before you can search and select the <code>my-first-model</code> project.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Verify that there is a model deployment named <code>llama-32-3b-instruct</code> and its status is <code>Ready</code>.</p>
+</li>
+<li>
+<p>Click <b class="menuref">View</b>, under the <strong>Endpoints</strong> column for the model row, and verify that it provides only an internal endpoint.
+This means the model cannot be accessed from outside of its OpenShift cluster, unless you change its model deployment.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Try the model with a Gen AI studio playground.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the left pane, select <span class="menuseq"><b class="menu">Gen AI studio</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Playground</b></span>.</p>
+</li>
+<li>
+<p>In the <b class="menuref">Project</b> field, enter <code>my</code> and select the <b class="menuref">my-first-model</b> project.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The project previously selected in one page of the RHOAI dashboard may not be the current selection in another page of the RHOAI dashboard.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>If you do not see a <strong>Configure</strong> pane, click <b class="menuref">Settings</b>.
+In the <strong>Configure</strong> pane, select the <b class="menuref">Model</b> tab and verify that the selected model is named <code>llama-32-3b-instruct</code>.
+Ignore the prefix on the model name.</p>
+</li>
+<li>
+<p>In the right pane, click <b class="menuref">Send a message&#8230;&#8203;</b> and type a prompt, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs" data-lang="none">What is RHEL?</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Type <kbd>Enter</kbd> to submit the prompt and see the response from the model.
+The model may return different answers if you attempt the same prompt again, but they all should be correct and reasonable.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_confirm_that_mlflow_and_evalhub_are_not_deployed_in_rhoai"><a class="anchor" href="#_confirm_that_mlflow_and_evalhub_are_not_deployed_in_rhoai"></a>Confirm that MLflow and EvalHub are not deployed in RHOAI</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Verify that there are no RHOAI dashboard pages related to MLflow.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the left pane, expand the <b class="menuref">Gen AI studio</b> category, which contains entries named <b class="menuref">Playground</b> and <b class="menuref">AI asset endpoints</b>.</p>
+<div class="paragraph">
+<p>Enabling MLflow will add additional entries here.</p>
+</div>
+</li>
+<li>
+<p>Select <span class="menuseq"><b class="menu">Gen AI studio</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">AI asset endpoints</b></span> and then select the <b class="menuref">MCP servers</b> tab.</p>
+<div class="paragraph">
+<p>Verify that there are no MCP servers configured for use by Gen AI studio playgrounds.</p>
+</div>
+</li>
+<li>
+<p>In the left pane, expand the <b class="menuref">Develop &amp; train</b> category, which contains entries named <b class="menuref">Feature store</b>, <b class="menuref">Pipelines</b>, <b class="menuref">Jobs</b>, and <b class="menuref">Evaluations</b>.</p>
+</li>
+<li>
+<p>In the toolbar, to the top right, click the <b class="menuref">Applications</b> icon, which is next to the <b class="menuref">Question</b> icon, and verify that there is <strong>not</strong> an entry named <b class="menuref">MLflow</b>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Verify that the Evaluations page from RHOAI dashboard is not functional.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the left pane select the <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.</p>
+</li>
+<li>
+<p>The <strong>Evaluations</strong> page display the messages <code>Evaluations unavailable</code> and <code>To use evaluations, enable the evaluation service using the Trusty AI operator</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_the_web_terminal_operator"><a class="anchor" href="#_install_the_web_terminal_operator"></a>Install the Web Terminal operator</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Navigate to the OpenShift web console URL of your demo environment.
+It should be automatically logged in as the <code>admin</code> user that you already authenticated to the RHOAI bashvoard.</p>
+</li>
+<li>
+<p>In the left pane, select <span class="menuseq"><b class="menu">Ecosystem</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Software Catalog</b></span>.
+Enter <code>web terminal</code> in the search field.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Web Terminal</b> provided by Red Hat and, on the operator details page, click <b class="menuref">Install</b>.</p>
+</li>
+<li>
+<p>In the <strong>Install Operator</strong> page, make no changes and click <b class="menuref">Install</b>.
+When it displays the <code>Manual approval required</code> message, click <b class="menuref">Approve</b>.</p>
+</li>
+<li>
+<p>When you see the message <code>Operator installed successfully</code>, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.</p>
+</li>
+<li>
+<p>Verify that the toolbar displays the <b class="menuref">&gt;_</b> icon, with tooltip <code>OpenShift command line</code> next to the <b class="menuref">help</b> or <b class="menuref">&quest;</b> icon.</p>
+</li>
+<li>
+<p>Click the <b class="menuref">&gt;_</b> icon, which opens the <b class="menuref">Terminal 1</b> tab at the bottom of your OpenShift web console and click <b class="menuref">Start</b>.</p>
+</li>
+<li>
+<p>When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc version</strong>
+Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
+Kustomize Version: v5.6.0
+Server Version: 4.20.29
+Kubernetes Version: v1.33.13
+$ <strong>oc get node</strong>
+NAME                          STATUS   ROLES                         AGE    VERSION
+ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
+<div class="paragraph">
+<p>After completing these steps, you verified that you have a functional RHOAI instance with a pre-deployed model, which is available only for internal access, and that you can submit prompts to the model using an RHOAI playground.</p>
+</div>
+<div class="paragraph">
+<p>In addition, you have also verified that MLflow and EvalHub are is not installed on your RHOAI instance, and that there are no MCP servers deployed.</p>
+</div>
 </div>
 </div>
 </div>
