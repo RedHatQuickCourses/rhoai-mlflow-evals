@@ -209,7 +209,7 @@ Work In Progress
 <p>Enter its <code>scripts</code> directory</p>
 </li>
 <li>
-<p>Log in to OpenShift as the <code>admin</code> user, using the <code>oc</code> command</p>
+<p>Log in to OpenShift in your demo instance as the <code>admin</code> user, using the <code>oc</code> command</p>
 </li>
 <li>
 <p>Invoke the <code>enable-evalhub.sh</code> script</p>
@@ -241,6 +241,9 @@ Work In Progress
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Also ensure that you already deployed MLflow by following the instructions from the <a href="s2-mlflow-deploy-lab.html" class="xref page">previous lab</a> because, if you enable EvalHub without having MLflow enabled, then EvalHub will not be able to save metrics on experiments from MLflow.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -251,7 +254,7 @@ Work In Progress
 Then you will use a shell a Jupyter notebook to test connectivity and healthy of your EvalHub server.</p>
 </div>
 <div class="paragraph">
-<p>As you perform this activity, you will alternate between three browser tabs:</p>
+<p>As you perform this activity, you will alternate between two browser tabs:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -271,7 +274,7 @@ Then you will use a shell a Jupyter notebook to test connectivity and healthy of
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Enable TrustyAI on RHOAI by editing its data science cluster resource.</p>
+<p>Verify that TrustyAI is already enabled in the data science cluster resource.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -317,6 +320,10 @@ spec:
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
+<p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml" target="_blank" rel="noopener">course samples repository</a> with a web browser and open the manifest <code>scripts/evalhubdb.yaml</code>.
+Copy the entire contents of the manifest to the clipboard.</p>
+</li>
+<li>
 <p>In the left pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Projects</b></span> and, in the search field, enter <code>redhat-ods</code>.
 Then click the <b class="menuref">redhat-ods-applications</b> project.</p>
 </li>
@@ -324,15 +331,13 @@ Then click the <b class="menuref">redhat-ods-applications</b> project.</p>
 <p>In the toolbar, click the menu:+[] icon, with tooltip <code>Quick create</code> and select <b class="menuref">Import YAML</b>.</p>
 </li>
 <li>
-<p>In the Import YAML page, enter the following manifests for a PVC, a deployment, and a service.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">Import from git, long listing. Or better, ask to open from git instead of listing it all here.</code></pre>
-</div>
-</div>
+<p>In the Import YAML page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard.</p>
 </li>
 <li>
-<p>TBD</p>
+<p>TBD Click menu:[Create].</p>
+</li>
+<li>
+<p>TBD Verify that the database is ready and available</p>
 </li>
 </ol>
 </div>
@@ -347,14 +352,46 @@ Then enter <code>EvalHb</code> in the search field.
 You will see only one resource types; click <b class="menuref">EvalHub</b>.</p>
 </li>
 <li>
-<p>In the MLflow Resource details page, select the <b class="menuref">Instances</b> tab and verify that the selected project is still <code>redhat-ods-applications</code>.
+<p>In the EvalHub Resource details page, select the <b class="menuref">Instances</b> tab and verify that the selected project is still <code>redhat-ods-applications</code>.
 Then click <b class="menuref">Create EvalHub</b>.</p>
 </li>
 <li>
-<p>In the YAML text editor, delete all of its sample contents and enter the following, which corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/find#section" target="_blank" rel="noopener">Minimal development or test deployment</a> in the Red Hat OpenShift AI product documentation.</p>
+<p>In the YAML text editor, delete all of its sample contents and enter the following, which corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate" target="_blank" rel="noopener">2.3. Deploy EvalHub with the TrustyAI Operator</a> in the Red Hat OpenShift AI product documentation with a couple chances:</p>
+<div class="openblock">
+<div class="content">
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Addition of the <code>lighteval</code> provider</p>
+</li>
+<li>
+<p>The correct internal URL of the MLflow server</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">EvalHub custom resource</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: trustyai.opendatahub.io/v1alpha1
+kind: EvalHub
+metadata:
+  name: evalhub
+spec:
+  replicas: 1
+  database:
+    type: postgresql
+    secret: evalhub-db-credentials
+  providers:
+    - lm-evaluation-harness
+    - garak
+    - guidellm
+    - lighteval
+  collections:
+    - safety-and-fairness-v1
+  env:
+    - name: MLFLOW_TRACKING_URI
+      value: "https://mlflow.redhat-ods-applications.svc.cluster.local:8443"</code></pre>
 </div>
 </div>
 </li>
@@ -370,9 +407,9 @@ Then click <b class="menuref">Create EvalHub</b>.</p>
 <div class="sect2">
 <h3 id="_test_your_evalhub_server_using_a_shell"><a class="anchor" href="#_test_your_evalhub_server_using_a_shell"></a>Test your EvalHub server using a shell</h3>
 <div class="olist arabic">
-<ol class="arabic">
+<ol class="arabic" start="3">
 <li>
-<p>Verify EvalHub is available from RHOAI and verify its healthy.</p>
+<p>Verify that EvalHub is available from the RHOAI dashboard.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -381,8 +418,17 @@ If it is already open, refresh your browser window.</p>
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.
-The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.</p>
+The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.
+The page also displays a button named <b class="menuref">Create Evaluation</b>.
+Do not click it yet.</p>
 </li>
+</ol>
+</div>
+</li>
+<li>
+<p>Verify that your EvalHub server is healthy.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p>Switch to your web browser tab which is open in the OpenShift web console.
 If its web terminal connection has closed due to inactivity, click <b class="menuref">Restart terminal</b>.</p>
@@ -405,10 +451,41 @@ $ curl -sk $EVALHUB_URL/api/v1/health
 </li>
 <li>
 <p>Install the EvalHub CLI in your web terminal.</p>
+<div class="paragraph">
+<p>In a regular shell, we would recommend installing the EvalHub CLI in a Python virtual enviroment.
+But, with a single-purpose web terminal, it is OK to install the EvalHub CLI on the system Python of the web terminal image.</p>
+</div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>TBD</p>
+<p>Run the folling shell commands to install the EvalHub CLI using <code>pip</code> and configure it to connect to the EvalHub server on its OpenShift cluster.</p>
+<div class="paragraph">
+<p>Notice these commands refer to the <code>EVALHUB_URL</code> shell variable you set during the previoius step.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ pip install "eval-hub-sdk[cli]"
+GRAB OUTPUT
+$ evalhub config set base_url $EVALHUB_URL
+GRAB OUTPUT
+$ evalhub config set tenant my-first-model
+GRAB OUTPUT
+$ TOKEN=$(oc whoami -t)
+$ evalhub config set token $TOKEN
+GRAB OUTPUT</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that the EvalHub CLI can connect to the EvalHub server and list its known evaluation providers.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub health
+GRAB OUTPUT
+$ evalhub providers list
+GRAB OUTPUT</code></pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
@@ -419,7 +496,7 @@ $ curl -sk $EVALHUB_URL/api/v1/health
 <div class="sect2">
 <h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
-<p>After completing these steps, you have verified that you have a minimal but functional MLflow instance, to which you can connect from applications running inside your RHOAI cluster and store data from your experiments.</p>
+<p>After completing these steps, you have verified that you have a minimal but functional EvalHub instance, which you can use to run evaluation jobs.</p>
 </div>
 </div>
 </div>
