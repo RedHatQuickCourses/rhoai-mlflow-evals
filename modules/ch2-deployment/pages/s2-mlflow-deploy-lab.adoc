@@ -117,6 +117,7 @@ spec:
 
 === Test your MLflow server using the dashboard and a workbench
 
+[start=3]
 3. Verify MLflow is available from RHOAI and create an empty experiment.
 
 .. Open your RHOAI dashboard.
