@@ -75,15 +75,6 @@ alert:default-dsc has been updated to version 1186240
 
 .. If you receive an error message, fix the errors in your YAML and try saving again.
 
-.. Alternatively, you could run the following `oc patch` command, which is provided by the https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow[Red Hat OpenShift AI product documentation^]:
-+
-[source,console,subs="verbatim,quotes"]
-----
-$ *oc patch datasciencecluster default-dsc --type=merge \
--p '{"spec":{"components":{"mlflowoperator":{"managementState":"Managed"}}}}'*
-datasciencecluster.datasciencecluster.opendatahub.io/default-dsc patched
-----
-
 2. Configure your MLflow instance by creating an MLflow resource.
 
 .. In the left navigation pane, select menu:Home[API Explorer].
