@@ -68,21 +68,24 @@ The model may return different answers if you attempt the same prompt again, but
 
 === Confirm that MLflow and EvalHub are not deployed in RHOAI
 
+[start=4]
 4. Verify that there are no RHOAI dashboard pages related to MLflow.
+
+.. In the toolbar, to the top right, click the menu:Applications[] icon, which is next to the menu:Question[] icon, and verify that there is *not* an entry named menu:MLflow[].
+
+.. In the left pane, expand the menu:Develop & train[] category, which contains entries named menu:Feature store[], menu:Pipelines[], menu:Jobs[], and menu:Evaluations[].
 
 .. In the left pane, expand the menu:Gen AI studio[] category, which contains entries named menu:Playground[] and menu:AI asset endpoints[].
 +
 Enabling MLflow will add additional entries here.
 
-.. Select menu:Gen AI studio[AI asset endpoints] and then select the menu:MCP servers[] tab.
+5. Verify that there are no MCP servers configured in the GenAI Studio.
 +
-Verify that there are no MCP servers configured for use by Gen AI studio playgrounds.
+Select menu:Gen AI studio[AI asset endpoints] and then select the menu:MCP servers[] tab.
++
+The page should list no MCP servers.
 
-.. In the left pane, expand the menu:Develop & train[] category, which contains entries named menu:Feature store[], menu:Pipelines[], menu:Jobs[], and menu:Evaluations[].
-
-.. In the toolbar, to the top right, click the menu:Applications[] icon, which is next to the menu:Question[] icon, and verify that there is *not* an entry named menu:MLflow[].
-
-5. Verify that the Evaluations page from RHOAI dashboard is not functional.
+6. Verify that the Evaluations page from RHOAI dashboard is not functional.
 
 .. In the left pane select the menu:Develop & train[Evaluations].
 
@@ -90,7 +93,8 @@ Verify that there are no MCP servers configured for use by Gen AI studio playgro
 
 === Install the Web Terminal operator
 
-6. To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.
+[start=7]
+7. To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.
 
 .. Navigate to the OpenShift web console URL of your demo environment.
 It should be automatically logged in as the `admin` user that you already authenticated to the RHOAI bashvoard.
@@ -105,11 +109,15 @@ When it displays the `Manual approval required` message, click menu:Approve[].
 
 .. When you see the message `Operator installed successfully`, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.
 
+8. Verify that the web terminal provides the OpenShift CLI.
+
 .. Verify that the toolbar displays the menu:>_[] icon, with tooltip `OpenShift command line` next to the menu:help[] or menu:&quest;[] icon.
 
 .. Click the menu:>_[] icon, which opens the menu:Terminal 1[] tab at the bottom of your OpenShift web console and click menu:Start[].
 
 .. When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.
++
+WARNING: GRAB OUTPUT
 +
 [source,console,subs="verbatim,quotes"]
 ----
@@ -118,6 +126,8 @@ Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
 Kustomize Version: v5.6.0
 Server Version: 4.20.29
 Kubernetes Version: v1.33.13
+$ *oc whoami*
+admin
 $ *oc get node*
 NAME                          STATUS   ROLES                         AGE    VERSION
 ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13
