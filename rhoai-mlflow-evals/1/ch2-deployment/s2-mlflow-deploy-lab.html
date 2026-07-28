@@ -219,7 +219,7 @@ Work In Progress
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are in a hurry and need to quickly enable MLflow in your demo instance, for example: you had to destroy and recreate it befor completing all activities in this course, you can:</p>
+<p>If you are in a hurry and need to quickly enable MLflow in your demo instance, for example: you had to destroy and recreate it before completing all activities in this course, you can:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -316,16 +316,6 @@ spec:
 </li>
 <li>
 <p>If you receive an error message, fix the errors in your YAML and try saving again.</p>
-</li>
-<li>
-<p>Alternatively, you could run the following <code>oc patch</code> command, which is provided by the <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow" target="_blank" rel="noopener">Red Hat OpenShift AI product documentation</a>:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc patch datasciencecluster default-dsc --type=merge \
--p '{"spec":{"components":{"mlflowoperator":{"managementState":"Managed"}}}}'</strong>
-datasciencecluster.datasciencecluster.opendatahub.io/default-dsc patched</code></pre>
-</div>
-</div>
 </li>
 </ol>
 </div>
