@@ -323,30 +323,33 @@ The model may return different answers if you attempt the same prompt again, but
 <div class="sect2">
 <h3 id="_confirm_that_mlflow_and_evalhub_are_not_deployed_in_rhoai"><a class="anchor" href="#_confirm_that_mlflow_and_evalhub_are_not_deployed_in_rhoai"></a>Confirm that MLflow and EvalHub are not deployed in RHOAI</h3>
 <div class="olist arabic">
-<ol class="arabic">
+<ol class="arabic" start="4">
 <li>
 <p>Verify that there are no RHOAI dashboard pages related to MLflow.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
+<li>
+<p>In the toolbar, to the top right, click the <b class="menuref">Applications</b> icon, which is next to the <b class="menuref">Question</b> icon, and verify that there is <strong>not</strong> an entry named <b class="menuref">MLflow</b>.</p>
+</li>
+<li>
+<p>In the left pane, expand the <b class="menuref">Develop &amp; train</b> category, which contains entries named <b class="menuref">Feature store</b>, <b class="menuref">Pipelines</b>, <b class="menuref">Jobs</b>, and <b class="menuref">Evaluations</b>.</p>
+</li>
 <li>
 <p>In the left pane, expand the <b class="menuref">Gen AI studio</b> category, which contains entries named <b class="menuref">Playground</b> and <b class="menuref">AI asset endpoints</b>.</p>
 <div class="paragraph">
 <p>Enabling MLflow will add additional entries here.</p>
 </div>
 </li>
-<li>
-<p>Select <span class="menuseq"><b class="menu">Gen AI studio</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">AI asset endpoints</b></span> and then select the <b class="menuref">MCP servers</b> tab.</p>
-<div class="paragraph">
-<p>Verify that there are no MCP servers configured for use by Gen AI studio playgrounds.</p>
+</ol>
 </div>
 </li>
 <li>
-<p>In the left pane, expand the <b class="menuref">Develop &amp; train</b> category, which contains entries named <b class="menuref">Feature store</b>, <b class="menuref">Pipelines</b>, <b class="menuref">Jobs</b>, and <b class="menuref">Evaluations</b>.</p>
-</li>
-<li>
-<p>In the toolbar, to the top right, click the <b class="menuref">Applications</b> icon, which is next to the <b class="menuref">Question</b> icon, and verify that there is <strong>not</strong> an entry named <b class="menuref">MLflow</b>.</p>
-</li>
-</ol>
+<p>Verify that there are no MCP servers configured in the GenAI Studio.</p>
+<div class="paragraph">
+<p>Select <span class="menuseq"><b class="menu">Gen AI studio</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">AI asset endpoints</b></span> and then select the <b class="menuref">MCP servers</b> tab.</p>
+</div>
+<div class="paragraph">
+<p>The page should list no MCP servers.</p>
 </div>
 </li>
 <li>
@@ -368,7 +371,7 @@ The model may return different answers if you attempt the same prompt again, but
 <div class="sect2">
 <h3 id="_install_the_web_terminal_operator"><a class="anchor" href="#_install_the_web_terminal_operator"></a>Install the Web Terminal operator</h3>
 <div class="olist arabic">
-<ol class="arabic">
+<ol class="arabic" start="7">
 <li>
 <p>To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.</p>
 <div class="olist loweralpha">
@@ -391,6 +394,13 @@ When it displays the <code>Manual approval required</code> message, click <b cla
 <li>
 <p>When you see the message <code>Operator installed successfully</code>, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.</p>
 </li>
+</ol>
+</div>
+</li>
+<li>
+<p>Verify that the web terminal provides the OpenShift CLI.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p>Verify that the toolbar displays the <b class="menuref">&gt;_</b> icon, with tooltip <code>OpenShift command line</code> next to the <b class="menuref">help</b> or <b class="menuref">&quest;</b> icon.</p>
 </li>
@@ -399,6 +409,18 @@ When it displays the <code>Manual approval required</code> message, click <b cla
 </li>
 <li>
 <p>When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+GRAB OUTPUT
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc version</strong>
@@ -406,6 +428,8 @@ Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
 Kustomize Version: v5.6.0
 Server Version: 4.20.29
 Kubernetes Version: v1.33.13
+$ <strong>oc whoami</strong>
+admin
 $ <strong>oc get node</strong>
 NAME                          STATUS   ROLES                         AGE    VERSION
 ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13</code></pre>
