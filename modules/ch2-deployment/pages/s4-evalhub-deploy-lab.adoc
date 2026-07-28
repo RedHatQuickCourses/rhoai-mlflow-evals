@@ -10,7 +10,7 @@ WARNING: Work In Progress
 
 [NOTE]
 ====
-If you are in a hurry and need to quickly enable EvalHub in your demo instance, for example: you had to destroy and recreate it befor completing all activities in this course, you can:
+If you are in a hurry and need to quickly enable EvalHub in your demo instance, for example: you had to destroy and recreate it before completing all activities in this course, you can:
 
 * Clone the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git[samples git repository^]
 * Enter its `scripts` directory
