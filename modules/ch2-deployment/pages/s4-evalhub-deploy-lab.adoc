@@ -31,12 +31,14 @@ If you already deployed MLflow, and you are in a hurry and need to quickly enabl
 == Instructions
 
 You will enable TrustyAI on your Data Science Cluster singleton resource and deploy a development instance of the EvalHub server.
-Then you will use a shell a Jupyter notebook to test connectivity and healthy of your EvalHub server.
+Then you will use a shell to test connectivity and healthy of your EvalHub server.
 
-As you perform this activity, you will alternate between two browser tabs:
+As you perform this activity, you will alternate between three browser tabs:
 
 * The Red Hat OpenShift web console
 * The Red Hat OpenShift AI (RHOAI) dashboard
+* A Jupyter notebook from the `test-evals` workbench
+
 
 Once you open one of these tabs, keep it open because you may return to it later.
 
@@ -76,60 +78,55 @@ spec:
 
 2. Deploy a PosgreSQL database.
 
-.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml[course samples repository^] with a web browser and open the manifest `scripts/evalhubdb.yaml`.
+.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml[sample evalhub db deployment^] from the course samples repository with a web browser and open the manifest `scripts/evalhubdb.yaml`.
 Copy the entire contents of the manifest to the clipboard.
 
 .. In the left pane, select menu:Home[Projects] and, in the search field, enter `redhat-ods`.
 Then click the menu:redhat-ods-applications[] project.
 
-.. In the toolbar, click the menu:+[] icon, with tooltip `Quick create` and select menu:Import YAML[].
+.. In the toolbar, click the menu:&#43;[] icon, with tooltip `Quick create` and select menu:Import YAML[].
 
-.. In the Import YAML page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard.
+.. In the Import YAML page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:[Create].
 
-.. TBD Click menu:[Create].
+.. You should see a page with the message `Resources successfully created`. 
+Click on the menu:evalhubdb[] deployment, the one with a "D" icon.
 
-.. TBD Verify that the database is ready and available
+.. In its deployment details page, wait until you see a blue cicle with a label of "1 Pod", indicating one pod from that deployment is running.
+Then scrool down to the *Conditions* table, and verify there is a row of type `Available` with status `True`.
 
-3. Configure your EvalHub instance by creating an EvalHub resource.
+3. Configure your EvalHub instance by creating a secret and an EvalHub resource.
+
+.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub-db-credentials.yaml[sample evalhub db secret^] from the course samples repository with a web browser and open the manifest `scripts/evalhub-db-credentials.yaml`.
+Copy the entire contents of the manifest to the clipboard.
+
+.. In the left navigation pane, select menu:Workloads[Secrets]  and verify that the selected project is still `redhat-ods-applications`.
+Then click menu:Create[From YAML].
+
+.. In the *Create Secret* page, enter the manifests for a secret which you already copied to your clipboard, and click menu:Create[].
+
+.. In the *Secret details* page, you can scroll down and click menu:Reveal values[] to see the database connection URL which contains the database user name and password and should match the database deployment you created in the previous step.
 
 .. In the left navigation pane, select menu:Home[API Explorer].
 Then enter `EvalHb` in the search field.
-You will see only one resource types; click menu:EvalHub[].
+You will see only one resource, so click menu:EvalHub[].
 
-.. In the EvalHub Resource details page, select the menu:Instances[] tab and verify that the selected project is still `redhat-ods-applications`.
+.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub.yaml[sample evalhub manifest^] from the course samples repository with a web browser and open the manifest `scripts/evalhub.yaml`.
+Copy the entire contents of the manifest to the clipboard.
++
+[NOTE]
+====
+That manifest  corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate[2.3. Deploy EvalHub with the TrustyAI Operator^] in the Red Hat OpenShift AI product documentation with a couple changes:
+
+* Addition of `lighteval` to the list of providers
+* The correct internal URL of the MLflow server
+====
+
+.. In the EvalHub resource details page, select the menu:Instances[] tab and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create EvalHub[].
 
-.. In the YAML text editor, delete all of its sample contents and enter the following, which corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate[2.3. Deploy EvalHub with the TrustyAI Operator^] in the Red Hat OpenShift AI product documentation with a couple chances:
-+
---
-... Addition of the `lighteval` provider
-... The correct internal URL of the MLflow server
---
-+
-[source,yaml,subs="verbatim,quotes"]
-----
-apiVersion: trustyai.opendatahub.io/v1alpha1
-kind: EvalHub
-metadata:
-  name: evalhub
-spec:
-  replicas: 1
-  database:
-    type: postgresql
-    secret: evalhub-db-credentials
-  providers:
-    - lm-evaluation-harness
-    - garak
-    - guidellm
-    - lighteval
-  collections:
-    - safety-and-fairness-v1
-  env:
-    - name: MLFLOW_TRACKING_URI
-      value: "https://mlflow.redhat-ods-applications.svc.cluster.local:8443"
-----
+.. In the YAML text editor, delete all of its sample contents and paste the evalhub manifest which you already copied to the clipboard.
 
-.. Click menu:Create[] and, in the EvalHub details page, wait until the `Available` condition is `True` and the `Progressing` condition is `False`.
+.. Click menu:Create[] and, in the EvalHub details page, wait until the `Ready` condition is `True`.
 
 === Test your EvalHub server using a shell
 
@@ -137,7 +134,7 @@ spec:
 3. Verify that EvalHub is available from the RHOAI dashboard.
 
 .. Open your RHOAI dashboard.
-If it is already open, refresh your browser window.
+If it is already open, refresh your browser window so it picks changes to the dashoard pages and navigation.
 
 .. In the left navigation pane, select menu:Develop & train[Evaluations].
 The *Evaluations* page now displays the message `No existing evaluation runs`.
@@ -146,34 +143,46 @@ Do not click it yet.
 
 4. Verify that your EvalHub server is healthy.
 
-.. Switch to your web browser tab which is open in the OpenShift web console.
-If its web terminal connection has closed due to inactivity, click menu:Restart terminal[].
+.. If you have a web browser tab already open on your workbench, from performing the previous lab, swith to it.
++
+If not, click menu:Projects[], in the left navigation pane, and select menu:All projects[] in the menu:Project[] field.
+Then enter `my` in the *Filter by name* field and click menu:my-first-model[] in the list of projects.
+Finally, in the Projects page for `my-first-model`, select the menu:Workbenches[] tab and click menu:test-evals[] to open the workbench in a new browser window.
+
+.. Click the menu:Terminal[] icon, with tooltip `Start a new terminal session`.
 
 .. Run the following shell commands to get the EvalHub URL and access its health endpoint.
 Your output should include the JSON field `status: healthy`.
 +
+WARNING: The workbench runs with a service account instead of with the admin user, so it has no access to other projects and kuberentes resouces. :-(
++
 [source,console,subs="verbatim,quotes"]
 ----
 $ oc project redhat-ods-applications
+error: You are not a member of project "redhat-ods-applications".
+You are not a member of any projects. You can request a project to be created with the 'new-project' command.
+### Expected:
 Now using project "redhat-ods-applications" on server "https://172.30.0.1:443".
 $ EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')
 $ curl -sk $EVALHUB_URL/api/v1/health
 {"status":"healthy","timestamp":"2026-07-27T23:24:06.894598885Z","build":"0.3.0"}
 ----
 
-5. Install the EvalHub CLI in your web terminal.
+5. Install the EvalHub CLI in your workbench.
 +
 In a regular shell, we would recommend installing the EvalHub CLI in a Python virtual enviroment.
-But, with a single-purpose web terminal, it is OK to install the EvalHub CLI on the system Python of the web terminal image.
+But, with a jupyter notebook, it is OK to install the EvalHub CLI on the system Python of its workbench image.
 
 .. Run the folling shell commands to install the EvalHub CLI using `pip` and configure it to connect to the EvalHub server on its OpenShift cluster.
 +
 Notice these commands refer to the `EVALHUB_URL` shell variable you set during the previoius step.
 +
+WARNING: The web terminal does NOT contain a Python runtime. Must switch to a workbenck. :-(
++
 [source,console,subs="verbatim,quotes"]
 ----
 $ pip install "eval-hub-sdk[cli]"
-GRAB OUTPUT
+bash: pip: command not found
 $ evalhub config set base_url $EVALHUB_URL
 GRAB OUTPUT
 $ evalhub config set tenant my-first-model
