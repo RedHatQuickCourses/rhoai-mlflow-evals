@@ -20,7 +20,7 @@ If you are in a hurry and need to quickly enable MLflow in your demo instance, f
 
 * Clone the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git[samples git repository^]
 * Enter its `scripts` directory
-* Log in to OpenShift as the `admin` user, using the `oc` command
+* Log in to OpenShift in your demo instance as the `admin` user, using the `oc` command
 * Invoke the `enable-mlflow.sh` script
 ====
 
