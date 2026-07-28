@@ -8,6 +8,16 @@ Enable EvalHub on Red Hat OpenShift AI using the TrustyAI operator, configure it
 
 WARNING: Work In Progress
 
+[NOTE]
+====
+If you are in a hurry and need to quickly enable EvalHub in your demo instance, for example: you had to destroy and recreate it befor completing all activities in this course, you can:
+
+* Clone the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git[samples git repository^]
+* Enter its `scripts` directory
+* Log in to OpenShift as the `admin` user, using the `oc` command
+* Invoke the `enable-evalhub.sh` script
+====
+
 == Before you begin
 
 You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:
