@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lab: Deploy MLFlow for Development :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
+    <title>Lab: Deploy MLflow for Development :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
     <link rel="prev" href="s1-mlflow-architecture.html">
     <link rel="next" href="s3-evalhub-architecture.html">
     <meta name="generator" content="Antora 3.2.0-alpha.12">
@@ -81,7 +81,7 @@
     <a class="nav-link" href="s1-mlflow-architecture.html">MLFlow Architecture and Integration</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="s2-mlflow-deploy-lab.html">Lab: Deploy MLFlow for Development</a>
+    <a class="nav-link" href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s3-evalhub-architecture.html">EvalHub Architecture and CLI</a>
@@ -158,7 +158,7 @@
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
     <li><a href="index.html">Deploy MLFlow and EvalHub</a></li>
-    <li><a href="s2-mlflow-deploy-lab.html">Lab: Deploy MLFlow for Development</a></li>
+    <li><a href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a></li>
   </ul>
 </nav>
 </div>
@@ -167,7 +167,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Lab: Deploy MLFlow for Development</h1>
+<h1 class="page">Lab: Deploy MLflow for Development</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="dlist">
@@ -263,7 +263,7 @@ You will use the MLflow SDK for Python.</p>
 <p>The Red Hat OpenShift AI (RHOAI) dashboard</p>
 </li>
 <li>
-<p>A Jupyter notebook from a RHOAI workbench.</p>
+<p>A Jupyter notebook from a RHOAI workbench</p>
 </li>
 </ul>
 </div>
@@ -321,9 +321,24 @@ spec:
 </div>
 </li>
 <li>
-<p>Configure your MLflow instance by creating an MLflow resource.</p>
+<p>Configure your MLflow instance by creating a MLflow resource.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
+<li>
+<p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml" target="_blank" rel="noopener">sample MLflow manifest</a> from the course samples repository. Copy the entire contents of the <code>scripts/mlflow.yaml</code> manifest to the clipboard.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+That manifest corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow" target="_blank" rel="noopener">Minimal development or test deployment</a> in the Red Hat OpenShift AI product documentation with no changes.
+</td>
+</tr>
+</table>
+</div>
+</li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">API Explorer</b></span>.
 Then enter <code>MLflow</code> in the search field.
@@ -333,26 +348,7 @@ You will see three resource types; click <b class="menuref">MLflow</b>.</p>
 <p>In the MLflow Resource details page, select the <b class="menuref">Instances</b> tab and click <b class="menuref">Create MLflow</b>.</p>
 </li>
 <li>
-<p>In the YAML text editor, delete all of its sample contents and enter the following, which corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow" target="_blank" rel="noopener">Minimal development or test deployment</a> in the Red Hat OpenShift AI product documentation.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: mlflow.opendatahub.io/v1
-kind: MLflow
-metadata:
-  name: mlflow
-  namespace: redhat-ods-applications
-spec:
-  storage:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 10Gi
-  backendStoreUri: "sqlite:////mlflow/mlflow.db"
-  artifactsDestination: "file:///mlflow/artifacts"
-  serveArtifacts: true</code></pre>
-</div>
-</div>
+<p>In the YAML text editor, delete all of its sample contents and paste the manifest you already copied to the clipboard.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Create</b> and, in the MLflow details page, wait until the <code>Available</code> condition is <code>True</code> and the <code>Progressing</code> condition is <code>False</code>.</p>
@@ -407,7 +403,7 @@ You should not need it: all functionality you need for this course is available 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you have trouble typing the Python code in this and other activities of this course, or you cannot cut-and-paste from the course page, you can access the complete source code for all Jupyter notebooks in a <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/tree/main/traces" target="_blank" rel="noopener">git repository</a>.
+If you have trouble typing the Python code in this and other activities of this course, or you cannot cut-and-paste from the course page, you can access the complete source code for all Jupyter notebooks in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/tree/main/traces" target="_blank" rel="noopener">course samples git repository</a>.
 </td>
 </tr>
 </table>
@@ -422,7 +418,7 @@ Then enter <code>my</code> in the <strong>Filter by name</strong> field and clic
 <p>In the Projects page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">Create workbench</b>.</p>
 </li>
 <li>
-<p>In the Create workbench page, enter <code>test-mlflow</code> for the <strong>Name</strong> field and, in the <strong>Workbench image</strong> field, select <b class="menuref">Jupyter | Minimal | CPU</b>.</p>
+<p>In the Create workbench page, enter <code>test-evals</code> for the <strong>Name</strong> field and, in the <strong>Workbench image</strong> field, select <b class="menuref">Jupyter | Minimal | CPU</b>.</p>
 </li>
 <li>
 <p>Leave all other fields with their default values and click <b class="menuref">Create workbench</b>.</p>
@@ -482,11 +478,11 @@ print(mlflow.list_workspaces())</code></pre>
 The results should be an array containing a single <code>Workspace</code> object named <code>my-first-model</code>.</p>
 <div class="paragraph">
 <p>This notebook takes advantage of the integration between the RHOAI dashboard and its managed instance of the MLflow server.
-It connects using the service account of the <code>test-mlflow</code> workbench, which is authorized to access the MLflow workspace corresponding to its <code>my-first-model</code> project.</p>
+It connects using the service account of the <code>test-evals</code> workbench, which is authorized to access the MLflow workspace corresponding to its <code>my-first-model</code> project.</p>
 </div>
 </li>
 <li>
-<p>You will not use the <code>test-mlflow.ipynb</code> notebook anymore, but do NOT delete the <code>test-mlflow</code> workbench because you will keep using it in the remaining activities of this course.</p>
+<p>You will not use the <code>test-mlflow.ipynb</code> notebook anymore, but do NOT delete the <code>test-evals</code> workbench because you will keep using it in the remaining activities of this course.</p>
 </li>
 </ol>
 </div>
