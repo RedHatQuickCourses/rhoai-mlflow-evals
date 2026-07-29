@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 1017,
+  "totalSeconds": 1051,
   "pageCount": 17,
   "pages": [
     {
@@ -50,7 +50,7 @@
     {
       "module": "ch2-deployment",
       "page": "s4-evalhub-deploy-lab.adoc",
-      "seconds": 148
+      "seconds": 182
     },
     {
       "module": "ch3-evalhub",

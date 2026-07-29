@@ -120,6 +120,13 @@ That manifest  corresponds to the example from https://docs.redhat.com/en/docume
 * Addition of `lighteval` to the list of providers
 * The correct internal URL of the MLflow server
 ====
++
+The full manifest is listed here, just for your reference:
++
+[source,YAML,subs="verbatim,quotes"]
+----
+include::1@samples:scripts:example$evalhub.yaml[]
+----
 
 .. In the EvalHub resource details page, select the menu:Instances[] tab and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create EvalHub[].

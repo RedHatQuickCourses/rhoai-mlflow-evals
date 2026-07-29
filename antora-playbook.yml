@@ -5,6 +5,7 @@ site:
 content:
   sources:
   - url: ./
+  - url: https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git
 
 asciidoc:
   extensions:
