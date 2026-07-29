@@ -333,6 +333,25 @@ spec:
 <li>
 <p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml" target="_blank" rel="noopener">sample evalhub db deployment</a> from the course samples repository with a web browser and open the manifest <code>scripts/evalhubdb.yaml</code>.
 Copy the entire contents of the manifest to the clipboard.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a minimal PostgreSQL deployment.
+It is not listed here because if its size, and you would not use such a simplisitic database deployment for a real development or production instance of EvalHub.</p>
+</div>
+<div class="paragraph">
+<p>You are free to use your preferred OpenShift template, helm chart, or database operator instead.
+Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>In the left pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Projects</b></span> and, in the search field, enter <code>redhat-ods</code>.
@@ -367,25 +386,13 @@ Copy the entire contents of the manifest to the clipboard.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: trustyai.opendatahub.io/v1alpha1
-kind: EvalHub
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: v1
+kind: Secret
 metadata:
-  name: evalhub
-spec:
-  replicas: 1
-  database:
-    type: postgresql
-    secret: evalhub-db-credentials
-  providers:
-    - lm-evaluation-harness
-    - garak
-    - guidellm
-    - lighteval
-  collections:
-    - safety-and-fairness-v1
-  env:
-    - name: MLFLOW_TRACKING_URI
-      value: "https://mlflow.redhat-ods-applications.svc.cluster.local:8443"</code></pre>
+  name: evalhub-db-credentials
+type: Opaque
+stringData:
+  db-url: "postgres://rhoai:dontdothisinprod@evalhubdb.redhat-ods-applications.svc.cluster.local:5432/evalhub"</code></pre>
 </div>
 </div>
 </li>
@@ -397,7 +404,8 @@ Then click <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa
 <p>In the <strong>Create Secret</strong> page, enter the manifests for a secret which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
 </li>
 <li>
-<p>In the <strong>Secret details</strong> page, you can scroll down and click <b class="menuref">Reveal values</b> to see the database connection URL which contains the database user name and password and should match the database deployment you created in the previous step.</p>
+<p>In the <strong>Secret details</strong> page, you can scroll down and click <b class="menuref">Reveal values</b> to see the database connection URL.
+It contains the database user name, password, and other connection parameters which match the database deployment you created in the previous step.</p>
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">API Explorer</b></span>.
