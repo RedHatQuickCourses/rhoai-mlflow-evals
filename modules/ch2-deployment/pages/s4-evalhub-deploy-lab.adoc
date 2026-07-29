@@ -4,9 +4,7 @@ Objective::
 
 Enable EvalHub on Red Hat OpenShift AI using the TrustyAI operator, configure its database, and install and configure the EvalHub CLI.
 
-// Maybe split all CLI usage into its own lab?
-
-WARNING: Work In Progress
+WARNING: Pending review
 
 == Before you begin
 
@@ -37,8 +35,6 @@ As you perform this activity, you will alternate between three browser tabs:
 
 * The Red Hat OpenShift web console
 * The Red Hat OpenShift AI (RHOAI) dashboard
-* A Jupyter notebook from the `test-evals` workbench
-
 
 Once you open one of these tabs, keep it open because you may return to it later.
 
