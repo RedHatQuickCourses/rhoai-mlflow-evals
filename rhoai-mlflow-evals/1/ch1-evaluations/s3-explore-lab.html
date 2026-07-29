@@ -214,9 +214,6 @@ Pending Review
 <li>
 <p>A web browser to access the RHOAI dashboard</p>
 </li>
-<li>
-<p>A web browser to access the OpenShift web console</p>
-</li>
 </ul>
 </div>
 </div>
@@ -225,8 +222,7 @@ Pending Review
 <h2 id="_instructions"><a class="anchor" href="#_instructions"></a>Instructions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, you will log in to the RHOAI dashboard and explore its main features and components to understand the platform&#8217;s capabilities.
-You will also install the Web Terminal operator in your OpenShift cluster to use for activities which require command-line tools.</p>
+<p>In this lab, you will log in to the RHOAI dashboard and explore its main features and components to understand the platform&#8217;s capabilities.</p>
 </div>
 <div class="sect2">
 <h3 id="_inspect_the_existing_projects_and_deployed_models"><a class="anchor" href="#_inspect_the_existing_projects_and_deployed_models"></a>Inspect the existing projects and deployed models</h3>
@@ -369,80 +365,6 @@ The model may return different answers if you attempt the same prompt again, but
 </li>
 <li>
 <p>The <strong>Evaluations</strong> page display the messages <code>Evaluations unavailable</code> and <code>To use evaluations, enable the evaluation service using the Trusty AI operator</code>.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_install_the_web_terminal_operator"><a class="anchor" href="#_install_the_web_terminal_operator"></a>Install the Web Terminal operator</h3>
-<div class="olist arabic">
-<ol class="arabic" start="7">
-<li>
-<p>To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Navigate to the OpenShift web console URL of your demo environment.
-It should be automatically logged in as the <code>admin</code> user that you already authenticated to the RHOAI bashvoard.</p>
-</li>
-<li>
-<p>In the left pane, select <span class="menuseq"><b class="menu">Ecosystem</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Software Catalog</b></span>.
-Enter <code>web terminal</code> in the search field.</p>
-</li>
-<li>
-<p>Click <b class="menuref">Web Terminal</b> provided by Red Hat and, on the operator details page, click <b class="menuref">Install</b>.</p>
-</li>
-<li>
-<p>In the <strong>Install Operator</strong> page, make no changes and click <b class="menuref">Install</b>.
-When it displays the <code>Manual approval required</code> message, click <b class="menuref">Approve</b>.</p>
-</li>
-<li>
-<p>When you see the message <code>Operator installed successfully</code>, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Verify that the web terminal provides the OpenShift CLI.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Verify that the toolbar displays the <b class="menuref">&gt;_</b> icon, with tooltip <code>OpenShift command line</code> next to the <b class="menuref">help</b> or <b class="menuref">&quest;</b> icon.</p>
-</li>
-<li>
-<p>Click the <b class="menuref">&gt;_</b> icon, which opens the <b class="menuref">Terminal 1</b> tab at the bottom of your OpenShift web console and click <b class="menuref">Start</b>.</p>
-</li>
-<li>
-<p>When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.</p>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-GRAB OUTPUT
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc version</strong>
-Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
-Kustomize Version: v5.6.0
-Server Version: 4.20.29
-Kubernetes Version: v1.33.13
-$ <strong>oc whoami</strong>
-admin
-$ <strong>oc get node</strong>
-NAME                          STATUS   ROLES                         AGE    VERSION
-ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13</code></pre>
-</div>
-</div>
 </li>
 </ol>
 </div>
