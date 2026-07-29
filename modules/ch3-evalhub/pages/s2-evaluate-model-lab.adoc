@@ -4,7 +4,7 @@ Objective::
 
 Run evaluation jobs on a self-hosted model using EvalHub, monitor their progress, and inspect results and metrics from the RHOAI dashboard.
 
-WARNING: Work in Progress
+WARNING: Pending review
 
 == Before you begin
 
@@ -134,7 +134,7 @@ Benchmarks (8):
 
 .. Among these benchmarks, the `cwe` benchmark is expected to be quick to run.
 
-6. Submit an evaluation job for the `cwe` benchmark.
+7. Submit an evaluation job for the `cwe` benchmark.
 
 .. Submit an evaliation job and save its ID in a shell variable.
 +
@@ -220,6 +220,10 @@ NAME                                                              READY   STATUS
 
 === View evaluation results on MLflow
 
+[start=8]
+
+8. View the two experiments from EvalHub in MLflow.
+
 .. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (mlflow)].
 In the *Projects* field, enter `my` and select menu:my-first-model[].
 
@@ -232,6 +236,7 @@ Click the one with a green ball, which is the most recent and corresponds to the
 
 .. That experiment contains no metrics, but select its menu:Overview[] tab to visualized the same metrics you seen with the EvalHub CLI or with the *Evaluations* page of the RHOAI dashboard.
 
+=== Summary
 
 You performed two evaluation runs, using the Garak provider or evaluation framework: once using the RHOAI dashboard, and other using the EvalHub CLI.
 Then you visualized their results using both EvalHub and MLflow.
