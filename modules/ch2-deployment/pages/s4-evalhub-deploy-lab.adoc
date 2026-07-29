@@ -83,8 +83,8 @@ Copy the entire contents of the manifest to the clipboard.
 +
 [NOTE]
 ====
-This is a minimal PostgreSQL deployment.
-It is not listed here because if its size, and you would not use such a simplisitic database deployment for a real development or production instance of EvalHub. 
+This manifest provides a minimal PostgreSQL deployment.
+It is not listed here because if its size, but you would not use such a simplisitic database deployment for a real development or production instance of EvalHub. 
 
 You are free to use your preferred OpenShift template, helm chart, or database operator instead.
 Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.
@@ -172,6 +172,9 @@ Do not click any of them: Just seeing the list is sufficient to prove your EvalH
 
 [start=4]
 4. Verify that your EvalHub server is healthy.
++
+NOTE: The shell commands in this course assume a Bash shell on Fedora Linux.
+If your work machine runs Windows or macOS, you should either install a Bash shell or connect to the bastion host of your demo environment using SSH.
 
 .. Open a terminal and log in to the OpenShift cluster from your demo environment, as a cluster administrator, using the `oc login` command.
 
@@ -190,12 +193,15 @@ $ curl -sk $EVALHUB_URL/api/v1/health
 5. Install the EvalHub CLI in a Python virtual environment.
 
 .. Install the EvalHub CLI using `pip`.
+It should work with any version of Python from 3.12 on.
 +
 [source,console,subs="verbatim,quotes"]
 ----
+$ python --version
+Python 3.14.6
 $ python -m venv ~/venv/evalhub
 $ source ~/venv/evalhub/bin/activate
-# prompt changes
+... prompt changes ...
 $ pip install "eval-hub-sdk[cli]"
 ...
 Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 click-8.4.2 *eval-hub-sdk-0.4.4* h11-0.16.0 httpcore-1.0.9
