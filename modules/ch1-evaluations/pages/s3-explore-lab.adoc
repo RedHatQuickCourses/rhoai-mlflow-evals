@@ -12,12 +12,10 @@ You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provide
 
 * Access credentials for the RHOAI dashboard
 * A web browser to access the RHOAI dashboard
-* A web browser to access the OpenShift web console
 
 == Instructions
 
 In this lab, you will log in to the RHOAI dashboard and explore its main features and components to understand the platform's capabilities.
-You will also install the Web Terminal operator in your OpenShift cluster to use for activities which require command-line tools.
 
 === Inspect the existing projects and deployed models
 
@@ -90,48 +88,6 @@ The page should list no MCP servers.
 .. In the left pane select the menu:Develop & train[Evaluations].
 
 .. The *Evaluations* page display the messages `Evaluations unavailable` and `To use evaluations, enable the evaluation service using the Trusty AI operator`.
-
-=== Install the Web Terminal operator
-
-[start=7]
-7. To avoid issues with local installation of Python in your regular work computer, install the Web Terminal operator on your OpenShift cluster.
-
-.. Navigate to the OpenShift web console URL of your demo environment.
-It should be automatically logged in as the `admin` user that you already authenticated to the RHOAI bashvoard.
-
-.. In the left pane, select menu:Ecosystem[Software Catalog].
-Enter `web terminal` in the search field.
-
-.. Click menu:Web Terminal[] provided by Red Hat and, on the operator details page, click menu:Install[].
-
-.. In the *Install Operator* page, make no changes and click menu:Install[].
-When it displays the `Manual approval required` message, click menu:Approve[].
-
-.. When you see the message `Operator installed successfully`, refresh your web browser tab to reload the HTML and JavaScript content of the OpenShift web console.
-
-8. Verify that the web terminal provides the OpenShift CLI.
-
-.. Verify that the toolbar displays the menu:>_[] icon, with tooltip `OpenShift command line` next to the menu:help[] or menu:&quest;[] icon.
-
-.. Click the menu:>_[] icon, which opens the menu:Terminal 1[] tab at the bottom of your OpenShift web console and click menu:Start[].
-
-.. When the terminal displays a bash prompt, enter the following commands to verify that you have, from the terminal, cluster administrator access to your OpenShift cluster.
-+
-WARNING: GRAB OUTPUT
-+
-[source,console,subs="verbatim,quotes"]
-----
-$ *oc version*
-Client Version: 4.20.0-202605211651.p2.g02b0b2d.assembly.stream-02b0b2d
-Kustomize Version: v5.6.0
-Server Version: 4.20.29
-Kubernetes Version: v1.33.13
-$ *oc whoami*
-admin
-$ *oc get node*
-NAME                          STATUS   ROLES                         AGE    VERSION
-ip-10-0-30-252.ec2.internal   Ready    control-plane,master,worker   7h8m   v1.33.13
-----
 
 === Summary 
 

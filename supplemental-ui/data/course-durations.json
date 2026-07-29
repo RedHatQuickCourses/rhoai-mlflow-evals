@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 1004,
+  "totalSeconds": 1021,
   "pageCount": 17,
   "pages": [
     {
@@ -25,7 +25,7 @@
     {
       "module": "ch1-evaluations",
       "page": "s3-explore-lab.adoc",
-      "seconds": 124
+      "seconds": 141
     },
     {
       "module": "ch2-deployment",
