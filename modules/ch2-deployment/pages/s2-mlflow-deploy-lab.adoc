@@ -80,6 +80,13 @@ alert:default-dsc has been updated to version 1186240
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml[sample MLflow manifest^] from the course samples repository. Copy the entire contents of the `scripts/mlflow.yaml` manifest to the clipboard.
 +
 NOTE: That manifest corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow[Minimal development or test deployment^] in the Red Hat OpenShift AI product documentation with no changes.
++
+The full secret manifest is listed here, just for your reference:
++
+[source,YAML,subs="verbatim,quotes"]
+----
+include::1@samples:scripts:example$mlflow.yaml[]
+----
 
 .. In the left navigation pane, select menu:Home[API Explorer].
 Then enter `MLflow` in the search field.
