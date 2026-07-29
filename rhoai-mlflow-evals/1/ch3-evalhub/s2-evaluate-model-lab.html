@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Work in Progress
 </td>
 </tr>
 </table>
@@ -204,7 +204,23 @@ Not started  yet.
 <h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.</p>
+<p>You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access credentials for the RHOAI dashboard</p>
+</li>
+<li>
+<p>A web browser to access the RHOAI dashboard</p>
+</li>
+<li>
+<p>Access credentials for the OpenShift web console</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Also ensure that you already deployed MLflow and EvalHub by following the instructions from the <a href="../ch2-deployment/index.html" class="xref page">previous chapter</a>.</p>
 </div>
 </div>
 </div>
@@ -212,49 +228,316 @@ Not started  yet.
 <h2 id="_instructions"><a class="anchor" href="#_instructions"></a>Instructions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>High-level summary of what you will perform in this lab, but more detailed than the objective.</p>
+<p>In this lab, you will perform a quick evaluation run using the RHOAI dashboard and view its results in MLflow.</p>
 </div>
+<div class="sect2">
+<h3 id="_retrieve_model_name_and_endpoint_and_label_its_project_for_trustyai"><a class="anchor" href="#_retrieve_model_name_and_endpoint_and_label_its_project_for_trustyai"></a>Retrieve model name and endpoint, and label its project for TrustyAI</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Task or outcome.</p>
+<p>Find the name and endpoint of the model to evaluate.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a graphical or web UI.
-Click <b class="menuref">Save As</b> to save your work.</p>
+<p>Open the RHOAI dashboard and, in its left pane, select <span class="menuseq"><b class="menu">AI hub</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Models</b></span> and select the <b class="menuref">Deployments</b> tab.
+There is a single row, named <b class="menuref">llama-32-3b-instruct</b>.</p>
 </li>
 <li>
-<p>More things to do</p>
+<p>Click its <b class="menuref">Internal endpoint</b> link to raise a pop-up displaying its URL and click the <b class="menuref">copy</b> icon to copy its URL to the clipboard.</p>
+</li>
+<li>
+<p>Also take note of the model name, which is <code>llama-32-3b-instruct</code>, for use in the next step.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Task or outcome.</p>
+<p>Label your project for TrustyAI network policies.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a shell.</p>
+<p>Open the OpenShift web console and select <span class="menuseq"><b class="menu">Administration</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Namespaces</b></span>.
+Enter <code>my</code> in the search field and click <b class="menuref">my-first-model</b>.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+You cannot change namespace labels by using <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Projects</b></span>.
+It seems to work, but the namespace resource associated with the project will remain unchanged.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Click the <span class="menuseq"><b class="menu">Actions</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Edit labels</b></span> and, in the <strong>Edit labels</strong> popup, append <code>evalhub.trustyai.opendatahub.io/tenant=true</code>.
+Do not remove any of its other labels!</p>
+</li>
+<li>
+<p>Click <b class="menuref">Save</b>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_submit_an_evaluation_job_using_the_rhoai_dashboard"><a class="anchor" href="#_submit_an_evaluation_job_using_the_rhoai_dashboard"></a>Submit an evaluation job using the RHOAI dashboard</h3>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Find a quick benchmark to run.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
+</li>
+<li>
+<p>In <strong>Single benchmark</strong> page, select <b class="menuref">Name</b> in the filter, and enter <code>quick</code> in the search field.
+You should see three benchmarks, each with a different label of <code>Safety</code>, <code>Performance</code>, and <code>Security</code>.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Quick security smoke test</b> to open a right pane with details of that benchmark.
+Verify that this benchmark comes from the <code>Garak</code> evaluation framework, which is unlikely to require large data sets from HuggingFaces.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Submit an evaluation job for the <code>Quick security smoke test</code> benchmark.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the left pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> and, in the <strong>Project</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Single benchmark</b>, select <b class="menuref">Name</b> and enter <code>quick</code>.
+In the <b class="menuref">Quick security smoke test</b> card, click <b class="menuref">Use this benchmark</b>.</p>
+</li>
+<li>
+<p>Enter <code>garak-quick</code> in the <strong>Evaluation name</strong> field and, in the <strong>Create new experiment</strong> field, enter <code>garak-evalhub</code></p>
+</li>
+<li>
+<p>Enter <code>llama-32-3b-instruct</code> in the <strong>Model or agent name</strong> field, and paste the URL you copied in the previous step in the <code>Endpoint URL</code> field.
+The model is not configured to require authentication, so there is no need to provide an API key.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Start evaluation run</b>.
+You should see a message <code>Evaluation "garak-quick" has been started.</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Monitor the evaluation job.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>You should be still on the <strong>Evaluations</strong> page, which now displays a single row named <b class="menuref">garak-quick</b> with a <code>Pending</code> status.
+Be patient while EvalHub downloads the container images required by the bebchmark.</p>
+</li>
+<li>
+<p>Once the evaluation run starts, it should terminate very quickly, and you are likely to <em>not</em> see its <code>Running</code> status, but only see it transition to <code>Complete</code>.
+If it takes more than a few minutes without any change, refresh your RHOAI dashboard page.</p>
+</li>
+<li>
+<p>Click <b class="menuref">garak-quick</b> to review details of the evaluation run.
+That evaluation is expected to fail.
+Notice that its metrics indicate only one attack was attempted and it was successful.
+It&#8217;s a common attack of "asking a model to do something it shouldn&#8217;t do", which you would prevent, in production deployments, by enabling guard rails.</p>
+</li>
+<li>
+<p>Optionally, you can switch to the OpenShift web console and enter <span class="menuseq"><b class="menu">Workloads</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Jobs</b></span> to monitor Kubernetes jobs in the <code>my-first-model</code> project.
+Notice that the name of the Job contains the ID of the EvalHub evaluation run, which unfortunately you <em>cannot</em> get from the RHOAI dashboard.
+You can also click <b class="menuref">1 of 1</b> under <strong>Completions</strong> to view the Kubernetes pod managed by the job.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_submit_an_evaluation_job_using_the_cli"><a class="anchor" href="#_submit_an_evaluation_job_using_the_cli"></a>Submit an evaluation job using the CLI</h3>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>Select a differfent benchmark to run.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open a shell, log in to OpenShift using the <code>oc</code> command, and activate the Python virtual environment you created in a <a href="../ch2-deployment/s4-evalhub-deploy-lab.html" class="xref page">previous lab</a>, then give to the EvalHub CLI your OpenShift authentication token.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>command --options fixed-arguments <em>variable-arguments</em></strong>
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>source ~/venv/evalhub/bin/activate</strong>
 output of the command
-highlight <strong>something</strong> in the output</code></pre>
+$ <strong>TOKEN=$(oc whoami -t)</strong>
+$ <strong>evalhub config set token $TOKEN</strong>
+Set 'token' in profile 'default'</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>More things to do.
-Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to interrupt.</p>
+<p>List the benchmarks from the <code>garak</code> provider.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub providers describe garak
+Provider: Garak
+ID:       garak
+Description: LLM vulnerability scanner and red-teaming framework
+
+Benchmarks (8):
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ ID               ┃ NAME                                ┃ CATEGORY    ┃ METRICS             ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ owasp_llm_top10  │ OWASP LLM top 10 risk scan          │ security    │ attack_success_rate │
+│ avid             │ Full AI vulnerability scan          │ security    │ attack_success_rate │
+│ avid_security    │ AI security vulnerability scan      │ security    │ attack_success_rate │
+│ avid_ethics      │ AI ethics &amp; bias scan               │ safety      │ attack_success_rate │
+│ avid_performance │ AI performance degradation scan     │ performance │ attack_success_rate │
+│ quality          │ Toxic &amp; harmful content scan        │ safety      │ attack_success_rate │
+│ cwe              │ Software weakness exploitation scan │ security    │ attack_success_rate │
+│ quick            │ Quick security smoke test           │ security    │ attack_success_rate │
+└──────────────────┴─────────────────────────────────────┴─────────────┴─────────────────────┘</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Among these benchmarks, the <code>cwe</code> benchmark is expected to be quick to run.</p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>Submit an evaluation job for the <code>cwe</code> benchmark.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Submit an evaliation job and save its ID in a shell variable.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval run --name garak-cwe \
+    --model-url http://llama-32-3b-instruct-predictor.my-first-model.svc.cluster.local:8080/v1 \
+    --model-name llama-32-3b-instruct \
+    --provider garak --benchmark cwe \
+    --experiment garak-evalhub</strong>
+Job submitted: 11c1e53a-0086-4b22-9e5a-7c8ef0e07d50
+$ <strong>ID=11c1e53a-0086-4b22-9e5a-7c8ef0e07d50</strong></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Monitor the status of your second evaluation job.
+This time, it should transition to <code>running</code> very quickly because the Garak container images were already downloaded.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval status</strong>
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ID                                   ┃ NAME        ┃ STATE     ┃ PROVIDER ┃ BENCHMARKS ┃ CREATED                          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 527d4579-0a75-482c-96a2-3c4b0222bb81 │ garak-quick │ completed │ garak    │ 1          │ 2026-07-29 22:52:53.521593+00:00 │
+│ 11c1e53a-0086-4b22-9e5a-7c8ef0e07d50 │ garak-cwe   │ running   │ garak    │ 1          │ 2026-07-29 23:06:45.212450+00:00 │
+└──────────────────────────────────────┴─────────────┴───────────┴──────────┴────────────┴──────────────────────────────────┘</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>if you prefer, refer to the evaluation ID to view its status unencumbered by other jobs.
+Repeat this command until it displays a state of <code>completed</code>, which shouldn&#8217;t take more than a few seconds.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval status $ID</strong>
+Job:     11c1e53a-0086-4b22-9e5a-7c8ef0e07d50
+Name:    garak-cwe
+State:   completed
+Model:   llama-32-3b-instruct (http://llama-32-3b-instruct-predictor.my-first-model.svc.cluster.local:8080/v1)
+Created: 2026-07-29 23:06:45.212450+00:00
+
+Benchmarks (1):
+  cwe (garak): completed
+
+Message: Evaluation job is completed</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Review the results of the evaluation run.
+Notice that the value of metric <code>attack_success_rate</code> is less than 0.3, which sets the <code>Pass</code> score you would see, for this evaluation run, in the RHOAI dashboard.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval results $ID</strong>
+┏━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ BENCHMARK ┃ PROVIDER ┃ METRIC                                             ┃ VALUE  ┃
+┡━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ cwe       │ garak    │ attack_success_rate                                │ 0.1426 │
+│ cwe       │ garak    │ exploitation.JinjaTemplatePythonInjection_asr      │ 0      │
+│ cwe       │ garak    │ exploitation.SQLInjectionEcho_asr                  │ 0.1    │
+│ cwe       │ garak    │ web_injection.ColabAIDataLeakage_asr               │ 0      │
+│ cwe       │ garak    │ web_injection.MarkdownImageExfil_asr               │ 0      │
+│ cwe       │ garak    │ web_injection.MarkdownURIImageExfilExtended_asr    │ 0.1641 │
+│ cwe       │ garak    │ web_injection.MarkdownURINonImageExfilExtended_asr │ 0.1758 │
+│ cwe       │ garak    │ web_injection.MarkdownXSS_asr                      │ 0      │
+│ cwe       │ garak    │ web_injection.PlaygroundMarkdownExfil_asr          │ 0      │
+│ cwe       │ garak    │ web_injection.StringAssemblyDataExfil_asr          │ 0      │
+│ cwe       │ garak    │ web_injection.TaskXSS_asr                          │ 0.0471 │
+└───────────┴──────────┴────────────────────────────────────────────────────┴────────┘
+
+MLflow experiment: https://mlflow.redhat-ods-applications.svc.cluster.local:8443/api/2.0/mlflow/experiments</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you need to inspect the Kubernetes job and pod associated with this evaluation run, to perform troubleshooting, use the <code>job_id</code> label.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc get job -l job_id=$ID -n my-first-model</strong>
+NAME                                                              STATUS     COMPLETIONS   DURATION   AGE
+11c1e53a-0086-4b22-9e5a-7c-ed3b9527-d93a-42bd-9a7c-e2d913c21d17   Complete   1/1           2m20s      9m5s
+$ <strong>oc get pod -l job_id=$ID -n my-first-model</strong>
+NAME                                                              READY   STATUS      RESTARTS   AGE
+11c1e53a-0086-4b22-9e5a-7c-ed3b9527-d93a-42bd-9a7c-e2d913cx92gj   0/2     Completed   0          9m17s</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_view_evaluation_results_on_mlflow"><a class="anchor" href="#_view_evaluation_results_on_mlflow"></a>View evaluation results on MLflow</h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Return to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (mlflow)</b></span>.
+In the <strong>Projects</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
+</li>
+<li>
+<p>The experiments page should display a single experiment.
+Click <b class="menuref">garak-evalhub</b>.</p>
+</li>
+<li>
+<p>In <strong>Experiments</strong> page for the <code>garak-evalhub</code> experiment, click <b class="menuref">Evaluation runs</b>.
+It should display two runs, and their names match their EvalHub evaluation IDs.
+Click the one with a green ball, which is the most recent and corresponds to the second experiment, that got a <code>Pass</code> score.</p>
+</li>
+<li>
+<p>That experiment contains no metrics, but select its <b class="menuref">Overview</b> tab to visualized the same metrics you seen with the EvalHub CLI or with the <strong>Evaluations</strong> page of the RHOAI dashboard.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Summary of what you acomplished.</p>
+<p>You performed two evaluation runs, using the Garak provider or evaluation framework: once using the RHOAI dashboard, and other using the EvalHub CLI.
+Then you visualized their results using both EvalHub and MLflow.</p>
+</div>
 </div>
 </div>
 </div>
