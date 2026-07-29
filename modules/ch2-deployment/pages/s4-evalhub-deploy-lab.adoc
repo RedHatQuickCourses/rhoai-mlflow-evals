@@ -152,7 +152,7 @@ Then click menu:Create EvalHub[].
 
 .. Click menu:Create[] and, in the EvalHub details page, wait until the `Ready` condition is `True`.
 
-=== Test your EvalHub server using a shell
+=== Test your EvalHub server using the RHOAI dashboard
 
 [start=3]
 3. Verify that EvalHub is available from the RHOAI dashboard.
@@ -162,58 +162,60 @@ If it is already open, refresh your browser window so it picks changes to the da
 
 .. In the left navigation pane, select menu:Develop & train[Evaluations].
 The *Evaluations* page now displays the message `No existing evaluation runs`.
-The page also displays a button named menu:Create Evaluation[].
-Do not click it yet.
 
+.. Click menu:Create Evaluation[] and, on the *New evaluation run* page, click menu:Single benchmarn[]. 
+
+.. The *Single benchmark* page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource. 
+Do not click any of them: Just seeing the list is sufficient to prove your EvalHub server is functional.
+
+=== Test your EvalHub server using a shell
+
+[start=4]
 4. Verify that your EvalHub server is healthy.
 
-.. If you have a web browser tab already open on your workbench, from performing the previous lab, swith to it.
-+
-If not, click menu:Projects[], in the left navigation pane, and select menu:All projects[] in the menu:Project[] field.
-Then enter `my` in the *Filter by name* field and click menu:my-first-model[] in the list of projects.
-Finally, in the Projects page for `my-first-model`, select the menu:Workbenches[] tab and click menu:test-evals[] to open the workbench in a new browser window.
+.. Open a terminal and log in to the OpenShift cluster from your demo environment, as a cluster administrator, using the `oc login` command.
 
-.. Click the menu:Terminal[] icon, with tooltip `Start a new terminal session`.
-
-.. Run the following shell commands to get the EvalHub URL and access its health endpoint.
+.. Run the following commands to get the EvalHub URL and access its health endpoint.
 Your output should include the JSON field `status: healthy`.
-+
-WARNING: The workbench runs with a service account instead of with the admin user, so it has no access to other projects and kuberentes resouces. :-(
 +
 [source,console,subs="verbatim,quotes"]
 ----
 $ oc project redhat-ods-applications
-error: You are not a member of project "redhat-ods-applications".
-You are not a member of any projects. You can request a project to be created with the 'new-project' command.
-### Expected:
 Now using project "redhat-ods-applications" on server "https://172.30.0.1:443".
 $ EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')
 $ curl -sk $EVALHUB_URL/api/v1/health
 {"status":"healthy","timestamp":"2026-07-27T23:24:06.894598885Z","build":"0.3.0"}
 ----
 
-5. Install the EvalHub CLI in your workbench.
-+
-In a regular shell, we would recommend installing the EvalHub CLI in a Python virtual enviroment.
-But, with a jupyter notebook, it is OK to install the EvalHub CLI on the system Python of its workbench image.
+5. Install the EvalHub CLI in a Python virtual environment.
 
-.. Run the folling shell commands to install the EvalHub CLI using `pip` and configure it to connect to the EvalHub server on its OpenShift cluster.
-+
-Notice these commands refer to the `EVALHUB_URL` shell variable you set during the previoius step.
-+
-WARNING: The web terminal does NOT contain a Python runtime. Must switch to a workbenck. :-(
+.. Install the EvalHub CLI using `pip`.
 +
 [source,console,subs="verbatim,quotes"]
 ----
+$ python -m venv ~/venv/evalhub
+$ source ~/venv/evalhub/bin/activate
+# prompt changes
 $ pip install "eval-hub-sdk[cli]"
-bash: pip: command not found
+...
+Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 click-8.4.2 *eval-hub-sdk-0.4.4* h11-0.16.0 httpcore-1.0.9
+...
+----
+
+
+.. Configure the EvalHub CLI to access your RHOAI instance.
++
+Notice these commands refer to the `EVALHUB_URL` shell variable you set during the previoius step.
++
+[source,console,subs="verbatim,quotes"]
+----
 $ evalhub config set base_url $EVALHUB_URL
-GRAB OUTPUT
+evalhub config set base_url $EVALHUB_URL
 $ evalhub config set tenant my-first-model
-GRAB OUTPUT
+evalhub config set tenant my-first-model
 $ TOKEN=$(oc whoami -t)
 $ evalhub config set token $TOKEN
-GRAB OUTPUT
+Set 'token' in profile 'default'
 ----
 
 .. Verify that the EvalHub CLI can connect to the EvalHub server and list its known evaluation providers.
@@ -221,9 +223,17 @@ GRAB OUTPUT
 [source,console,subs="verbatim,quotes"]
 ----
 $ evalhub health
-GRAB OUTPUT
+evalhub health
 $ evalhub providers list
-GRAB OUTPUT
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ ID                    ┃ NAME                  ┃ DESCRIPTION                                                                ┃ BENCHMARKS ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ lm_evaluation_harness │ LM Evaluation Harness │ Comprehensive evaluation framework for language models with 180 benchmarks │ 181        │
+│                       │                       │                                                                            │            │
+│ lighteval             │ Lighteval             │ Lightweight LLM evaluation framework from Hugging Face                     │ 25         │
+│ guidellm              │ GuideLLM              │ Performance benchmarking framework for LLM inference servers               │ 7          │
+│ garak                 │ Garak                 │ LLM vulnerability scanner and red-teaming framework                        │ 8          │
+└───────────────────────┴───────────────────────┴────────────────────────────────────────────────────────────────────────────┴────────────┘
 ----
 
 === Summary
