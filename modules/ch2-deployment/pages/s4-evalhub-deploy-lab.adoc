@@ -163,10 +163,10 @@ If it is already open, refresh your browser window so it picks changes to the da
 .. In the left navigation pane, select menu:Develop & train[Evaluations].
 The *Evaluations* page now displays the message `No existing evaluation runs`.
 
-.. Click menu:Create Evaluation[] and, on the *New evaluation run* page, click menu:Single benchmarn[]. 
+.. Click menu:Create Evaluation[] and, on the *New evaluation run* page, click menu:Single benchmark[]. 
 
 .. The *Single benchmark* page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource. 
-Do not click any of them: Just seeing the list is sufficient to prove your EvalHub server is functional.
+Do _not_ click any of them: Just seeing the list is sufficient to prove that your EvalHub server is functional.
 
 === Test your EvalHub server using a shell
 
@@ -183,10 +183,10 @@ Your output should include the JSON field `status: healthy`.
 +
 [source,console,subs="verbatim,quotes"]
 ----
-$ oc project redhat-ods-applications
+$ *oc project redhat-ods-applications*
 Now using project "redhat-ods-applications" on server "https://172.30.0.1:443".
-$ EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')
-$ curl -sk $EVALHUB_URL/api/v1/health
+$ *EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')*
+$ *curl -sk $EVALHUB_URL/api/v1/health*
 {"status":"healthy","timestamp":"2026-07-27T23:24:06.894598885Z","build":"0.3.0"}
 ----
 
@@ -197,12 +197,12 @@ It should work with any version of Python from 3.12 on.
 +
 [source,console,subs="verbatim,quotes"]
 ----
-$ python --version
+$ *python --version*
 Python 3.14.6
-$ python -m venv ~/venv/evalhub
-$ source ~/venv/evalhub/bin/activate
+$ *python -m venv ~/venv/evalhub*
+$ *source ~/venv/evalhub/bin/activate*
 ... prompt changes ...
-$ pip install "eval-hub-sdk[cli]"
+$ *pip install "eval-hub-sdk[cli]"*
 ...
 Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 click-8.4.2 *eval-hub-sdk-0.4.4* h11-0.16.0 httpcore-1.0.9
 ...
@@ -215,12 +215,12 @@ Notice these commands refer to the `EVALHUB_URL` shell variable you set during t
 +
 [source,console,subs="verbatim,quotes"]
 ----
-$ evalhub config set base_url $EVALHUB_URL
-evalhub config set base_url $EVALHUB_URL
-$ evalhub config set tenant my-first-model
-evalhub config set tenant my-first-model
-$ TOKEN=$(oc whoami -t)
-$ evalhub config set token $TOKEN
+$ *evalhub config set base_url $EVALHUB_URL*
+Set 'base_url' in profile 'default'
+$ *evalhub config set tenant my-first-model*
+Set 'tenant' in profile 'default'
+$ *TOKEN=$(oc whoami -t)*
+$ *evalhub config set token $TOKEN*
 Set 'token' in profile 'default'
 ----
 
@@ -228,9 +228,9 @@ Set 'token' in profile 'default'
 +
 [source,console,subs="verbatim,quotes"]
 ----
-$ evalhub health
-evalhub health
-$ evalhub providers list
+$ *evalhub health*
+EvalHub service: healthy (640ms)
+$ *evalhub providers list*
 ┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
 ┃ ID                    ┃ NAME                  ┃ DESCRIPTION                                                                ┃ BENCHMARKS ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
