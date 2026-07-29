@@ -346,6 +346,28 @@ That manifest corresponds to the example from <a href="https://docs.redhat.com/e
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The full secret manifest is listed here, just for your reference:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: mlflow.opendatahub.io/v1
+kind: MLflow
+metadata:
+  name: mlflow
+  namespace: redhat-ods-applications
+spec:
+  storage:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  backendStoreUri: "sqlite:////mlflow/mlflow.db"
+  artifactsDestination: "file:///mlflow/artifacts"
+  serveArtifacts: true</code></pre>
+</div>
+</div>
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">API Explorer</b></span>.
