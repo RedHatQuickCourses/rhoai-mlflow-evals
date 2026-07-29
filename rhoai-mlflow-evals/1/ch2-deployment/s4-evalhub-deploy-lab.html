@@ -341,8 +341,8 @@ Copy the entire contents of the manifest to the clipboard.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This is a minimal PostgreSQL deployment.
-It is not listed here because if its size, and you would not use such a simplisitic database deployment for a real development or production instance of EvalHub.</p>
+<p>This manifest provides a minimal PostgreSQL deployment.
+It is not listed here because if its size, but you would not use such a simplisitic database deployment for a real development or production instance of EvalHub.</p>
 </div>
 <div class="paragraph">
 <p>You are free to use your preferred OpenShift template, helm chart, or database operator instead.
@@ -499,11 +499,11 @@ If it is already open, refresh your browser window so it picks changes to the da
 The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.</p>
 </li>
 <li>
-<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmarn</b>.</p>
+<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
 </li>
 <li>
 <p>The <strong>Single benchmark</strong> page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource.
-Do not click any of them: Just seeing the list is sufficient to prove your EvalHub server is functional.</p>
+Do <em>not</em> click any of them: Just seeing the list is sufficient to prove that your EvalHub server is functional.</p>
 </li>
 </ol>
 </div>
@@ -517,6 +517,19 @@ Do not click any of them: Just seeing the list is sufficient to prove your EvalH
 <ol class="arabic" start="4">
 <li>
 <p>Verify that your EvalHub server is healthy.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The shell commands in this course assume a Bash shell on Fedora Linux.
+If your work machine runs Windows or macOS, you should either install a Bash shell or connect to the bastion host of your demo environment using SSH.
+</td>
+</tr>
+</table>
+</div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -527,10 +540,10 @@ Do not click any of them: Just seeing the list is sufficient to prove your EvalH
 Your output should include the JSON field <code>status: healthy</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ oc project redhat-ods-applications
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>oc project redhat-ods-applications</strong>
 Now using project "redhat-ods-applications" on server "https://172.30.0.1:443".
-$ EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')
-$ curl -sk $EVALHUB_URL/api/v1/health
+$ <strong>EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')</strong>
+$ <strong>curl -sk $EVALHUB_URL/api/v1/health</strong>
 {"status":"healthy","timestamp":"2026-07-27T23:24:06.894598885Z","build":"0.3.0"}</code></pre>
 </div>
 </div>
@@ -543,13 +556,16 @@ $ curl -sk $EVALHUB_URL/api/v1/health
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Install the EvalHub CLI using <code>pip</code>.</p>
+<p>Install the EvalHub CLI using <code>pip</code>.
+It should work with any version of Python from 3.12 on.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ python -m venv ~/venv/evalhub
-$ source ~/venv/evalhub/bin/activate
-# prompt changes
-$ pip install "eval-hub-sdk[cli]"
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>python --version</strong>
+Python 3.14.6
+$ <strong>python -m venv ~/venv/evalhub</strong>
+$ <strong>source ~/venv/evalhub/bin/activate</strong>
+... prompt changes ...
+$ <strong>pip install "eval-hub-sdk[cli]"</strong>
 ...
 Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 click-8.4.2 <strong>eval-hub-sdk-0.4.4</strong> h11-0.16.0 httpcore-1.0.9
 ...</code></pre>
@@ -563,12 +579,12 @@ Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 clic
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub config set base_url $EVALHUB_URL
-evalhub config set base_url $EVALHUB_URL
-$ evalhub config set tenant my-first-model
-evalhub config set tenant my-first-model
-$ TOKEN=$(oc whoami -t)
-$ evalhub config set token $TOKEN
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub config set base_url $EVALHUB_URL</strong>
+Set 'base_url' in profile 'default'
+$ <strong>evalhub config set tenant my-first-model</strong>
+Set 'tenant' in profile 'default'
+$ <strong>TOKEN=$(oc whoami -t)</strong>
+$ <strong>evalhub config set token $TOKEN</strong>
 Set 'token' in profile 'default'</code></pre>
 </div>
 </div>
@@ -577,9 +593,9 @@ Set 'token' in profile 'default'</code></pre>
 <p>Verify that the EvalHub CLI can connect to the EvalHub server and list its known evaluation providers.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub health
-evalhub health
-$ evalhub providers list
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub health</strong>
+EvalHub service: healthy (640ms)
+$ <strong>evalhub providers list</strong>
 ┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
 ┃ ID                    ┃ NAME                  ┃ DESCRIPTION                                                                ┃ BENCHMARKS ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
