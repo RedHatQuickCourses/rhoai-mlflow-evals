@@ -81,7 +81,7 @@ alert:default-dsc has been updated to version 1186240
 +
 NOTE: That manifest corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow[Minimal development or test deployment^] in the Red Hat OpenShift AI product documentation with no changes.
 +
-The full secret manifest is listed here, just for your reference:
+The full manifest is listed here, just for your reference:
 +
 [source,YAML,subs="verbatim,quotes"]
 ----

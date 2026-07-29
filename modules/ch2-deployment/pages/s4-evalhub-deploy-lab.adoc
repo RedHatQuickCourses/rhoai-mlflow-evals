@@ -80,6 +80,15 @@ spec:
 
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml[sample evalhub db deployment^] from the course samples repository with a web browser and open the manifest `scripts/evalhubdb.yaml`.
 Copy the entire contents of the manifest to the clipboard.
++
+[NOTE]
+====
+This is a minimal PostgreSQL deployment.
+It is not listed here because if its size, and you would not use such a simplisitic database deployment for a real development or production instance of EvalHub. 
+
+You are free to use your preferred OpenShift template, helm chart, or database operator instead.
+Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.
+====
 
 .. In the left pane, select menu:Home[Projects] and, in the search field, enter `redhat-ods`.
 Then click the menu:redhat-ods-applications[] project.
@@ -103,7 +112,7 @@ The full secret manifest is listed here, just for your reference:
 +
 [source,YAML,subs="verbatim,quotes"]
 ----
-include::1@samples:scripts:example$evalhub.yaml[]
+include::1@samples:scripts:example$evalhub-db-credentials.yaml[]
 ----
 
 .. In the left navigation pane, select menu:Workloads[Secrets]  and verify that the selected project is still `redhat-ods-applications`.
@@ -111,7 +120,8 @@ Then click menu:Create[From YAML].
 
 .. In the *Create Secret* page, enter the manifests for a secret which you already copied to your clipboard, and click menu:Create[].
 
-.. In the *Secret details* page, you can scroll down and click menu:Reveal values[] to see the database connection URL which contains the database user name and password and should match the database deployment you created in the previous step.
+.. In the *Secret details* page, you can scroll down and click menu:Reveal values[] to see the database connection URL.
+It contains the database user name, password, and other connection parameters which match the database deployment you created in the previous step.
 
 .. In the left navigation pane, select menu:Home[API Explorer].
 Then enter `EvalHb` in the search field.
