@@ -483,7 +483,7 @@ Then click <b class="menuref">Create EvalHub</b>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_test_your_evalhub_server_using_a_shell"><a class="anchor" href="#_test_your_evalhub_server_using_a_shell"></a>Test your EvalHub server using a shell</h3>
+<h3 id="_test_your_evalhub_server_using_the_rhoai_dashboard"><a class="anchor" href="#_test_your_evalhub_server_using_the_rhoai_dashboard"></a>Test your EvalHub server using the RHOAI dashboard</h3>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
@@ -496,49 +496,38 @@ If it is already open, refresh your browser window so it picks changes to the da
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.
-The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.
-The page also displays a button named <b class="menuref">Create Evaluation</b>.
-Do not click it yet.</p>
+The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.</p>
+</li>
+<li>
+<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmarn</b>.</p>
+</li>
+<li>
+<p>The <strong>Single benchmark</strong> page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource.
+Do not click any of them: Just seeing the list is sufficient to prove your EvalHub server is functional.</p>
 </li>
 </ol>
 </div>
 </li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_test_your_evalhub_server_using_a_shell"><a class="anchor" href="#_test_your_evalhub_server_using_a_shell"></a>Test your EvalHub server using a shell</h3>
+<div class="olist arabic">
+<ol class="arabic" start="4">
 <li>
 <p>Verify that your EvalHub server is healthy.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>If you have a web browser tab already open on your workbench, from performing the previous lab, swith to it.</p>
-<div class="paragraph">
-<p>If not, click <b class="menuref">Projects</b>, in the left navigation pane, and select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
-Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.
-Finally, in the Projects page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">test-evals</b> to open the workbench in a new browser window.</p>
-</div>
+<p>Open a terminal and log in to the OpenShift cluster from your demo environment, as a cluster administrator, using the <code>oc login</code> command.</p>
 </li>
 <li>
-<p>Click the <b class="menuref">Terminal</b> icon, with tooltip <code>Start a new terminal session</code>.</p>
-</li>
-<li>
-<p>Run the following shell commands to get the EvalHub URL and access its health endpoint.
+<p>Run the following commands to get the EvalHub URL and access its health endpoint.
 Your output should include the JSON field <code>status: healthy</code>.</p>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The workbench runs with a service account instead of with the admin user, so it has no access to other projects and kuberentes resouces. :-(
-</td>
-</tr>
-</table>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ oc project redhat-ods-applications
-error: You are not a member of project "redhat-ods-applications".
-You are not a member of any projects. You can request a project to be created with the 'new-project' command.
-<mark>#</mark> Expected:
 Now using project "redhat-ods-applications" on server "https://172.30.0.1:443".
 $ EVALHUB_URL=https://$(oc get routes evalhub -o jsonpath='{.spec.host}')
 $ curl -sk $EVALHUB_URL/api/v1/health
@@ -550,41 +539,37 @@ $ curl -sk $EVALHUB_URL/api/v1/health
 </div>
 </li>
 <li>
-<p>Install the EvalHub CLI in your workbench.</p>
-<div class="paragraph">
-<p>In a regular shell, we would recommend installing the EvalHub CLI in a Python virtual enviroment.
-But, with a jupyter notebook, it is OK to install the EvalHub CLI on the system Python of its workbench image.</p>
-</div>
+<p>Install the EvalHub CLI in a Python virtual environment.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Run the folling shell commands to install the EvalHub CLI using <code>pip</code> and configure it to connect to the EvalHub server on its OpenShift cluster.</p>
+<p>Install the EvalHub CLI using <code>pip</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ python -m venv ~/venv/evalhub
+$ source ~/venv/evalhub/bin/activate
+# prompt changes
+$ pip install "eval-hub-sdk[cli]"
+...
+Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 click-8.4.2 <strong>eval-hub-sdk-0.4.4</strong> h11-0.16.0 httpcore-1.0.9
+...</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Configure the EvalHub CLI to access your RHOAI instance.</p>
 <div class="paragraph">
 <p>Notice these commands refer to the <code>EVALHUB_URL</code> shell variable you set during the previoius step.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The web terminal does NOT contain a Python runtime. Must switch to a workbenck. :-(
-</td>
-</tr>
-</table>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ pip install "eval-hub-sdk[cli]"
-bash: pip: command not found
-$ evalhub config set base_url $EVALHUB_URL
-GRAB OUTPUT
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub config set base_url $EVALHUB_URL
+evalhub config set base_url $EVALHUB_URL
 $ evalhub config set tenant my-first-model
-GRAB OUTPUT
+evalhub config set tenant my-first-model
 $ TOKEN=$(oc whoami -t)
 $ evalhub config set token $TOKEN
-GRAB OUTPUT</code></pre>
+Set 'token' in profile 'default'</code></pre>
 </div>
 </div>
 </li>
@@ -593,9 +578,17 @@ GRAB OUTPUT</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub health
-GRAB OUTPUT
+evalhub health
 $ evalhub providers list
-GRAB OUTPUT</code></pre>
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ ID                    ┃ NAME                  ┃ DESCRIPTION                                                                ┃ BENCHMARKS ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ lm_evaluation_harness │ LM Evaluation Harness │ Comprehensive evaluation framework for language models with 180 benchmarks │ 181        │
+│                       │                       │                                                                            │            │
+│ lighteval             │ Lighteval             │ Lightweight LLM evaluation framework from Hugging Face                     │ 25         │
+│ guidellm              │ GuideLLM              │ Performance benchmarking framework for LLM inference servers               │ 7          │
+│ garak                 │ Garak                 │ LLM vulnerability scanner and red-teaming framework                        │ 8          │
+└───────────────────────┴───────────────────────┴────────────────────────────────────────────────────────────────────────────┴────────────┘</code></pre>
 </div>
 </div>
 </li>
