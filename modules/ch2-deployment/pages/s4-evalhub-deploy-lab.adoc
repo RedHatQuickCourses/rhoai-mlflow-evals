@@ -98,6 +98,13 @@ Then scrool down to the *Conditions* table, and verify there is a row of type `A
 
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub-db-credentials.yaml[sample evalhub db secret^] from the course samples repository with a web browser and open the manifest `scripts/evalhub-db-credentials.yaml`.
 Copy the entire contents of the manifest to the clipboard.
++
+The full secret manifest is listed here, just for your reference:
++
+[source,YAML,subs="verbatim,quotes"]
+----
+include::1@samples:scripts:example$evalhub.yaml[]
+----
 
 .. In the left navigation pane, select menu:Workloads[Secrets]  and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create[From YAML].
