@@ -20,6 +20,12 @@ Also ensure that you already deployed MLflow and EvalHub by following the instru
 
 In this lab, you will perform a quick evaluation run using the RHOAI dashboard and view its results in MLflow.
 
+As you perform this activity, you will alternate between three windows:
+
+* The Red Hat OpenShift AI (RHOAI) dashboard
+* The Red Hat OpenShift web console
+* A terminal window
+
 === Retrieve model name and endpoint, and label its project for TrustyAI
 
 1. Find the name and endpoint of the model to evaluate.
@@ -36,7 +42,7 @@ There is a single row, named menu:llama-32-3b-instruct[].
 .. Open the OpenShift web console and select menu:Administration[Namespaces].
 Enter `my` in the search field and click menu:my-first-model[].
 +
-WARNING: You cannot change namespace labels by using menu:Home[Projects].
+WARNING: You _cannot_ change namespace labels by using menu:Home[Projects].
 It seems to work, but the namespace resource associated with the project will remain unchanged.
 
 .. Click the menu:Actions[Edit labels] and, in the *Edit labels* popup, append `evalhub.trustyai.opendatahub.io/tenant=true`.
