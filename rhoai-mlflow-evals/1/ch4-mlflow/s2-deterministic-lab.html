@@ -182,7 +182,7 @@
 <dl>
 <dt class="hdlist1">Objective</dt>
 <dd>
-<p>Add tracing to a chat application, create a deterministic scorer, and run an MLFlow evaluation to verify response quality.</p>
+<p>Starting from an agent which already produces MLflow traces, create a deterministic scorer, and run an MLFlow evaluation to verify response quality of that agent.</p>
 </dd>
 </dl>
 </div>
@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Pending review
 </td>
 </tr>
 </table>
@@ -204,7 +204,23 @@ Not started  yet.
 <h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.</p>
+<p>You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access credentials for the RHOAI dashboard</p>
+</li>
+<li>
+<p>A web browser to access the RHOAI dashboard</p>
+</li>
+<li>
+<p>Access credentials for the OpenShift web console</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from <a href="../ch2-deployment/s2-mlflow-deploy-lab.html" class="xref page">chapter 2</a>.</p>
 </div>
 </div>
 </div>
@@ -212,49 +228,503 @@ Not started  yet.
 <h2 id="_instructions"><a class="anchor" href="#_instructions"></a>Instructions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>High-level summary of what you will perform in this lab, but more detailed than the objective.</p>
+<p>You will create and test an MLflow scorer functions, using a jupyter notebook. Then you will use the function for an MLflow evaluation of a simplistic agentic application that is provided to you.</p>
 </div>
+<div class="paragraph">
+<p>As you perform this activity, you will alternate between two browser tabs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Red Hat OpenShift AI (RHOAI) dashboard</p>
+</li>
+<li>
+<p>A Jupyter notebook from a RHOAI workbench</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_review_the_sample_agentic_application"><a class="anchor" href="#_review_the_sample_agentic_application"></a>Review the sample agentic application</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Task or outcome.</p>
+<p>If you do not have a browser tab already open with the <code>test-mlflow</code> workbench, open it.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a graphical or web UI.
-Click <b class="menuref">Save As</b> to save your work.</p>
+<p>Open the RHOAI work bench and, in the left navigation pane, click <b class="menuref">Projects</b>.
+Select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
+Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.</p>
 </li>
 <li>
-<p>More things to do</p>
+<p>In the <strong>Projects</strong> page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">test-mlflow</b> to open its Jupyter Lab in a new browser tab.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Task or outcome.</p>
+<p>Import the provided agentic application from git and test it.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a shell.</p>
+<p>In the toolbar of left pane of the jupyter notebook, click the <b class="menuref">Git Clone</b> icon and, in  the <strong>Clone a repo</strong> pop-up, enter <code>https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git</code> which is the URL of the course samples repository.
+Click <b class="menuref">Clone</b>.
+You should see, in the bottom right. the message <code>succesfully cloned</code>.</p>
+</li>
+<li>
+<p>In the left pane of the jupyter notebook, enter the <b class="menuref">rhoai-mlflow-samples/evals</b> directory and double-click the <b class="menuref">basic-agent.ipnyb</b> notebook to open it in a notebook tab.</p>
+</li>
+<li>
+<p>Review the Python code for the agent.
+It is a simplisitc chat application which sets a hardcoded system prompt and submits a hardcoded question to a llama model, which is predeployed on your demo instance, using the OpenAI API.</p>
+<div class="paragraph">
+<p>The code in the notebook is split into multiple cells for readability and it could be concatenated into a single Python script to run in a shell, but then it would require changes to use external URLs to acess an inferenceservice and MLflow, and to use authentication tokens.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you need more explanation about how that simplistic agent and its calls to MLflow tracing, please refer to the quick course about <a href="https://redhatquickcourses.github.io/rhoai-mlflow-traces/rhoai-mlflow-traces/1/ch3-collect-traces/s2-agent-traces-lab.html" target="_blank" rel="noopener">MLflow traces</a>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The notebook is ready to run as it is.
+In the top toolbar of the notebook tab, click the <b class="menuref">fast-forward</b> icon with tooltip <code>Restart the kernel and run all cells</code>.
+In the <strong>Restart Kernel</strong> pop-up, click <b class="menuref">Restart</b>.</p>
+</li>
+<li>
+<p>Be patient while the first cell downloads Python packages from the RHOAI index, and the second cell submits to the llama model a prompt asking what is RHEL.
+You can ignore any warnings about <code>IProgress</code> and <code>ipywidgets</code>.</p>
+</li>
+<li>
+<p>If all goes well, you should get a reasonable and correct response, though a rather long one.
+Follows an example from testing these instructions:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>command --options fixed-arguments <em>variable-arguments</em></strong>
-output of the command
-highlight <strong>something</strong> in the output</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">**Red Hat Enterprise Linux (RHEL)**
+
+* Developed and maintained by Red Hat, Inc.
+* Licensed under the Red Hat Enterprise Linux License, which requires a subscription and support fees
+* Supports a wide range of hardware and software platforms
+* Includes commercial support, updates, and security patches for a fee
+* Typically used in production environments, data centers, and enterprise settings
+
+**CentOS**
+
+* Originally based on RHEL 5, but now uses RHEL 8 as its base
+* Developed by a community of volunteers, led by Red Hat
+* Licensed under the GNU General Public License (GPL), which is free and open-source
+* No subscription or support fees required
+* Often used in development, testing, and education environments, as well as in some production environments where cost is a concern
+
+In summary, RHEL is a commercial Linux distribution that requires a subscription and support fees, while CentOS is a free and open-source distribution that is based on RHEL but is not directly supported by Red Hat.</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Visualize the MLflow trace generated by the agent.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to the RHOAI dashboard and, in the left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>.
+If the current project is not already <code>my-first-model</code> enter <code>my</code> in the <strong>Project</strong> field and click <b class="menuref">my-first-model</b>.</p>
+</li>
+<li>
+<p>The <strong>Experiments</strong> page should display both the <code>garak-evalhub</code> experiment from the from previous chapter and the <code>simple-agent</code> experiment from the this activity.
+Click <b class="menuref">simple-agent</b> to open its experiment details page and click <b class="menuref">Traces</b>.</p>
+</li>
+<li>
+<p>You should see a single row, which displays the request and response from the agent, and metrics such as token count and execution time, but no assessments.
+The <code>OK</code> state just means the agent performed the request and produced a reponse without execution errors.</p>
+</li>
+<li>
+<p>Click either the trace id or the request on the single row to open a trace summary pane.
+Then click <b class="menuref">Show assessments</b> to open its assessments pane.
+It is empty, displaying only buttons to add feedback and expectations.</p>
+</li>
+<li>
+<p>Return to the traces table by clicking the close button of the trace summary pane pane, which is the <b class="menuref">x</b> icon at its top right corner.
+Do <em>not</em> click the similar icon inside the assessments pane!</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_evaluate_the_agent_using_a_deterministic_scorer_function"><a class="anchor" href="#_evaluate_the_agent_using_a_deterministic_scorer_function"></a>Evaluate the agent using a deterministic scorer function</h3>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Create and test a deterministic scorer function to assess the lengh of a reponse.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can see the complete code, ready to run evaluations, in the <code>determistic-eval-complete.ipnyb</code> notebook, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/determistic-eval-complete.ipnyb" target="_blank" rel="noopener">course samples repository</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Copy the simple-agent notebook to a new file which you will edit.</p>
+<div class="paragraph">
+<p>Switch to your jupyter labs and, in its left pane, right click <b class="menuref">simple-agent.ipynb</b> and select <b class="menuref">Duplicate</b>.
+Then right-click the new file <b class="menuref">simple-agent-Copy1.ipnyb</b> and select <b class="menuref">Rename</b>.
+Enter <code>determistic-eval.ipnyb</code> as the new file name.
+Finally, double-click <b class="menuref">determistic-eval.ipnyb</b> to open the notebook in a new editor tab.</p>
+</div>
+</li>
+<li>
+<p>Enter, inside the cell, the code for a scorer function which checks the leng of a response based on the number of words.</p>
+<div class="paragraph">
+<p>In the <code>deterministic-eval.ipynb</code> notebook, select the last cell, having the comment <code>###Cell 6: run the agent</code>.
+Then click, in the cell&#8217;s toolbar, the icon to <b class="menuref">Insert a cell bellow</b>.
+Inside the new cell, enter the following code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 7: deterministic scorer
+
+from mlflow.genai.scorers import scorer
+from mlflow.entities import Feedback
+
+@scorer
+def one_to_three_short_sentences(outputs: str) -&gt; Feedback:
+    """15-20 words per sentence, up to three sentences"""
+    word_count = len(outputs.split())
+    metric={
+        "word-count": word_count,
+        "min": 20,
+        "max": 60
+    }
+    pass_fail = word_count &gt;=20 and word_count &lt;=60
+    if word_count &lt; metric["min"]:
+        return Feedback(
+                name="short_response",
+                value=False,
+                rationale=f"Total world count was lower than {metric["min"]}: {word_count}.",
+                metadata=metric
+            )
+    elif word_count &gt; metric["max"]:
+        return Feedback(
+                name="short_response",
+                value=False,
+                rationale=f"Total world count was higher than {metric["max"]}: {word_count}.",
+                metadata=metric
+            )
+    else:
+        return Feedback(
+                name="short_response",
+                value=True,
+                rationale=f"Total world count was between {metric["min"]} and {metric["max"]}: {word_count}.",
+                metadata=metric
+            )</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>More things to do.
-Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to interrupt.</p>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the function and create a new notebook cell.
+Running the cell produces no output.</p>
+</li>
+<li>
+<p>Inside the new cell, enter the code to test the scorer function from hardcoded examples.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 8: test scorer
+
+feedback = one_to_three_short_sentences(
+    outputs="RHEL (Red Hat Enterprise Linux) is a Linux distribution."
+)
+print(f"Test scorer with a too short response: {feedback.value} - {feedback.rationale}")
+
+feedback = one_to_three_short_sentences(
+    outputs="RHEL (Red Hat Enterprise Linux) is a commercial Linux distribution, supported by Red Hat and produced from CentOS Stream and Fedora Linux."
+)
+print(f"Test scorer with an OK long response: {feedback.value} - {feedback.rationale}")
+
+feedback = one_to_three_short_sentences(
+    outputs="""
+        Red Hat Enterprise Linux (RHEL) is a commercial, stable, and secure version of Linux, supported by Red Hat and produced from from multiple upstreams.
+        The direct upstream to RHEL is the CentOS Stream Linux distribution, which is a free, commumity-supported distribution.
+        The Fedora Linux is a direct upstream to CentOS, and thus an indirect upstream to RHEL.
+        RHEL is suitable for production environments, whereas Fedora is more experimental and intended for developers and power users.
+        Fedora is often used as a testing ground for new features and technologies before they are included in RHEL.
+        Fedora Linux is free and commumity-supported.
+    """
+)
+print(f"Test scorer with a too long response: {feedback.value} - {feedback.rationale}")</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the test code.
+Running the cell produces the follwing output.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Test scorer with a too short response: False - Total world count was lower than 20: 9.
+Test scorer with an OK long response: True - Total world count was between 20 and 60: 22.
+Test scorer with a too long response: False - Total world count was higher than 60: 100.</code></pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
 </li>
+<li>
+<p>Create code for running an MLflow evaluation using the deterministic scorer.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the new, empty cell, created by running the test code for the scorer function, enter the code to define an evaluation data set.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 9: hardcoded evaluation data set
+
+eval_dataset = [
+    {
+        "inputs": {"question":
+            "What's the difference between RHEL and CentOS?"},
+        "expectations": {"expected_response":
+            """
+            RHEL and CentOS are both Linux distributions. RHEL is a proprietary distribution from Red Hat, while CentOS is community-supported. CentOS is a direct upstream of RHEL.
+            """},
+    },
+    {
+        "inputs": {"question":
+            "What's the difference between RHEL and Fedora Linux?"},
+        "expectations": {"expected_response":
+            """
+            RHEL and Fedora are both Linux distributions. RHEL is a proprietary distribution from Red Hat, while Fedora is community-supported. Fedora is an upstream of RHEL.
+            """},
+    },
+]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the array and create a new notebook cell.
+Running the cell produces no output.</p>
+</li>
+<li>
+<p>Inside the new cell, enter the code to wrap the agent inside a predictor function and run an MLflow evaluation using your scorer function.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>MLFLOW_GENAI_EVAL_SKIP_TRACE_VALIDATION</code> environment variable prevents MLflow from performing a canary test using the first row of the evaluation data, which would produce duplicate traces and assessments for it.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 10: run evaluation
+
+def my_predict_fn(question: str) -&gt; str:
+    return agent("no token", system_instructions, input_text)
+
+os.environ["MLFLOW_GENAI_EVAL_SKIP_TRACE_VALIDATION"]="true"
+
+try:
+    results = mlflow.genai.evaluate(
+        data=eval_dataset,
+        predict_fn=my_predict_fn,
+        scorers=[one_to_three_short_sentences],
+    )
+except Exception as e:
+    print(f"An error occurred: {e}")</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the evaluation.
+Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scoreres over the complete evaluation data set.
+When done, you should see an output similar to the following.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Evaluating: 100%|██████████| 2/2 [Elapsed: 00:01, Remaining: 00:00] [predict_fn: 98%, scorers: 2%]</code></pre>
+</div>
+</div>
+</li>
 </ol>
+</div>
+</li>
+<li>
+<p>View evaluation results on MLflow traces</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to your RHOAI dashboard, which should already be in the details page for the <code>simple-agent</code> experiment. If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <strong>Project</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
+</li>
+<li>
+<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides the two new traces, the new colums <code>short_response</code> which display results from the scorer function.
+If you do not see these changes, clich the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
+<div class="paragraph">
+<p>Also notice that the trace for the previous run of the agent, which did no evaluation, displays <code>null</code> for that column.</p>
 </div>
 <div class="paragraph">
-<p>Summary of what you acomplished.</p>
+<p>Finally, notice that the top of the table displays a summary of the <code>short_response</code> score for all traces, which a 100% for the <code>False</code> value.</p>
+</div>
+</li>
+<li>
+<p>Click the trace ID or the request of the most recent trace, which is the first row of the traces table, to view its trace summary panel.
+It should display an <strong>Assessment</strong> pane, with the value of the <code>short_response</code> scorer.
+Click the <b class="menuref">&gt;</b> icon to expand the feedback results and view the rationale for the result.</p>
+</li>
+<li>
+<p>Return to the traces table by clicking the close button of the trace summary pane pane, which is the <b class="menuref">x</b> icon at its top right corner.
+Do <em>not</em> click the similar icon in the assessments pane!</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_improve_the_agent_with_a_new_system_prompt_from_the_mlflow_prompt_registry"><a class="anchor" href="#_improve_the_agent_with_a_new_system_prompt_from_the_mlflow_prompt_registry"></a>Improve the agent with a new system prompt from the MLflow prompt registry</h3>
+<div class="olist arabic">
+<ol class="arabic" start="7">
+<li>
+<p>Record a new system prompt in MLflow.</p>
+<div class="paragraph">
+<p>You already seem that the llama model produces very long responses, by default.
+It is standard practice to tweak the system prompt to control the tone and format of outputs from the agent.
+But, instead of hardcoding a new system prompt in the agent, retrieve the prompt from MLflow.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Still in the <code>simple-agent</code> experiment details page, click <b class="menuref">Prompts</b>.
+Then click <b class="menuref">Create prompt</b>.</p>
+</li>
+<li>
+<p>In the <strong>Create prompt</strong> pop-up, enter <code>short-responses</code> in the <strong>Name</strong> field, and enter the following in the <strong>Prompt</strong> field:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">You are a helpful assistant which provides short and objective responses, composed of one to three short senteces.</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click <b class="menuref">Create</b> to save the prompt.
+Notice that it is saved as <code>version 1</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Change the agent to use the new system prompt.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can see the complete code, ready to use the new system prompt, in the <code>determistic-eval-new-prompt.ipnyb</code> notebook, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/deterministic-eval-new-prompt.ipynb" target="_blank" rel="noopener">course samples repository</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to your jupyter lab and its editor tab with the <code>deterministic-eval.ipynb</code> notebook and scroll up to its sixth cell, that starts with <code>###Cell 6: run the agent</code>.</p>
+</li>
+<li>
+<p>Make the following changes to the code inside the cell to load and format the prompt from MLflow and use it as the system prompt.
+Even tough our new prompt contains no placeholders, it must still be formatted before passing to an LLM.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">...
+try:
+    <strong>system_prompt = mlflow.genai.load_prompt("prompts:/short-responses/1")</strong>
+    <strong>final_prompt = system_prompt.format()</strong>
+    response = agent("no token", <strong>final_prompt</strong>, input_text)
+    print(response)
+except Exception as e:
+    print(f"An error occurred: {e}")</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the agent using the new system prompt.
+Its output should be very different from its previous run, and similar to the following.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">RHEL (Red Hat Enterprise Linux) and CentOS are both Linux distributions, but they differ in their licensing and support. RHEL is a commercial distribution, while CentOS is an open-source distribution based on RHEL.</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Run evaluations using the new system prompt</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Scroll down to the tenth cell of the notebook, that starts with <code>###Cell 10: run evaluation</code>, and change its code to use the new system prompt.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">...
+def my_predict_fn(question: str) -&gt; str:
+    <strong>system_prompt = mlflow.genai.load_prompt("prompts:/short-responses/1")</strong>
+    <strong>final_prompt = system_prompt.format()</strong>
+    return agent("no token",<strong>final_prompt</strong>, input_text)
+...</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the agent using the new system prompt.
+The ouput is the same as the previous attempt, because the code for evalutions does not print anything about the results, but just a progress meter.</p>
+</li>
+<li>
+<p>Switch to the RHOAI dashboard, which should still be in the <b class="menuref">Prompts</b> tab of the experiment details page for <code>simple-agent</code>.
+Select <b class="menuref">Traces</b> to open its list of traces.</p>
+</li>
+<li>
+<p>You should see the new traces, from running the agent and the evaluation a second time.
+If you do not, click the <b class="menuref">Refresh</b> icon near the <b class="menuref">Time range</b> field.</p>
+<div class="paragraph">
+<p>The new traces should display the values <code>null</code> and <code>True</code> in the <code>short_response</code> column, proving that the new system prompt had the desired effect.
+The summary at the top of the table should now split 50%/50% between <code>True</code> and <code>False</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
+<div class="paragraph">
+<p>You created a scorer functions to assess the lengh of responses produced by the model, then you run an evaluation which showed the responses were too long.
+Then you crafted a new system prompt, which you stored in the MLflow prompt registry, to direct the model to produce shorter responses.
+After testing the agent using the new system prompt, you run the same evaluation again, proving that now responses were are short, as desired.</p>
+</div>
 </div>
 </div>
 </div>
