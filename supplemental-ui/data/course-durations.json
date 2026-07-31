@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 1295,
+  "totalSeconds": 1841,
   "pageCount": 17,
   "pages": [
     {
@@ -65,7 +65,7 @@
     {
       "module": "ch3-evalhub",
       "page": "s2-evaluate-model-lab.adoc",
-      "seconds": 347
+      "seconds": 355
     },
     {
       "module": "ch4-mlflow",
@@ -80,7 +80,7 @@
     {
       "module": "ch4-mlflow",
       "page": "s2-deterministic-lab.adoc",
-      "seconds": 68
+      "seconds": 606
     },
     {
       "module": "ch4-mlflow",
