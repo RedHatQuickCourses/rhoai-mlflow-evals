@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 1841,
+  "totalSeconds": 2291,
   "pageCount": 17,
   "pages": [
     {
@@ -85,7 +85,7 @@
     {
       "module": "ch4-mlflow",
       "page": "s3-llm-judge-lab.adoc",
-      "seconds": 66
+      "seconds": 516
     }
   ]
 }
