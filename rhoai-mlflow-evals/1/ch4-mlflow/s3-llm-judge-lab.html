@@ -192,7 +192,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Work In Progrees
 </td>
 </tr>
 </table>
@@ -203,7 +203,23 @@ Not started  yet.
 <h2 id="_before_you_begin"><a class="anchor" href="#_before_you_begin"></a>Before you begin</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Describe requirements, such as customer portal accounts, Red Hat Developer free sub, already configured machines, access to container registries, etc.</p>
+<p>You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access credentials for the RHOAI dashboard</p>
+</li>
+<li>
+<p>A web browser to access the RHOAI dashboard</p>
+</li>
+<li>
+<p>Access credentials for the OpenShift web console</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from <a href="../ch2-deployment/s2-mlflow-deploy-lab.html" class="xref page">chapter 2</a>, and that you already cloned the sample notebooks from the coure samples repository, by following the instructions from the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.</p>
 </div>
 </div>
 </div>
@@ -211,49 +227,401 @@ Not started  yet.
 <h2 id="_instructions"><a class="anchor" href="#_instructions"></a>Instructions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>High-level summary of what you will perform in this lab, but more detailed than the objective.</p>
+<p>You will create and test two LLM judges, one provided by MLflow and another using your custom prompt.
+You will use them together for an MLflow evaluation of a simplistic agentic application that is provided to you</p>
 </div>
+<div class="paragraph">
+<p>As you perform this activity, you will alternate between two browser tabs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Red Hat OpenShift AI (RHOAI) dashboard</p>
+</li>
+<li>
+<p>The Jupyter Lab from a RHOAI workbench</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_create_and_test_a_llm_judge_using_one_of_the_judges_provided_by_mlflow"><a class="anchor" href="#_create_and_test_a_llm_judge_using_one_of_the_judges_provided_by_mlflow"></a>Create and test a LLM judge using one of the judges provided by MLflow</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Task or outcome.</p>
+<p>If you do not have a browser tab already open with the <code>test-mlflow</code> workbench, open it and, in its Jupyter Lab, enter the <code>rhoai-mlflow-samples/evals</code> directory.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a graphical or web UI.
-Click <b class="menuref">Save As</b> to save your work.</p>
+<p>Open the RHOAI work bench and, in the left navigation pane, click <b class="menuref">Projects</b>.
+Select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
+Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.</p>
 </li>
 <li>
-<p>More things to do</p>
+<p>In the <strong>Projects</strong> page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">test-mlflow</b> to open its Jupyter Lab in a new browser tab.</p>
+</li>
+<li>
+<p>Copy the <code>simple-agent</code> notebook to a new file which you will edit.
+In the left pane of the jupyter notebook, enter the <b class="menuref">rhoai-mlflow-samples/evals</b> directory, right click <b class="menuref">simple-agent.ipynb</b>, and select <b class="menuref">Duplicate</b>.
+Then right-click the new file <b class="menuref">simple-agent-Copy1.ipnyb</b> and select <b class="menuref">Rename</b>.
+Enter <code>llm-eval.ipnyb</code> as the new file name.
+Finally, double-click <b class="menuref">llm-eval.ipnyb.ipnyb</b> to open the notebook in a new editor tab.</p>
+</li>
+<li>
+<p>In the toolbar of the notebook, click the <b class="menuref">fast-forward icon</b> with tooltip <code>Restart the kernel and run all cells</code>.
+In the <strong>Restart kernel</strong> pop-up, click <b class="menuref">Restart</b>.
+The output of the last cell should provide a short explanation about the differences between RHEL and CentOS.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the code uses the prompt added to the MLflow prompt registry during the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Task or outcome.</p>
+<p>Create and test an LLM judge to assess the correctdness of a response.</p>
+<div class="paragraph">
+<p>You can see the complete code, ready to use the built-in LLM judge, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-builtin.ipynb" target="_blank" rel="noopener">llm-eval-builtin.ipynb</a> notebook, in the course samples repository.</p>
+</div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Something to do, using a shell.</p>
+<p>Enter the model configurations for MLflow LLM judges.</p>
+<div class="paragraph">
+<p>In the <code>llm-eval.ipynb</code> notebook, select the third cell, with the comment <code>###Cell 3: environment settings</code> and append configuration and environment variables to configure MLflow to use the llama model available in your demo environment to run LLM judges.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>command --options fixed-arguments <em>variable-arguments</em></strong>
-output of the command
-highlight <strong>something</strong> in the output</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 3: environment settings
+
+import os
+
+BASE_URL = "http://llama-32-3b-instruct-predictor.my-first-model.svc.cluster.local:8080/v1"
+model_name = "llama-32-3b-instruct"
+
+MLFLOW_TRACKING_URL = "https://mlflow.redhat-ods-applications.svc.cluster.local:8443"
+MLFLOW_EXPERIMENT = "simple-agent"
+
+os.environ["MLFLOW_TRACKING_AUTH"]="kubernetes-namespaced"
+
+# New code starts here
+<strong>JUDGE_URL = BASE_URL
+judge_model = model_name
+os.environ["OPENAI_API_BASE"] = JUDGE_URL
+os.environ["OPENAI_API_KEY"] = "no token"</strong></code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>More things to do.
-Press <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to interrupt.</p>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the new variables.
+Running the cell produces no output.</p>
 </li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
+<li>
+<p>Enter the code to instantiate a <code>Correctdness</code> judge from MLflow.</p>
 <div class="paragraph">
-<p>Summary of what you acomplished.</p>
+<p>In the <code>llm-eval.ipynb</code> notebook, select the last cell, having the comment <code>###Cell 6: run the agent</code>.
+Then click, in the cell&#8217;s toolbar, the icon to <b class="menuref">Insert a cell bellow</b>.
+Inside the new cell, enter the following code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 7: LLM judges
+
+from mlflow.genai.scorers import Correctness
+from mlflow.genai.judges import make_judge
+
+correctness_judge = Correctness(
+    model=f"openai:/{judge_model}"
+)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the function and create a new notebook cell.
+Running the cell produces no output.</p>
+</li>
+<li>
+<p>Inside the new cell, enter the code to test the LLM judge from hardcoded examples.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 8: test judges
+
+print ("Test built-in judge:\n")
+feedback = correctness_judge(
+    inputs={"question": "What is RHEL?"},
+    outputs={"response": "RHEL is a Linux distribution from Red Hat."},
+    expectations={"expected_response": "RHEL (Red Hat Enterprise Linux) is a Linux distribution."},
+)
+print(f"• Test judge with correct definition of RHEL: {feedback.value}\n  {feedback.rationale}")
+
+feedback = correctness_judge(
+    inputs={"question": "What is RHEL?"},
+    outputs={"response": "RHEL (Rebooting Helps Every Lag) is pun on IT struggles."},
+    expectations={"expected_response": "RHEL (Red Hat Enterprise Linux) is a Linux distribution."},
+)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the test code.
+Running the cell produces an output similar to the following.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Test built-in judge:
+
+• Test judge with correct definition of RHEL: yes
+  The first statement in the claim is 'RHEL' which is supported by the document as the question and response both mention 'RHEL'. The second statement in the claim is 'is a Linux distribution' which is also supported by the document as the response explicitly states 'a Linux distribution from Red Hat'.
+• Test judge with incorrect definition of RHEL: no
+  The claim states RHEL is a Linux distribution. The document does not mention Linux distribution, it mentions a pun on IT struggles.</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_and_test_a_llm_judge_using_a_custom_prompt"><a class="anchor" href="#_create_and_test_a_llm_judge_using_a_custom_prompt"></a>Create and test a LLM judge using a custom prompt</h3>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Create and test an LLM judge to assess that a reponse contains no acronyms</p>
+<div class="paragraph">
+<p>You can see the complete code, ready to use the built-in LLM judge, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-custom.ipynb" target="_blank" rel="noopener">llm-eval-custom.ipynb</a> notebook, in the course samples repository.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Select the first cell that you just added to the notebook, the one starting with <code>###Cell 7: LLM judges</code> and append code to create a custom judge.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 7: LLM judges
+
+from mlflow.genai.scorers import Correctness
+
+correctness_judge = Correctness(
+    model=f"openai:/{judge_model}"
+)
+
+# New code starts here
+from mlflow.genai.judges import make_judge
+
+<strong>acronyms_judge = make_judge(
+    name="expanded_acronyms",
+    instructions=(
+        "Check if this text expands any common IT acronyms or product names:\n"
+        "{{ outputs }}"
+        "\n\nEVALUATION STEPS:\n"
+        "1. Scan the text for IT acronyms (e.g., TCP, IP, AI, LLM) or similar names (e.g., Vim, GNOME, LAME, RHEL).\n"
+        "2. Check if the text explicitly expands them to their full words (e.g., 'LLM (Large-Language Model)', 'GNOME (GNU Network Object Model Environment).\n"
+        "3. Merely explaining or describing a concept (e.g., 'Vim is a text editor') (e.g. 'RHEL is an operating system') does NOT count as an expansion.\n\n"
+        "BOOLEAN OUTPUT:\n"
+        "- Return True if you found ONE OR MORE acronym expansions.\n"
+        "- Return False if the response is completely FREE of acronym expansions (NO expansions found).\n"
+    ),
+    feedback_value_type=bool,
+    model=f"openai:/{judge_model}",
+    inference_params={"temperature": 0.0},
+    base_url=f"{JUDGE_URL}/chat/completions"</strong>
+)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the function and create a new notebook cell.
+Running the cell produces no output.</p>
+</li>
+<li>
+<p>Select the second cell that you just added to the notebook, the one starting with <code>###Cell 8: test judges</code> and append code to test the custom judge.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 8: test judges
+
+print ("Test built-in judge:\n")
+...
+
+# New code starts here
+<strong>print ("\nTest LLM judge:\n")
+
+feedback = acronyms_judge(
+    inputs={"question": "What is RHEL?"},
+    outputs={"response": "RHEL is a Linux distribution."},
+)
+print(f"• Test judge with RHEL (no expansion): {feedback.value}\n  {feedback.rationale}")
+
+feedback = acronyms_judge(
+    inputs={"question": "Who supports RHEL?"},
+    outputs={"response": "Red Hat provides commercial support for users of Linux."},
+)
+print(f"• Test judge with RHEL (no expansion): {feedback.value}\n  {feedback.rationale}")
+
+feedback = acronyms_judge(
+    inputs={"question": "What is RHEL?"},
+    outputs={"response": "RHEL (Red Hat Enterprise Linux) is a Linux distribution."},
+)
+print(f"• Test judge with RHEL (expanded)': {feedback.value}\n  {feedback.rationale}")</strong></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the test code.
+Running the cell produces an output similar to the following.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Test built-in judge:
+...
+
+Test LLM judge:
+
+• Test judge with RHEL (no expansion): False
+  The text does not explicitly expand any IT acronyms or product names. Although it mentions 'RHEL', it only provides a brief description without expanding the acronym to its full word 'Linux distribution'. The text does not meet the criteria for an acronym expansion.
+• Test judge with RHEL (no expansion): False
+  The text does not explicitly expand any IT acronyms or product names. It only mentions 'Linux', which is a common operating system, but does not provide any expansion or explanation of the acronym.
+• Test judge with RHEL (expanded)': True
+  The text explicitly expands the acronym 'RHEL' to its full word 'Red Hat Enterprise Linux', indicating that it meets the criteria for evaluating the performance of an AI agent on this query.</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_an_mlflow_evaluation_using_both_llm_judges"><a class="anchor" href="#_run_an_mlflow_evaluation_using_both_llm_judges"></a>Run an MLflow evaluation using both LLM judges</h3>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Create code for running an MLflow evaluation using the two LLM judges you just tested.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the new, empty cell, created by running the test code for the custom judge function, enter the code to define an evaluation data set.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 9: hardcoded evaluation data set
+
+eval_dataset = [
+    {
+        "inputs": {"question":
+            "What's the difference between RHEL and CentOS?"},
+        "expectations": {"expected_response":
+            """
+            RHEL and CentOS are both Linux distributions.
+            RHEL is a commercial distribution from Red Hat, while CentOS is a free distribution.
+            CentOS Stream is a direct upstream of RHEL.
+            """},
+    },
+    {
+        "inputs": {"question":
+            "What's the difference between RHEL and Fedora Linux?"},
+        "expectations": {"expected_response":
+            """
+            RHEL and Fedora are both Linux distributions.
+            RHEL is a commercial distribution from Red Hat, while Fedora is a free distribution.
+            Fedora is an upstream of RHEL.
+            """},
+    },
+]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the array and create a new notebook cell.
+Running the cell produces no output.</p>
+</li>
+<li>
+<p>Inside the new cell, enter the code to wrap the agent inside a predictor function and run an MLflow evaluation using your scorer function.
+If you need, follow the instructions there to store the prompt.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 10: run evaluation
+
+def my_predict_fn(question: str) -&gt; str:
+    system_prompt = mlflow.genai.load_prompt("prompts:/short-responses/1")
+    final_prompt = system_prompt.format()
+    return agent("no token", final_prompt, input_text)
+
+os.environ["MLFLOW_GENAI_EVAL_SKIP_TRACE_VALIDATION"]="true"
+
+try:
+    results = mlflow.genai.evaluate(
+        data=eval_dataset,
+        predict_fn=my_predict_fn,
+        scorers=[correctness_judge,acronyms_judge],
+    )
+except Exception as e:
+    print(f"An error occurred: {e}")</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the evaluation.
+Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scoreres over the complete evaluation data set.
+When done, you should see an output similar to the following.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">2026/08/03 16:47:51 INFO mlflow.models.evaluation.utils.trace: Auto tracing is temporarily enabled during the model evaluation for computing some metrics and debugging. To disable tracing, call `mlflow.autolog(disable=True)`.
+Evaluating: 100%|██████████| 2/2 [Elapsed: 00:08, Remaining: 00:00] [predict_fn: 22%, scorers: 78%]</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View evaluation results on MLflow traces</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to your RHOAI dashboard, which should already be in the details page for the <code>simple-agent</code> experiment. If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <strong>Project</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
+</li>
+<li>
+<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides a few new traces, the new colums <code>Correctdness</code> and <code>expanded_acronyms</code>.
+If you do not see these changes, clich the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
+</li>
+<li>
+<p>Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their <code>Correctdness</code> column to view the reasoning for the <code>Fail</code> and <code>Pass</code> grades of each trace.</p>
+</li>
+<li>
+<p>On the same traces, mouse over the values of their <code>expanded_acronyms</code> column to view the reasoning between their <code>True</code> or <code>False</code> scores.</p>
+</li>
+<li>
+<p>With any of the traces, if you cannot read the full reasoning by using mouse over, click on the trace id or its request and, if the <strong>Assessments</strong> page is not shown, click <b class="menuref">Show assessments</b>.
+Then you can expand each assessment to fully visualize its reasoning, and you can scroll down and up as you need.</p>
+</li>
+<li>
+<p>You may note that the <code>expanded_acronyms</code> custom judge is not very reliable, which might be because of the quality of the prompt or by limitations of the llama model.
+It is frequent to use different or larger models for judges than the models that might be good enough for an application.</p>
+</li>
+<li>
+<p>You may get assessments which seem odd or incorrect.
+It is the nature of LLMs that sometimes they produce incorrect responses.
+Feel free to run the evaluation multiple times, compare the responses of each attempt, and how the LLM judges assess each one.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
+<div class="paragraph">
+<p>You two LLM judges, one to verify if an response is correct, by comparing with a correct response provided in the evaluation data set, and another to verify if a response expands acronyms, which would make it longer than necessary.
+After testing each judge, you combined both in a single evaluation again, demonstrating that you can use multiple judges on the same evaluation data and visualize the results of multiple judges in the same MLflow trace.</p>
+</div>
 </div>
 </div>
 </div>
