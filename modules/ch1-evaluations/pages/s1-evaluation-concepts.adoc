@@ -124,8 +124,9 @@ Among those components, EvalHub can store evaluation results from any provider a
 This way, results from all your evaluations, be them managed by EvalHub or not, are stored and visualized together in MLflow.
 
 Unfortunately, at the time of RHOAI 3.4, EvalHub is not yet cappable of running MLflow evaluations directly.
-It would require building custom code using the bring your own framework (BYOF) API from EvalHub to run an MLflow experiment.
-This course will not present BYOF, but provide you sufficient information so you could use EvalHub for run model evaluations and MLflow for agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.
+It would require building custom code using the bring your own framework (BYOF) API from EvalHub to run an MLflow evaluation.
+
+This course does not present BYOF, but provides you with sufficient information so you could use EvalHub for run model evaluations and MLflow for agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.
 
 == What's Next
 
