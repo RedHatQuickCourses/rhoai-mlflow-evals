@@ -313,7 +313,7 @@ Do not remove any of its other labels!</p>
 <p>Switch to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.</p>
 </li>
 <li>
-<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
+<p>Click <b class="menuref">Create new evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
 </li>
 <li>
 <p>In <strong>Single benchmark</strong> page, select <b class="menuref">Name</b> in the filter, and enter <code>quick</code> in the search field.
@@ -339,14 +339,42 @@ In the <b class="menuref">Quick security smoke test</b> card, click <b class="me
 </li>
 <li>
 <p>Enter <code>garak-quick</code> in the <strong>Evaluation name</strong> field and, in the <strong>Create new experiment</strong> field, enter <code>garak-evalhub</code></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is an issue with the RHOAI dashboard which prevents it from retrieving names of existing experiments with MLflow.
+You must always create a new experiment, and ensure the name does not match any existing experiment in the same project nor the name of experiments that were marked for deletion.
+If you use the EvalHub CLI, you can either add to existing experiments or create new ones.
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>Enter <code>llama-32-3b-instruct</code> in the <strong>Model or agent name</strong> field, and paste the URL you copied in the previous step in the <code>Endpoint URL</code> field.
+Append <code>/v1</code> to the URL so it is a valid OpenAI endpoint.
 The model is not configured to require authentication, so there is no need to provide an API key.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Start evaluation run</b>.
 You should see a message <code>Evaluation "garak-quick" has been started.</code></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there is any error, the error message might disappear before you can read it and it might seem that nothing happened.
+In that case, try starting the the evaluation run again, without making changes.
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ol>
 </div>
@@ -537,7 +565,7 @@ NAME                                                              READY   STATUS
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Return to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (mlflow)</b></span>.
+<p>Return to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MFflow)</b></span>.
 In the <strong>Projects</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
 </li>
 <li>
