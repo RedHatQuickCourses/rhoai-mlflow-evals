@@ -4,15 +4,62 @@ Objective::
 
 Describe the architecture of MLFlow and explain how to enable and access it in Red Hat OpenShift AI.
 
-WARNING: Not started  yet.
+== MLflow architecture
 
-== Heading
+MLflow is based on a client/server architecture.
+An AI application, which is instrumented by using either the MLflow SDK or OpenTelemetry, sends observability data, such as metrics and traces, to an MLflow server, which stores that data and provides HTML-based visualization of it.
 
-Lorem ipsum
+image::mlflow-arch.svg[title="Architecture of MLflow"]
 
-== Another heading
+It does not matter whether the "application" is a user-facing application, an autonomous agent, or a training or evaluation pipeline.
+It just needs to send observability data to an MLflow server.
 
-Lorem ipsum
+The MLflow server makes use of a relational database and an artifact store to record artifacts such as prompts and resposes.
+It is recommended that the artifact store be an S3 service, for scalability.
+
+The relational database stores metadata and tags which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
+PostgreSQL is a popular option for the MLflow database.
+
+== MLflow experiments and workspaces
+
+Experiments are a key concept in MLflow.
+An _experiment_ is a grouping of observability data from multiple runs.
+Each run collects all data obtained while running an AI application once.
+Runs can take multiple forms, such as _traces_, which record the interactions between an agent and a model.
+
+A _workspace_ is a grouping of experiments.
+Typically, a workspace corresponds to an application, and experiments correspond to running the application with different configuration parameters, such as different models, or different system prompts.
+
+Then, inside an experiment, each run connects an input to its output, and provides metrics and other observability data from that run.
+
+== The MLflow Operator and RHOAI
+
+There is an MLflow operator included with Red Hat OpenShift AI (RHOAI), but this operator will not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
+The MLflow operator is managed by the RHOAI operator itself.
+
+To deploy an MLflow server, you must perform two actions:
+
+. Edit the singleton data science cluster resource of your RHOAI instance to enable the MLflow operator by setting its `spec.components.mlflowoperator.managementState` field to `Managed`.
+
+. Create an MLflow resource, which configures the database and artifact storage of the MLflow server.
+
+Once the MLflow resource is available, the RHOAI dashboard displays a number of new pages and adds more elements to other pages.
+The menu:Develop & train[Experiments] page is the main user interface to MLflow in RHOAI 3.4.
+
+== MLflow workspaces and authentication within OpenShift
+
+The MLflow operator maps Kubernetes namespaces and OpenShift projects (not just AI projects) to MLflow workspaces.
+For each project in RHOAI, there is an MLflow workspace.
+
+The MLflow operator also configures the MLflow server to delegate authentication and authorization to OpenShift.
+Any OpenShift user is a valid MLflow user.
+Such users have access to data in MLflow workspaces based on their RBAC permissions from the respective OpenShift project.
+
+Service accounts also get access to the MLflow workspace, so pods running in OpenShift can access the MLflow server in RHOAI.
+These pods include GenAI studio playgrounds and Jupyter Labs notebooks.
+
+If you must connect to MLflow from an application running outside of its OpenShift cluster, you can take the same user token you would use for access to Kubernetes APIs and use it to authenticate to the MLflow server.
+External applications connect to the MLflow server using the same route (URL) a web browser uses to access the standalone MLflow web UI.
 
 == What's Next
 
