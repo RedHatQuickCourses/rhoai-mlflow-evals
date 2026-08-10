@@ -213,23 +213,25 @@ Those tests are called <em>evaluations</em>.</p>
 <div class="paragraph">
 <p>It is a known fact that large-language models (LLMs) are based on probabilistic pattern-matching.
 They may produce different outputs from the same input data.
-Sometines those differences are inconsequential, such as a different wording of the same statements, but sometimes those differences make their answers factually incorrect or open to misleading interpretation.</p>
+Sometimes those differences are inconsequential, such as a different wording of the same statements, but sometimes those differences make their answers factually incorrect or open to misleading interpretation.</p>
 </div>
 <div class="paragraph">
 <p>Aproaches such as guard rails can mitigate the probabilistic nature of LLMs, but cannot sove it entirely.
 Other approaches, such as setting the <em>temperature</em> parameter to zero, to force a model to always provide the same response, also degrates a model performance when planning, exploring, and researching.
-The randomness of LLMs actually enable them to work in advanced scenarios.
-Without randomness, LLMs can only output facts which are present in their training data.</p>
+The randomness of LLMs actually enable them to work in imprecise scenarios and  emulate creativity, probem-solving, or finding new insights.
+Without randomness, LLMs can only output facts which are alredy explicity stated in their training data.</p>
 </div>
 <div class="paragraph">
-<p>Model evaluations become popular quite early as a way of demonstrating the capabilities of LLMs and of benchmarking them based on criteria such as their ability to provide correct answers to general knowledge questions, science questions, and question from other domain areas.
-Other popular model evaluation benmchmarks assess how easy is to trick a model into providing a harmful response, or how capable they are at following instructions.</p>
+<p>Model evaluations become popular quite early as a way of demonstrating the capabilities of LLMs and comparing them with each other based on criteria such as ability to provide correct answers to general knowledge questions, science questions, and other domain areas.</p>
+</div>
+<div class="paragraph">
+<p>Other popular use cases for model evaluations include assessing how easy is to trick a model into providing a harmful response, or how capable they are at following instructions.</p>
 </div>
 <div class="sect2">
 <h3 id="_evaluating_models_and_applications"><a class="anchor" href="#_evaluating_models_and_applications"></a>Evaluating models and applications</h3>
 <div class="paragraph">
 <p>AI-enabled applications usually perform more than just sending a prompt to a model and displaying its output.
-Even chat bots are nowadays expected to function similarly to <em>agentic applications</em> and rely on sophisticated <em>harnesses</em> which might include data such as:</p>
+Even chat bots are nowadays expected to function as <em>agentic applications</em> and rely on sophisticated <em>harnesses</em> which might include data such as:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -246,7 +248,7 @@ Even chat bots are nowadays expected to function similarly to <em>agentic applic
 <p>Data from <em>retrieval augumented generation (RAG)</em> sources, for example documentation of processes and legal or financial rules.</p>
 </li>
 <li>
-<p>Various levels of <em>memory</em> which add to the request information about the current user, past interactions, or the current applications&#8217;s screen.</p>
+<p>Various levels of <em>memory</em> which add to the request information about the current user, past interactions, or the what&#8217;s in the end user applications&#8217;s screen.</p>
 </li>
 </ul>
 </div>
@@ -256,25 +258,25 @@ You should assess that, on your specific environment, a model performs as expect
 </div>
 <div class="paragraph">
 <p>But evaluating a model is not sufficient to assess the performance of agentic applications.
-You must evaluate individual components of its harness, such as its RAG sources and their configurations, and their MCP servers.
+You must evaluate individual components of its harness, such as their RAG sources and MCP servers.
 You must also evaluate the harness as a whole and experiment with different combinations, for example:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Different MCP servers that integrate with the same back-end systems</p>
+<p>Among different MCP servers that integrate with the same back-end systems, the most powerful MCP server may perform worse when combined with other elements of a harness.</p>
 </li>
 <li>
-<p>Different combinations of skills and system prompts</p>
+<p>A simpler MCP server, which performs worst individually, may be better when combined with a specific system prompt or set of skills.</p>
 </li>
 <li>
-<p>Deterministically preloading data from memory and RAG vs letting the model request data on-demand by requesting tool calls.</p>
+<p>Preloading data from memory and RAG may be better or worse than letting the model request such data on-demand from MCP servers.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Your applications will require multiple evaluations, of different kinds, to assess a good enough performance and quality responses.
-It will also require repeated evaluations to catch regressions when any piece of its harness changes, and its evaluations set will grow as you discover different usage scenarios and failure modes.</p>
+<p>Most applications require multiple evaluations, of different kinds, to assess a good enough performance and quality of their responses.
+They also require repeated evaluations to catch regressions when any piece of their harnesses change, and their evaluations sets will grow over time, as you discover different usage scenarios and failure modes.</p>
 </div>
 </div>
 <div class="sect2">
@@ -290,15 +292,15 @@ You may require large evaluation data sets and also curate custom data sets whic
 You will not run them for every commit.</p>
 </div>
 <div class="paragraph">
-<p>Early during development, you evaluations will be exploratory and interactive, intended to select an optimal harness, and use a reduced data set.
-Once your harness and model selections are more solid, you&#8217;ll increase your evaluation data sets and range of different evaluations to assess performance, correctness, and the need for specialized guardrails.
-You will also start to perform evaluations as part of your CI/CD process.</p>
+<p>Early during development, you evaluations will be exploratory and interactive, intended to select an optimal harness, and use a small data set.
+Once your harness and model selections are more solid, you will increase the size of your evaluation data sets and add a larger variety of evaluations to assess performance, correctness, and the need for specialized guardrails.
+You will also start to run evaluations automatically, as part of your CI/CD processes.</p>
 </div>
 <div class="paragraph">
-<p>Once you release your agent to production (or to test users) you will collect samples (traces) of actual inputs and outputs to evaluate actual performance of your harness, and feed back some of that data to improve the evaluations you perform for the next development interaction of your agentic application.</p>
+<p>Once you release your agent to production, or to its first external test users, you will collect samples (traces) of actual inputs and outputs to assess actual performance of your harness, and feedback some of that data to improve the evaluations for the next development interaction of your agent.</p>
 </div>
 <div class="paragraph">
-<p>It is recommended that you work proactively: instead of relying just on user feedback about the quality of your application, such as thumbus up and down, and customer support tickets about errors, you should take samples of actual usage data as additional evaluation data sets and compare the results with evaluations from your synthetic and development evaluation data sets.</p>
+<p>It is recommended that you work proactively: instead of relying just on user feedback about the quality of your application, such as thumbs up and down, and customer support tickets complaining about errors, you should take samples of actual usage data as additional evaluation data sets and compare the results with evaluations from your synthetic and development evaluation data sets.</p>
 </div>
 <div class="paragraph">
 <p>You may learn that actual behavior differs significantly from intended and tested behavior, and consequently improve both your harness and its evaluations.</p>
@@ -307,10 +309,35 @@ You will also start to perform evaluations as part of your CI/CD process.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_running_evaluations_with_mlflow"><a class="anchor" href="#_running_evaluations_with_mlflow"></a>Running evaluations with MLflow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MLflow provides fundamental observability and experiment-tracking capabilities that enable developers and data scientists to ensure their applications work beyond a demonstration and perform as expected in production.</p>
+</div>
+<div class="paragraph">
+<p>MLflow is a popular library for agentic evaluations.
+It requires encapsulating your agent and its harness as a <em>predictor function</em>, and them creating custom code to invoke your prediction function together with  <em>scorers</em> and <em>judges</em>, some of which are themselves based on LLMs.</p>
+</div>
+<div class="paragraph">
+<p>It is up to the developer packaging their custom evaluation code, based on the MLflow SDK, as a KubeFlow pipeline or as a Tekton task (for OpenShift Pipelines), among other ways of operationalizing reproducible execution of MLflow evaluations.</p>
+</div>
+<div class="paragraph">
+<p>MLflow is also a popular library for tracing agentic applications, including their usage of RAG sources, tools, and multi-turn conversations with LLMs.</p>
+</div>
+<div class="paragraph">
+<p>Typical usage of MLflow libraries store evaluation results as part of a trace, and multiple traces are part of an <em>experiment</em>.
+An MLflow experiment could include other kinds of data and other kinds of experiment runs besides traces.</p>
+</div>
+<div class="paragraph">
+<p>Using the MLflow SDK, you can also retrieve data from traces as evaluation data sets for running evaluations, closing the loop from development to production, or from early development tests to test users.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_running_evaluations_with_evalhub"><a class="anchor" href="#_running_evaluations_with_evalhub"></a>Running evaluations with EvalHub</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Evaluations are tradicionally run as custom code, using a number of different libraries which specialize in different kinds of evaluations, such as safety and domain expertise.
+<p>Most kinds of AI evaluations are run by custom code, using varied libraries which specialize in different kinds of evaluations, such as safety and domain expertise.
 As you can guess, maintaining and operationalizing such custom code quickly becomes a challenge.</p>
 </div>
 <div class="paragraph">
@@ -318,58 +345,33 @@ As you can guess, maintaining and operationalizing such custom code quickly beco
 </div>
 <div class="paragraph">
 <p>EvalHub standardizes how you operationalize and store results of your evaluations.
-It provides a number of <em>evaluation providers</em> or <em>evaluation frameworks</em> and a standard syntax to combine multiple of them in a <em>collection</em> which makes it easy to re-run the same evaluation.</p>
+It provides a number of <em>evaluation providers</em>, each specific for an <em>evaluation framework</em> and their specific <em>benchmarks</em>.
+EvalHub also offers a standard syntax to combine multiple providers and select a subset of their benchmarks in a <em>collection</em>, which makes it easier to reproduce evaluation runs.</p>
 </div>
 <div class="paragraph">
-<p>EvalHub also standardizes governance of your evaluations by storing their results on MLflow, where they become part of larger experiments and traces, and on OCI container images, for immutable auditability storage.</p>
+<p>EvalHub also improves governance of your evaluations by storing their results on on OCI container images, for immutable auditability storage.</p>
 </div>
 <div class="paragraph">
-<p>You can submit evaluation jobs, register new providers, and query evaluation results by using EvalHub&#8217;s REST API and it&#8217;s CLI, or by using the RHOAI dashboard.</p>
-</div>
-<div class="paragraph">
-<p>The EvalHub server, managed by RHOAI as part of its TrustyAI feature, manages evaluation runs and their respective Kuberentes jobs.
-It is integrated with RHOAI authentication and authorization, and it also manages connectivity with other components such as the MLflow server, OCI container registries, and Kueue.</p>
-</div>
-<div class="paragraph">
-<p>As included with RHOAI 3.4, EvalHub offers a number of providers focused on evaluating models, such as Garak and LightEval, and offers a bring your own framework (BYOF) API for creating custom evaluation jobs for other kinds of evaluations.</p>
-</div>
-<div class="paragraph">
-<p>The EvalHub community is very active and it is expanding its set of community-supported providers, which add capabilities for running other kinds of evaluations, including agent evaluations.
-The set of supported provides will expand with future releases of RHOAI and include some of those providers, as they mature.</p>
+<p>As included with RHOAI 3.4, EvalHub supports a number of providers focused on evaluating models, such as Garak and LightEval.
+The EvalHub community is very active and it is expanding its set of community-supported providers, which add capabilities for running other kinds of evaluations, including agent evaluations.
+As these community providers mature, some of them will be included and supported with future releases of RHOAI.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_evaluations_with_mlflow"><a class="anchor" href="#_running_evaluations_with_mlflow"></a>Running evaluations with MLflow</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>MLflow is currently one of the most popular libraries for agentic evaluations.
-It requires encapsulating your agent and its harness as a <em>predictor function</em>, and them creating custom code to invoke your prediction function together with  <em>scorers</em> and <em>judges</em>, some of which are themselves based on LLMs.</p>
-</div>
-<div class="paragraph">
-<p>It is up to the user packaging their custom evaluation code, based on the MLflow SDK, as a KubeFlow pipeline, as a Tekton task (for OpenShift Pipelines), or as a BYOF evaluation provider for EvalHub.</p>
-</div>
-<div class="paragraph">
-<p>MLflow is also one of the most popular libraries for tracing agentic applications, which enables troublehooting applications and analysing its usage of RAG sources, tools, and record inputs and outputs of both single requests to LLMs and also multi-turn conversations.</p>
-</div>
-<div class="paragraph">
-<p>Using the MLflow SDK, you can also retrieve data from traces as evaluation data sets for running evaluations, closing the loop from development to production, or from early development tests to test users.</p>
-</div>
-<div class="paragraph">
-<p>RHOAI manages an MLflow server, which is integrated with RHOAI authentication and authorization, as its main observability feature.
-The MLflow server which stores experiments, traces, metrics, and other observability data, which you can access through MLflow&#8217;s own web UI, using the RHOAI dashboard, or programatically through the MLflow SDK.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_integrating_evalhub_with_mlflow"><a class="anchor" href="#_integrating_evalhub_with_mlflow"></a>Integrating EvalHub with MLflow</h2>
+<h2 id="_integrating_evalhub_and_mlflow"><a class="anchor" href="#_integrating_evalhub_and_mlflow"></a>Integrating EvalHub and MLflow</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>RHOAI uses MLflow as its main observability feature.
-Multiple components of RHOAI are being integrated with MLflow so they store traces and metrics as MLflow <em>experiments</em>.</p>
+Multiple components of RHOAI integrate with MLflow to store traces and metrics as MLflow experiments.
+Among those components, EvalHub can store evaluation results from any provider and benchmark as MLflow experiments.</p>
 </div>
 <div class="paragraph">
-<p>With RHOAI 3.4, EvalHub is not yet cappable of running MLflow evaluations directly (it requires building custom code using BYOF) but it already stores evaluation results as MLflow experiments.</p>
+<p>Unfortunately, at the time of RHOAI 3.4, EvalHub is not yet cappable of running MLflow evaluations directly.
+It would require building custom code using the bring your own framework (BYOF) API from EvalHub to run an MLflow experiment.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you could use EvalHub to run model evaluations and MLflow to run agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.</p>
 </div>
 </div>
 </div>
