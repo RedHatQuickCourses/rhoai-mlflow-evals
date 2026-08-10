@@ -110,16 +110,22 @@ As included with RHOAI 3.4, EvalHub supports a number of providers focused on ev
 The EvalHub community is very active and it is expanding its set of community-supported providers, which add capabilities for running other kinds of evaluations, including agent evaluations.
 As these community providers mature, some of them will be included and supported with future releases of RHOAI.
 
-== Integrating EvalHub and MLflow
+== Comparing and integrating EvalHub with MLflow
+
+It is not a choice of using either EvalHub or MLflow for your evaluations.
+Most of the times, it is about how you will use each of them, and sometimes them together, during your AI applicaiton lifecycle.
+
+While MLflow provides building blocks for creating custom evaluations for your agents and its business needs, EvalHub provides standard benchmark collections which are ready to run and compare how different models perform on your specific deployment environment. 
+EvalHub also enables customizing those collections, by selecting different benchmarks or the weights and thresholds from each individual benchmark to compose the overall evaluation score.
 
 RHOAI uses MLflow as its main observability feature.
 Multiple components of RHOAI integrate with MLflow to store traces and metrics as MLflow experiments.
 Among those components, EvalHub can store evaluation results from any provider and benchmark as MLflow experiments.
+This way, results from all your evaluations, be them managed by EvalHub or not, are stored and visualized together in MLflow.
 
 Unfortunately, at the time of RHOAI 3.4, EvalHub is not yet cappable of running MLflow evaluations directly.
 It would require building custom code using the bring your own framework (BYOF) API from EvalHub to run an MLflow experiment.
-
-Alternatively, you could use EvalHub to run model evaluations and MLflow to run agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.
+This course will not present BYOF, but provide you sufficient information so you could use EvalHub for run model evaluations and MLflow for agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.
 
 == What's Next
 
