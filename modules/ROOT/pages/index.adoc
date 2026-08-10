@@ -9,6 +9,12 @@ Total estimated reading time: pass:[<span class="course-total-duration" aria-liv
 
 You should reserve between 4 hours to one working day to complete this course.
 
+This is the second in a series of quick courses covering MLflow, which consists of two courses:
+
+. https://redhatquickcourses.github.io/rhoai-mlflow-traces/[Agent Traces with MLflow and Red Hat OpenShift AI^] (optional prerequisite course)
+
+. *Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI* (this course)
+
 IMPORTANT: Red Hat associates must enroll using the https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3DRHTP_COURSE_ID[Red Hat Learning Portal^], and Red Hat Partners must enroll using https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3DPTP_COURSE_ID[Red Hat Partner Connect^] to register this course in their learning history.
 
 == Objectives
@@ -41,7 +47,7 @@ This course assumes that you have the following experience:
 
 * Python programming skills are recommended but not required, because this training provides sample code which is ready to run.
 
-It is recommended, but not required, to attend a prerequisite course about agentic traces with MLflow.
+It is recommended, but not required, to attend a prerequisite course: https://redhatquickcourses.github.io/rhoai-mlflow-traces/[Agent Traces with MLflow and Red Hat OpenShift AI^].
 
 == Classroom environment
 
@@ -56,7 +62,7 @@ For documentation about Red Hat OpenShift AI, see its https://docs.redhat.com/en
 * https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/index[Working with MLflow^]
 * Chapter 2 of Evaluating AI systems: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate[Evaluate LLMs with EvalHub^]
 
-Also refer to upstream documentation ofhttps://mlflow.org/docs/latest/index.html[MLflow^] and https://eval-hub.github.io/[EvalHub^].
+Also refer to upstream documentation of https://mlflow.org/docs/latest/index.html[MLflow^] and https://eval-hub.github.io/[EvalHub^].
 
 == Author
 
@@ -64,6 +70,4 @@ Also refer to upstream documentation ofhttps://mlflow.org/docs/latest/index.html
 Training Content Architect +
 Red Hat - Product Portfolio Marketing & Learning
 
-////
-Special thanks to people for their support while designing and writing this course.
-////
+_Special thanks to Ahsen Shah, Edson Tirelli, and Matthew Prahl for their support while designing and writing this course._
