@@ -186,33 +186,98 @@
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Not started  yet.
-</td>
-</tr>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mlflow_architecture"><a class="anchor" href="#_mlflow_architecture"></a>MLflow architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MLflow is based on a client/server architecture.
+An AI application, which is instrumented by using either the MLflow SDK or OpenTelemetry, sends observability data, such as metrics and traces, to an MLflow server, which stores that data and provides HTML-based visualization of it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mlflow-arch.svg" alt="mlflow arch">
+</div>
+<div class="title">Figure 1. Architecture of MLflow</div>
+</div>
+<div class="paragraph">
+<p>It does not matter whether the "application" is a user-facing application, an autonomous agent, or a training or evaluation pipeline.
+It just needs to send observability data to an MLflow server.</p>
+</div>
+<div class="paragraph">
+<p>The MLflow server makes use of a relational database and an artifact store to record artifacts such as prompts and resposes.
+It is recommended that the artifact store be an S3 service, for scalability.</p>
+</div>
+<div class="paragraph">
+<p>The relational database stores metadata and tags which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
+PostgreSQL is a popular option for the MLflow database.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_heading"><a class="anchor" href="#_heading"></a>Heading</h2>
+<h2 id="_mlflow_experiments_and_workspaces"><a class="anchor" href="#_mlflow_experiments_and_workspaces"></a>MLflow experiments and workspaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>Experiments are a key concept in MLflow.
+An <em>experiment</em> is a grouping of observability data from multiple runs.
+Each run collects all data obtained while running an AI application once.
+Runs can take multiple forms, such as <em>traces</em>, which record the interactions between an agent and a model.</p>
+</div>
+<div class="paragraph">
+<p>A <em>workspace</em> is a grouping of experiments.
+Typically, a workspace corresponds to an application, and experiments correspond to running the application with different configuration parameters, such as different models, or different system prompts.</p>
+</div>
+<div class="paragraph">
+<p>Then, inside an experiment, each run connects an input to its output, and provides metrics and other observability data from that run.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_another_heading"><a class="anchor" href="#_another_heading"></a>Another heading</h2>
+<h2 id="_the_mlflow_operator_and_rhoai"><a class="anchor" href="#_the_mlflow_operator_and_rhoai"></a>The MLflow Operator and RHOAI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>There is an MLflow operator included with Red Hat OpenShift AI (RHOAI), but this operator will not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
+The MLflow operator is managed by the RHOAI operator itself.</p>
+</div>
+<div class="paragraph">
+<p>To deploy an MLflow server, you must perform two actions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit the singleton data science cluster resource of your RHOAI instance to enable the MLflow operator by setting its <code>spec.components.mlflowoperator.managementState</code> field to <code>Managed</code>.</p>
+</li>
+<li>
+<p>Create an MLflow resource, which configures the database and artifact storage of the MLflow server.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once the MLflow resource is available, the RHOAI dashboard displays a number of new pages and adds more elements to other pages.
+The <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments</b></span> page is the main user interface to MLflow in RHOAI 3.4.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mlflow_workspaces_and_authentication_within_openshift"><a class="anchor" href="#_mlflow_workspaces_and_authentication_within_openshift"></a>MLflow workspaces and authentication within OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The MLflow operator maps Kubernetes namespaces and OpenShift projects (not just AI projects) to MLflow workspaces.
+For each project in RHOAI, there is an MLflow workspace.</p>
+</div>
+<div class="paragraph">
+<p>The MLflow operator also configures the MLflow server to delegate authentication and authorization to OpenShift.
+Any OpenShift user is a valid MLflow user.
+Such users have access to data in MLflow workspaces based on their RBAC permissions from the respective OpenShift project.</p>
+</div>
+<div class="paragraph">
+<p>Service accounts also get access to the MLflow workspace, so pods running in OpenShift can access the MLflow server in RHOAI.
+These pods include GenAI studio playgrounds and Jupyter Labs notebooks.</p>
+</div>
+<div class="paragraph">
+<p>If you must connect to MLflow from an application running outside of its OpenShift cluster, you can take the same user token you would use for access to Kubernetes APIs and use it to authenticate to the MLflow server.
+External applications connect to the MLflow server using the same route (URL) a web browser uses to access the standalone MLflow web UI.</p>
 </div>
 </div>
 </div>
