@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Work In Progress
 </td>
 </tr>
 </table>
@@ -201,18 +201,129 @@ Not started  yet.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_heading"><a class="anchor" href="#_heading"></a>Heading</h2>
+<h2 id="_architecture_of_evalhub"><a class="anchor" href="#_architecture_of_evalhub"></a>Architecture of EvalHub</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs which are ultimately implemented as Kubernetes jobs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/evalhub-arch.svg" alt="evalhub arch">
+</div>
+<div class="title">Figure 1. Architecture of EvalHub</div>
+</div>
+<div class="paragraph">
+<p>EvalHub offers its own API for managing and querying the state of evaluation runs instead of using Kubernetes custom resources.
+This makes EvalHub easier for AI engineers and software developers not experienced with Kubernetes.
+It also enables the community to deploy and use EvalHub by itself, outside of Kubernetes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Standalone deployments of EvalHub are <em>not</em> supported by Red Hat OpenShift AI.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A client uses the EvalHub API to submit requests to create and query the state of evaluation runs, evaluation providers, and collections.
+The RHOAI dashboard acts an an EvalHub client, and there is an EvalHub CLI tool included with the EvalHub SDK for Python.
+Among other potential clients for the EvalHub server are Jupyter notebooks and KubeFlow pipelines.</p>
+</div>
+<div class="paragraph">
+<p>The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and  OCI container image which also store their evaluation results.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_another_heading"><a class="anchor" href="#_another_heading"></a>Another heading</h2>
+<h2 id="_evalhub_and_trustyai_in_rhoai"><a class="anchor" href="#_evalhub_and_trustyai_in_rhoai"></a>EvalHub and TrustyAI in RHOAI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>There is no EvalHub operator in RHOAI.
+The TrustyAI operator manages EvalHub servers in RHOAI.
+The TrustyAI operator, in turn, is managed by the RHOAI operator.
+Consequently, the the TustyAI and EvalHub operators are not visible from the Operator Lifecycle Manager (OLM).</p>
+</div>
+<div class="paragraph">
+<p>To deploy an EvalHub server, you must perform two actions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit the singleton data science cluster resource of your RHOAI instance to enable the TrustyAI operator by setting its <code>spec.components.trustyai.managementState</code> field to <code>Managed</code>.</p>
+</li>
+<li>
+<p>Create an EvalHub resource, which configures the database, MLflow server, and optional OCI container registry associated with the EvalHub server.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once the EvalHub resource is available, the <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> page of the RHOAI dashboard becomes functional and exibits the <b class="menuref">Create new evaluation</b> buttopn.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Contrary to the note on the RHOAI 3.4 product docs, you <em>must</em> create your EvalHub resource in the <code>redhat-ods-applications</code> namespace to enable its RHOAI dashboard integration.</p>
+</div>
+<div class="paragraph">
+<p>If you create your EvalHub resource in any other namespace, you cannot use the RHOAI dashboard to manage evaluations, but you can still use the EvalHub SDK and its CLI.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you install EvalHub in the standard namespace for RHOAI applications, as recommended, you must set the TrustyAI label in any project where you run evaluations:</p>
+</div>
+<div class="paragraph">
+<p><code>evalhub.trustyai.opendatahub.io/tenant</code></p>
+</div>
+<div class="paragraph">
+<p>Without that label, network policies would prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
+It doesn&#8217;t matter the value assigned to the label.
+Only its key is necessary.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_evalhub_tenants_and_authentication_within_openshift"><a class="anchor" href="#_evalhub_tenants_and_authentication_within_openshift"></a>EvalHub tenants and authentication within OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The EvalHub operator maps Kubernetes namespaces and OpenShift projects (not just AI projects) to EvalHub tenants.
+For each project in RHOAI, there is an EvalHub tenant.</p>
+</div>
+<div class="paragraph">
+<p>The EvalHub operator also configures the EvalHub server to delegate authentication and authorization to OpenShift.
+Any OpenShift user is a valid EvalHub user.
+Such users have access to EvalHub tenants and their evaluation runs based on their RBAC permissions from the respective OpenShift project.</p>
+</div>
+<div class="paragraph">
+<p>Service accounts also get access to EvalHub, so pods running in OpenShift can access the EvalHub server in RHOAI.
+These pods include Jupyter Labs notebooks and KubeFlow pipeline tasks.</p>
+</div>
+<div class="paragraph">
+<p>If you must connect to EvalHub from an application running outside of its OpenShift cluster, for example the EvalHub CLI, you can take the same user token you would use for access to Kubernetes APIs and use it to authenticate to the EvalHub server.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_the_evalhub_cli"><a class="anchor" href="#_installing_the_evalhub_cli"></a>Installing the EvalHub CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The EvalHub CLI is provided as part of the EvalHub SDK, which is a Python library.
+The recommended approach is creating a Python virtual environment and installing the EvalHub SDK and CLI inside it.</p>
+</div>
+<div class="paragraph">
+<p>Once you have the <code>evalhub</code> command available on your shell, you must use the <code>evalhub configure</code> command to set the URL of the EvalHub server, the tenant, and authentication token so you can create and manage evaluation runs.</p>
 </div>
 </div>
 </div>
