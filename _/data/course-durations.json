@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3161,
+  "totalSeconds": 3172,
   "pageCount": 17,
   "pages": [
     {
@@ -30,7 +30,7 @@
     {
       "module": "ch2-deployment",
       "page": "index.adoc",
-      "seconds": 5
+      "seconds": 16
     },
     {
       "module": "ch2-deployment",
