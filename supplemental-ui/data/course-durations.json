@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3154,
+  "totalSeconds": 3161,
   "pageCount": 17,
   "pages": [
     {
@@ -20,7 +20,7 @@
     {
       "module": "ch1-evaluations",
       "page": "s1-evaluation-concepts.adoc",
-      "seconds": 509
+      "seconds": 516
     },
     {
       "module": "ch1-evaluations",
