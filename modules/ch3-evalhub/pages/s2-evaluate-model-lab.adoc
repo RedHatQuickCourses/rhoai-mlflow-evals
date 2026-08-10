@@ -57,7 +57,7 @@ Do not remove any of its other labels!
 
 .. Switch to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Evaluations].
 
-.. Click menu:Create Evaluation[] and, on the *New evaluation run* page, click menu:Single benchmark[]. 
+.. Click menu:Create new evaluation[] and, on the *New evaluation run* page, click menu:Single benchmark[]. 
 
 .. In *Single benchmark* page, select menu:Name[] in the filter, and enter `quick` in the search field.
 You should see three benchmarks, each with a different label of `Safety`, `Performance`, and `Security`.
@@ -73,12 +73,20 @@ Verify that this benchmark comes from the `Garak` evaluation framework, which is
 In the menu:Quick security smoke test[] card, click menu:Use this benchmark[].
 
 .. Enter `garak-quick` in the *Evaluation name* field and, in the *Create new experiment* field, enter `garak-evalhub`
++
+NOTE: There is an issue with the RHOAI dashboard which prevents it from retrieving names of existing experiments with MLflow.
+You must always create a new experiment, and ensure the name does not match any existing experiment in the same project nor the name of experiments that were marked for deletion.
+If you use the EvalHub CLI, you can either add to existing experiments or create new ones.
 
 .. Enter `llama-32-3b-instruct` in the *Model or agent name* field, and paste the URL you copied in the previous step in the `Endpoint URL` field.
+Append `/v1` to the URL so it is a valid OpenAI endpoint.
 The model is not configured to require authentication, so there is no need to provide an API key.
 
 .. Click menu:Start evaluation run[].
 You should see a message `Evaluation "garak-quick" has been started.`
++
+NOTE: If there is any error, the error message might disappear before you can read it and it might seem that nothing happened.
+In that case, try starting the the evaluation run again, without making changes.
 
 5. Monitor the evaluation job.
 
@@ -230,7 +238,7 @@ NAME                                                              READY   STATUS
 
 8. View the two experiments from EvalHub in MLflow.
 
-.. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (mlflow)].
+.. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (MFflow)].
 In the *Projects* field, enter `my` and select menu:my-first-model[].
 
 .. The experiments page should display a single experiment.

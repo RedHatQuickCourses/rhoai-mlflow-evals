@@ -106,10 +106,10 @@ Do _not_ click the similar icon inside the assessments pane!
 +
 NOTE: You can see the complete code, ready to run evaluations, in the `determistic-eval-complete.ipnyb` notebook, in the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/determistic-eval-complete.ipnyb[course samples repository^].
 
-.. Copy the simple-agent notebook to a new file which you will edit.
+.. Copy the basic-agent notebook to a new file which you will edit.
 +
-Switch to your jupyter labs and, in its left pane, right click menu:simple-agent.ipynb[] and select menu:Duplicate[].
-Then right-click the new file menu:simple-agent-Copy1.ipnyb[] and select menu:Rename[].
+Switch to your jupyter labs and, in its left pane, right click menu:basic-agent.ipynb[] and select menu:Duplicate[].
+Then right-click the new file menu:basic-agent-Copy1.ipnyb[] and select menu:Rename[].
 Enter `determistic-eval.ipnyb` as the new file name.
 Finally, double-click menu:determistic-eval.ipnyb[] to open the notebook in a new editor tab.
 
