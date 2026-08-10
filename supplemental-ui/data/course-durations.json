@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 2335,
+  "totalSeconds": 2366,
   "pageCount": 17,
   "pages": [
     {
@@ -10,7 +10,7 @@
     {
       "module": "LABENV",
       "page": "index.adoc",
-      "seconds": 4
+      "seconds": 35
     },
     {
       "module": "ch1-evaluations",
