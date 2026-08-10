@@ -1,0 +1,11 @@
+FROM quay.io/fedora/fedora:44
+
+# Containerfile for use with automatic QA of hands-on activities from quick courses using pty-mcp and Claude Code
+# Claude Code will run commands in an interactive session (podman run -it) from this container
+# First, download and copy the OpenShift client tarball for the version you need.
+
+RUN dnf -y install python3 git jq
+ADD openshift-client-linux-4.20.23.tar.gz /usr/local/bin
+
+# Something to keep the container running so you can podman exec into it
+CMD ["tail", "-f", "/dev/null"]

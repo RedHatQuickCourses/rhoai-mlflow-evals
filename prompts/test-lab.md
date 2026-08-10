@@ -1,22 +1,22 @@
-Test if a person would be able to successfully follow the instructions provided by the hands-on activities in the current open lab file.
+Test if a person would be able to successfully follow the instructions provided by the hands-on activities in the current open lab file by performing these instructions as a learner would do.
 
-Open a web browser, using the playwright MCP, and access the provided demo environment, to verify that the instructions from the lab work exactly as described.
-Use the demo environment access credentials from @demo-env.md
+If there are instructions requiring a web browser, follow additional instructions from @prompts/test-lab-web.md.
 
-Before you start peforming the first step, pause so the user can resize the web browser window.
+If there are instructions requiring running shell commands in a terminal, follow additional instructions from @prompts/test-lab-cli.md.
+
+Use the demo environment access credentials from @prompts/demo-env.md
 
 If any step from the lab does not work *exactly* as described, do NOT attempt to guess missing information.
 Do NOT attempt to click anywhere else and do NOT attempt to fill in any additional field.
-Just report at which step you had to stop.
+Do NOT attempt to run additional shell commands.
+Just report at which step you had to stop and why.
 
-It is OK to take actions to work around minor differences caused by responsive web interfaces, such as displaying collapsed navigation panes.
-
-Reuse existing web browser tabs.
-Do not create new tabs to access the same web site or web application which is already open in another browser tab.
+Skip instructions stated as optional, alternative, or inside admonitions.
 
 Verify that, for each step, the outputs match the results described by the lab.
-If the outputs to not match the results, report the mismatch but continue following the instructions.
+If the outputs do not match the results, report the mismatch but continue following the instructions.
 
-If there are instructions for editing jupyter notebooks, use additional instructions from @prompts/test-juyter-botebooks.md
-
-Save a report issues during testing in a file named qa-[lab file name]-yyyymmdd.md in the @prompts/reports directory.
+Save a report of issues found during testing in a file named qa-issues.md in a directory named qa-[lab file name]-yyyymmdd-HHMM.md under the @prompts/reports/[lab chapter name] directory.
+Also save screenshots of all browser-based actions in the same directory.
+Create a report named qa-outputs.html with links to the screenshots and also with the text output from shell commands.
+Each screenshot and text output should refer to its step and substep from the lab.
