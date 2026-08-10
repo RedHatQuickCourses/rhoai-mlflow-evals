@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 2975,
+  "totalSeconds": 3154,
   "pageCount": 17,
   "pages": [
     {
@@ -45,7 +45,7 @@
     {
       "module": "ch2-deployment",
       "page": "s3-evalhub-architecture.adoc",
-      "seconds": 32
+      "seconds": 211
     },
     {
       "module": "ch2-deployment",

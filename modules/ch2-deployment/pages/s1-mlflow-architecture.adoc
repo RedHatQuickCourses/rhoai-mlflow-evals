@@ -4,7 +4,7 @@ Objective::
 
 Describe the architecture of MLFlow and explain how to enable and access it in Red Hat OpenShift AI.
 
-== MLflow architecture
+== Architecture of MLflow
 
 MLflow is based on a client/server architecture.
 An AI application, which is instrumented by using either the MLflow SDK or OpenTelemetry, sends observability data, such as metrics and traces, to an MLflow server, which stores that data and provides HTML-based visualization of it.
@@ -21,6 +21,8 @@ The relational database stores metadata and tags which enables the MLflow server
 PostgreSQL is a popular option for the MLflow database.
 
 == MLflow experiments and workspaces
+
+// Advance that to ch1?
 
 Experiments are a key concept in MLflow.
 An _experiment_ is a grouping of observability data from multiple runs.
