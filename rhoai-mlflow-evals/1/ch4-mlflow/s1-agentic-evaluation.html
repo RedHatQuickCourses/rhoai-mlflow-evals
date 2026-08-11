@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Work In Progress
 </td>
 </tr>
 </table>
@@ -201,18 +201,200 @@ Not started  yet.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_heading"><a class="anchor" href="#_heading"></a>Heading</h2>
+<h2 id="_mlflow_assessments_and_evaluations"><a class="anchor" href="#_mlflow_assessments_and_evaluations"></a>MLflow assessments and evaluations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>MLflow provides observability of gen AI applications in the form of <em>traces</em> which record data about the conversation between an applicaiton and an LLM, such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>inputs: system prompts, user prompts, tools lists, and other data in the context of an LLM.</p>
+</li>
+<li>
+<p>outputs: responses from returned by an LLM.</p>
+</li>
+<li>
+<p>attributes: model name, context window size, and user-defined values.</p>
+</li>
+<li>
+<p>metrics: time to first token, execution time in the LLM, token cost.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Traces record multiple <em>spans</em> which are internal conversations between an application and an LLM before it produces the final response, for example when an LLM request tool calls, and they can be grouped into <em>sessions</em> for interactive conversations.</p>
+</div>
+<div class="paragraph">
+<p>Traces and sessions are grouped in <em>experiments</em> which in turn are grouped in <em>workspaces</em>.
+A workspace in MLflow maps to an OpenShift project or Kubernetes namespace.</p>
+</div>
+<div class="paragraph">
+<p>MLflow also enables recording the results of <em>assessments</em> in a trace.
+A <em>human assessment</em> is based on judgment of the user, such as from thumbs up and down buttons.
+AI-enabled applications can use the MLflow SDK or OpenTracing to store human assessments from its users.
+Alternatively, an application can process stored traces and add such assessments after the fact.</p>
+</div>
+<div class="paragraph">
+<p>Human assessments do not scale well, and MLflow offers automated assessments in the form of <em>scorer</em> functions.
+Using the MLflow SDK, you can create your custom scorer functions based on whatever criteria makes sense for your business.
+They could search facts in a database, match regular expressions, or employ any other approach to verify the quality and correctness of a response.</p>
+</div>
+<div class="paragraph">
+<p>But processing free-form text is incredibly hard.
+And that assuming your agent deals only with text.
+MLflow also supports the concept of <em>LLM judges</em> where you use an LLM to perform an assessment.</p>
+</div>
+<div class="paragraph">
+<p>The LLM which runs a judge is usually different from the LLM used by an application, though it could be the same one.
+Some models perform better as judges than at tool calling, for example.
+Or some tasks may perform well with a small model, but judging their responses require a larger model.</p>
+</div>
+<div class="paragraph">
+<p>MLflow provides a number of predefined LLM judges, which are basically prompts which are ready to use, but you can create your custom judges and define their prompts yourself.</p>
+</div>
+<div class="paragraph">
+<p>An MLflow evaluation uses an <em>evaluation data set</em> which provides not only inputs (promts) for the aplication being evaluated, but also expected responses.
+LLM judges usually perform their assessments by comparing the actual response with the expected response from the evaluation data set.</p>
+</div>
+<div class="paragraph">
+<p>You can run an MLflow evaluation by creating custom code which refers to an AI-enabled application (an agentic application), an evaluation data set, and a list of scorers.</p>
+</div>
+<div class="paragraph">
+<p>The upstream MLflow also supports other ways of running evaluations, such as defining jobs that perform post-processing of stored traces, but these capabilities are not yet supported as part of RHOAI because they depend on componentes of MLflow, such as its own AI gateway, which are not included with RHOAI.</p>
+</div>
+<div class="paragraph">
+<p>Despite that limitation, nothing prevents you from emulating such capability by creating custom code using the MLflow SDK and running it from Jupyter notebooks, KubeFlow pipelines, or even OpenShift pipelines, among other alternatives.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_another_heading"><a class="anchor" href="#_another_heading"></a>Another heading</h2>
+<h2 id="_coding_mlflow_evaluations"><a class="anchor" href="#_coding_mlflow_evaluations"></a>Coding MLflow evaluations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>An MLflow evaluation is essentially a call to <code>mlflow.genai.evaluate</code> with three arguments:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data</code></dt>
+<dd>
+<p>An evaluation data set.</p>
+</dd>
+<dt class="hdlist1"><code>predict_fn</code></dt>
+<dd>
+<p>A predictor function, which encapsulates your entire AI-enabled and its harness.</p>
+</dd>
+<dt class="hdlist1"><code>scorers</code></dt>
+<dd>
+<p>A list of scorer functions.
+The list can mix custom scorers and built-in scorers.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>An evaluation data set can be defined inline by your code, stored in the MLflow server, or retrieved from external data sources by using libraries such as Pandas.</p>
+</div>
+<div class="paragraph">
+<p>The <code>evaluate</code> function from MLflow expect that an evaluation data set is a list of objects which contains keys such as:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>inputs.question</code></dt>
+<dd>
+<p>The user prompt.</p>
+</dd>
+<dt class="hdlist1"><code>expectations.expected_answer</code></dt>
+<dd>
+<p>A correct reference response to the user prompt.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Evaluation data sets could contain many other keys, some which are specific to LLM judges, for example to indicate you expect a helpful or formal tone, or to indicate that you expect that the response includes a plan or reasoning before delivering the final response.</p>
+</div>
+<div class="paragraph">
+<p>Finally, a predictor function takes a single string argument, which is the user prompt, and returns a string result, which is the final response.
+It is responsible for setting set up your agentic harness, for example its system prompt, tool lists, and RAG sources.</p>
+</div>
+<div class="paragraph">
+<p>A predictor function is also expected to set up MLflow tracing, if the actual application does not.</p>
+</div>
+<div class="paragraph">
+<p>The following snippet provides a minimal evaluation data set, containing a single item, and runs an evaluation based on a built-in LLM judge:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">eval_dataset = [
+    {
+        "inputs": {"question":
+            "What's the difference between RHEL and CentOS?"},
+        "expectations": {"expected_response":
+            """
+            RHEL and CentOS are both Linux distributions. RHEL is a proprietary distribution from Red Hat, while CentOS is community-supported. CentOS is a direct upstream of RHEL.
+            """},
+    },
+]
+
+results = mlflow.genai.evaluate(
+    data=eval_dataset,
+    predict_fn=my_predict_fn,
+    scorers=[Correctness],
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous snippet ommits a predictor function, but you can view a complete example in the next activity.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_deterministic_scorers"><a class="anchor" href="#_creating_deterministic_scorers"></a>Creating deterministic scorers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Traditional code-based scorer functions, which do not using an LLM, are often called deterministic scorers.
+They usually consider only the responses from LLMs, ignoring everything else from either the trace or evaluation data sets.</p>
+</div>
+<div class="paragraph">
+<p>A scorer function is decorated with <code>@scorer</code> and could just return a boolean or a numeric value, but it is recommended that scorer funtions return a <code>Feedback</code> object which inclides a reasoning for their assessment results.
+MLflow evaluations record such and that reasoning in traces to support human verification and troubleshooting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_llm_judges"><a class="anchor" href="#_creating_llm_judges"></a>Creating LLM judges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MLflow provides a number of <a href="https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined/#available-judges" target="_blank" rel="noopener">built-in judges</a>, from generic ones such as <code>RevelanceToQuery</code> or <code>Correctness</code> to very specific ones that access the usage of RAG sources and tool calls.
+They also include judges specialized in multi-turn conversations, for example <code>UserFrustraton</code>,</p>
+</div>
+<div class="paragraph">
+<p>Those built-in judges use the OpenAI API to invoke a model and by default require valid OpenAI keys for cloud-based models, but can be configured by setting standard OpenAI environment variables to invoke self-hosted models.</p>
+</div>
+<div class="paragraph">
+<p>You create your own LLM judge by calling the <code>make_judge</code> function and passing, as arguments, the prompt, model URL, and authentication token for the model.
+You do not require setting OpenAI environment variables to use self-hosted models with your custom judges.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mlflow_and_other_programming_language_runtimes"><a class="anchor" href="#_mlflow_and_other_programming_language_runtimes"></a>MLflow and other programming language runtimes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creating an MLflow evaluation requires writing some code using the MLflow SDK, which is available for Python and TypeScript.
+Does that mean developers using other programming languares are excluded from tapping into MLflow evaluations?
+No!</p>
+</div>
+<div class="paragraph">
+<p>Because the predictor function encapsulares your entire agentic application and its harness, they could invoke your actual application directly, by using the operating system <code>exec</code> system call or by invoking a REST API endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Applications developed using accepted best practices usually provide an agentic backend, which is decoupled from its user interface, that can be involved in one of those ways.
+If your application does not, it is worth considering such a refactoring.
+Improving testability of an application usually brings other maintenance benefits.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can write code which retrieves traces of your application from MLflow and run evaluations on those traces.
+This course will not provide an example of either approach, but the <a href="https://mlflow.org/docs/latest/genai/">upstream documentation</a> of MLflow should provide sufficient information for implement those approaches.</p>
 </div>
 </div>
 </div>
