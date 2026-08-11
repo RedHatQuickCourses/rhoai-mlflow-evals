@@ -1,18 +1,123 @@
-= Model Evaluation Concepts
+= Model Evaluation with EvalHub
 
 Objective::
 
 Describe the evaluation providers and benchmarks available in EvalHub and explain how to manage evaluation jobs and interpret their results.
 
-WARNING: Not started  yet.
+WARNING: Work In Progress
 
-== Heading
+== Evaluation providers, benchmarks, and collections
 
-Lorem ipsum
+EvalHub runs evaluations as Kubernetes jobs, taking advantage of queuing, scheduling, and security from Red Hat OpenShift, but offers its own API for managing such jobs, instead of relaying on Kubernetes custom resources.
 
-== Another heading
+There are a number of popular frameworks for running AI evaluations, each having their own coding and data conventions, and EvalHub _providers_ offer a consistent API and CLI for running individual _benchmarks_ from different frameworks.
 
-Lorem ipsum
+An _evaluation job_, or evaluation run, can include multiple benchmarks from a single provider.
+
+Alternatively, an evaluation job can refer to a _collection_, which refers to selected benchmarks from different providers.
+A few collections and providers are predefined in RHOAI, and more collections and providers are available from the upstream community and can be used, though without commercial support from Red Hat.
+
+NOTE: Users of EvalHub can define their own collections, including a fine tuned selection of benchmarks, weights, and pass criteria aligned with their business needs.
+This course does not go into that level of detail, but focuses on running a single benchmark, as a starting point for operating EvalHub.
+
+The APIs from EvalHub enable starting and monitoring evaluation jobs, and then checking their results, but you still require specific knowledge about each provider you wish run and their benchmarks, for example:
+
+* What are they intended to evaluate?
+* Which parameters do they require?
+* Which metrics they produce, and how to interpret them?
+
+EvalHub documentation does not answer those questions.
+You must refer to each framework's own documentation.
+
+EvalHub providers discoverability of the configured collections and providers, enabled by editing the EvalHub custom resource, and of individual benchmarks from each provider.
+It does not provide, yet, discoverability about the arguments required by each provider and its individual benchmarks.
+
+Some benchmarks might take a long time to run and require large data sets from public sources such as Hugging Faces.
+They may also require authentication credentials to access those sources and LLMs, which are provided as Kubernetes secrets.
+
+In this course, we do not present the EvalHub APIs and SDK.
+It focus instead on the front-ends offered by the RHOAI dashboard and the EvalHub CLI.
+Refer to the https://eval-hub.github.io[EvalHub community docs^] for information about using the SDK in your Jupyter notebooks and KubeFlow pipelines.
+
+== EvalHub tentants and OpenShift projects
+
+An EvalHub tenant is the environment where an evaluation runs.
+It corresponds to an OpenShift project or Kubernetes namespace.
+
+Users and applications (pods) from a tenant need access to the EvalHub server, through Kubernetes RBAC.
+The easy way of granting access is by setting the label `evalhub.trustyai.opendatahub.io/tenant` on a namespace, as long as you have deployed your EvalHub resource on the `redhat-ods-applications` namespace from RHOAI.
+
+This label triggers the TrustyAI operator to add service accounts and role bindings which enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
+You may require additional role bindings to access EvalHub from your Jupyter Labs and KubeFlow pipeline pods.
+
+The same label enables network connections from pods in a namespace to the EvalHub server, which are restricted by Kubernetes network policies.
+
+== Using EvalHub from the RHOAI dashboard
+
+The RHOAI dashboard offers the menu:Develop & train[Evaluations] page to browse available benchmarks and create or monitor evaluation jobs.
+It offers options to run either a single benchmark or an entire benchmark suite, that is, an evaluation collection. 
+
+When selecting a single benchmark to run, it does not filter benchmarks by their providers, but by categories and tags present on the metadata of each benchmark.
+
+In either case (single benchmark or benchmark suite), the RHOAI dashboard displays a form where the user provides a display name for the evaluation job and required arguments: a model name, URL, and token.
+Additional benchmark or collection parameters can be provided as a JSON strong.
+
+NOTE: When using the RHOAI dashboard, it is mandatory to select either a new MLflow experiment or create a new one for an evaluation job.
+This is not mandatory when using the EvalHub SDK and CLI.
+
+The menu:Develop & train[Evaluations] page list evaluation jobs, which can be pending, running, complete, or failed.
+Job details include a final pass/fail score and individual metrics recorded by the benchmark.
+Notice that an evaluation with a complete status might have failed, meaning it didn't meet the threshold set for its key metrics.
+On the other hand, an evaluation with a failed status registers score or metrics because it failed with a runtime error.
+
+Creating new collections, registering new profiles, and other operations other than running a single benchmark or suite require using either the EvalHub SDK or the EvalHub CLI.
+
+== Using EvalHub from the CLI
+
+Using the EvalHub CLI, included with the EvalHub SDK for Python, you can create evaluation jobs running multiple benchmarks from the same provider, or all benchmarks from a collection. 
+You can also list available providers and their benchmarks, with or without descriptions.
+
+It is recommended that you install the EvalHub CLI in a Python virtual environment, using the `pip` command.
+Refer to the next activity in this course for the complete syntax of installation command and examples of using the EvalHub CLI.
+
+Most operations using the CLI follow a command structure of two words plus arguments:
+
+[source,console,subs="verbatim,quotes"]
+--
+$ evalhub _resource_ _operation_
+--
+
+Examples of _resource_ are `config`, `collections`, `providers`, and `eval`.
+Valid _operation_ varies with the resource, for example `create` and `list` for `providers` or `run` and `status` for `evals`.
+
+The EvalHub CLI also takes some single-word commands, such as `health` and `version` and takes the `--help` switch.
+Try the following.
+
+[source,console,subs="verbatim,quotes"]
+--
+$ evalhub --help
+$ evalhub eval --help
+$ evalhub eval run --help
+--
+
+In the output of the last command, pay special attention to the `-p` switch, which enables passing of provider and benchmark-specific parameters to the evaluation job using the `key=value` format.
+A typical `evalhub eval run` command line may be quite long, including multiple switches, especially multiple `-p` switches.
+
+The `evalhub eval` command will be the most used, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
+It also enables monitoring the status such jobs, canceling them, and viewing their results, once they are complete.
+
+== Troubleshooting evaluation runs
+
+If an evaluation job fails unexpectedly it may be necessary to collect logs from its Kubernetes pod for troubleshooting.
+
+For each EvalHub evaluation job there is a Kubernetes job, and for each of such Kubernetes jobs there might be one or more pods. 
+If an evaluation pod terminates unexpectedly, its Kubernetes job will retry, by creating another pod, and you might see new pods which also fail.
+
+EvalHub evaluation jobs are identified by an autogenerated ID which is set to the `job_id` label of its associated Kubernetes resources.
+
+So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and them use the ID to filter for Kubernetes jobs and pods using either the OpenShift web console or its `oc` command.
+
+From them, you perform troubleshooting using the usual Kubernetes and OpenShift features, such as viewing events from `oc describe` or container logs from `oc logs`.
 
 == What's Next
 

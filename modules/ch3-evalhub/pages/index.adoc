@@ -4,4 +4,7 @@ Goal::
 
 Evaluate LLMs using EvalHub providers, benchmarks, and collections on Red Hat OpenShift AI.
 
-WARNING: Not started  yet.
+WARNING: Work In Progress
+
+This chapter describes the main concepts and the process for running and monitoring evaluations using EvalHub with RHOAI.
+Then it shows how to find and run a simple and quick benchmark, so you gain some familiarity with EvalHub before your attempt to run larger and longer evaluation collections.

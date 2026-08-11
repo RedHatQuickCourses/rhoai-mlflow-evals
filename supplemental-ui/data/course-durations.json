@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3210,
+  "totalSeconds": 3575,
   "pageCount": 17,
   "pages": [
     {
@@ -55,12 +55,12 @@
     {
       "module": "ch3-evalhub",
       "page": "index.adoc",
-      "seconds": 5
+      "seconds": 20
     },
     {
       "module": "ch3-evalhub",
       "page": "s1-model-evaluation.adoc",
-      "seconds": 23
+      "seconds": 373
     },
     {
       "module": "ch3-evalhub",
