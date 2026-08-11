@@ -4,4 +4,7 @@ Goal::
 
 Evaluate agentic applications using the MLFlow SDK with deterministic scorers and LLM judges on Red Hat OpenShift AI.
 
-WARNING: Not started  yet.
+WARNING: Work In Progress
+
+This chapter presets how to code and run MLflow evaluations, including custom scorers based on traditional code or deferring to an LLM.
+It provides two examples of evaluations, one based on deterministic code, another based on LLM judges.
