@@ -5,12 +5,10 @@ It relies on test-lab-web.md, which testes browser-based UIs using the playwrigh
 Install the MCP server and related CLI tools before attempting to run these prompts:
 
 - Install playright
-TODO
 - Install the playright mcp server:
 $ claude mcp add playwright npx @playwright/mcp@latest
 
 - Install pty-mcp
-TODO
 - Install the pyt-mcp mcp server:
 $ claude mcp add pty-mcp -- pty-mcp
 
@@ -30,3 +28,9 @@ It should enable testing activities which alternate between a browser and a shel
 It should be possible to overcome such limitation with a specially crafted browser profile and podman volumes.
 
 The pty-mcp should allow testing of hands-on activities using a local or remote VM, for example a RHDP bastion host or ROLE workstation and server machines, but these prompts were not tested in such scenarios.
+
+TODO
+
+- Provide scripts to check prereqs and create the reports directory -- things that are deterministic and are a waste of tokens to do from prompts.
+
+- Test prompt variantes which start SSH sessions to RHDP bastion hosts.
