@@ -29,7 +29,7 @@ The EvalHub server uses a PostgreSQL database to store the state of evaluation r
 There is no EvalHub operator in RHOAI.
 The TrustyAI operator manages EvalHub servers in RHOAI.
 The TrustyAI operator, in turn, is managed by the RHOAI operator.
-Consequently, the the TustyAI and EvalHub operators are not visible from the Operator Lifecycle Manager (OLM).
+Consequently, the the TustyAI is not visible from the Operator Lifecycle Manager (OLM).
 
 To deploy an EvalHub server, you must perform two actions:
 
@@ -37,13 +37,13 @@ To deploy an EvalHub server, you must perform two actions:
 
 . Create an EvalHub resource, which configures the database, MLflow server, and optional OCI container registry associated with the EvalHub server.
 
-Once the EvalHub resource is available, the menu:Develop & train[Evaluations] page of the RHOAI dashboard becomes functional and exibits the menu:Create new evaluation[] buttopn.
+Once the EvalHub resource is available, the menu:Develop & train[Evaluations] page of the RHOAI dashboard becomes functional and exhibits the menu:Create new evaluation[] button.
 
 [IMPORTANT]
 ====
 Contrary to the note on the RHOAI 3.4 product docs, you _must_ create your EvalHub resource in the `redhat-ods-applications` namespace to enable its RHOAI dashboard integration.
 
-If you create your EvalHub resource in any other namespace, you cannot use the RHOAI dashboard to manage evaluations, but you can still use the EvalHub SDK and its CLI.
+If you create your EvalHub resource in any other namespace, you cannot use the RHOAI dashboard to manage evaluation runs, but you can still use the EvalHub SDK and its CLI.
 ====
 
 If you install EvalHub in the standard namespace for RHOAI applications, as recommended, you must set the TrustyAI label in any project where you run evaluations:
@@ -64,7 +64,7 @@ Any OpenShift user is a valid EvalHub user.
 Such users have access to EvalHub tenants and their evaluation runs based on their RBAC permissions from the respective OpenShift project.
 
 Service accounts also get access to EvalHub, so pods running in OpenShift can access the EvalHub server in RHOAI.
-These pods include Jupyter Labs notebooks and KubeFlow pipeline tasks.
+These pods include Jupyter Labs and KubeFlow pipeline tasks.
 
 If you must connect to EvalHub from an application running outside of its OpenShift cluster, for example the EvalHub CLI, you can take the same user token you would use for access to Kubernetes APIs and use it to authenticate to the EvalHub server.
 
