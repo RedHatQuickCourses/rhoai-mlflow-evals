@@ -37,21 +37,30 @@ If the field is clickable, such as a combo box or check box, tag with the `menu:
 
 - "MLflow" must be capitalized with uppercase ML and lowercase flow, except in links and code blocks.
 
+- "EvalHub must be capitalized as camel case, except in links and code blocks.
+
 - Use active voice.
 
 - Use short sentences, and avoid long paragraphs (containing more than five sentences).
 
 - Format paragraphs using a single sentence per line. Do not have multiple sentences on a single text line.
 
-- Use sentence case for headings.
+- Use sentence case for headings except for the top-level heading which uses title case.
 
 - Do not use contractions such as don't and can't.
 
 - Expand acronyms on first usage, except if first usage is in a heading or code block. For example: "Red Hat OpenShift AI (RHOAI)".
 
+- Do not expand "SDK" when used in the a name of a software component, ex: "MLflow SDK"
+
+- Do not expand common IT and AI jargon such as MCP and LLM.
+
 - Use "gen AI" instead of "GenAI" or "genAI" meaning "generative AI". Using the long form "generative AI" is also fine.
 
-- Images must provide a caption, using the attribute, ex: `::image:file.svg]title="this iamge caption"]`
+- Images must provide a caption, using the attribute, ex: `::image:file.svg]title="this image's caption"]`
 
 - Links to external web sites use "^" to open an external browser tab, ex: `http://www.example.com[example web site^]`
 
+- Leave "WARNING: Pending Review" markers untouched. They will be removed after a human review.
+
+- Replace "WARNING: Work In Progress" with "WARNING: Pending Review".
