@@ -55,7 +55,11 @@ If the field is clickable, such as a combo box or check box, tag with the `menu:
 
 - Do not expand common IT and AI jargon such as MCP and LLM.
 
+- Do not expand common Kubernetes and OpenShift concepts such as RBAC and OCI.
+
 - Use "gen AI" instead of "GenAI" or "genAI" meaning "generative AI". Using the long form "generative AI" is also fine.
+
+- Keep "GenAI studio" because it's this way in the RHOAI dashboard navigation.
 
 - Images must provide a caption, using the attribute, ex: `::image:file.svg]title="this image's caption"]`
 
