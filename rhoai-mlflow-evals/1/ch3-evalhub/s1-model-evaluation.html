@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Model Evaluation Concepts :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
+    <title>Model Evaluation with EvalHub :: Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</title>
     <link rel="prev" href="index.html">
     <link rel="next" href="s2-evaluate-model-lab.html">
     <meta name="generator" content="Antora 3.2.0-alpha.12">
@@ -100,7 +100,7 @@
     <a class="nav-link" href="index.html">Model Evaluation with EvalHub</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="s1-model-evaluation.html">Model Evaluation Concepts</a>
+    <a class="nav-link" href="s1-model-evaluation.html">Model Evaluation with EvalHub</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s2-evaluate-model-lab.html">Lab: Evaluate a Self-Hosted Model</a>
@@ -166,7 +166,7 @@
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
     <li><a href="index.html">Model Evaluation with EvalHub</a></li>
-    <li><a href="s1-model-evaluation.html">Model Evaluation Concepts</a></li>
+    <li><a href="s1-model-evaluation.html">Model Evaluation with EvalHub</a></li>
   </ul>
 </nav>
 </div>
@@ -175,7 +175,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Model Evaluation Concepts</h1>
+<h1 class="page">Model Evaluation with EvalHub</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="dlist">
@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Not started  yet.
+Work In Progress
 </td>
 </tr>
 </table>
@@ -201,18 +201,189 @@ Not started  yet.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_heading"><a class="anchor" href="#_heading"></a>Heading</h2>
+<h2 id="_evaluation_providers_benchmarks_and_collections"><a class="anchor" href="#_evaluation_providers_benchmarks_and_collections"></a>Evaluation providers, benchmarks, and collections</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>EvalHub runs evaluations as Kubernetes jobs, taking advantage of queuing, scheduling, and security from Red Hat OpenShift, but offers its own API for managing such jobs, instead of relaying on Kubernetes custom resources.</p>
+</div>
+<div class="paragraph">
+<p>There are a number of popular frameworks for running AI evaluations, each having their own coding and data conventions, and EvalHub <em>providers</em> offer a consistent API and CLI for running individual <em>benchmarks</em> from different frameworks.</p>
+</div>
+<div class="paragraph">
+<p>An <em>evaluation job</em>, or evaluation run, can include multiple benchmarks from a single provider.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, an evaluation job can refer to a <em>collection</em>, which refers to selected benchmarks from different providers.
+A few collections and providers are predefined in RHOAI, and more collections and providers are available from the upstream community and can be used, though without commercial support from Red Hat.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Users of EvalHub can define their own collections, including a fine tuned selection of benchmarks, weights, and pass criteria aligned with their business needs.
+This course does not go into that level of detail, but focuses on running a single benchmark, as a starting point for operating EvalHub.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The APIs from EvalHub enable starting and monitoring evaluation jobs, and then checking their results, but you still require specific knowledge about each provider you wish run and their benchmarks, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What are they intended to evaluate?</p>
+</li>
+<li>
+<p>Which parameters do they require?</p>
+</li>
+<li>
+<p>Which metrics they produce, and how to interpret them?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>EvalHub documentation does not answer those questions.
+You must refer to each framework&#8217;s own documentation.</p>
+</div>
+<div class="paragraph">
+<p>EvalHub providers discoverability of the configured collections and providers, enabled by editing the EvalHub custom resource, and of individual benchmarks from each provider.
+It does not provide, yet, discoverability about the arguments required by each provider and its individual benchmarks.</p>
+</div>
+<div class="paragraph">
+<p>Some benchmarks might take a long time to run and require large data sets from public sources such as Hugging Faces.
+They may also require authentication credentials to access those sources and LLMs, which are provided as Kubernetes secrets.</p>
+</div>
+<div class="paragraph">
+<p>In this course, we do not present the EvalHub APIs and SDK.
+It focus instead on the front-ends offered by the RHOAI dashboard and the EvalHub CLI.
+Refer to the <a href="https://eval-hub.github.io" target="_blank" rel="noopener">EvalHub community docs</a> for information about using the SDK in your Jupyter notebooks and KubeFlow pipelines.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_another_heading"><a class="anchor" href="#_another_heading"></a>Another heading</h2>
+<h2 id="_evalhub_tentants_and_openshift_projects"><a class="anchor" href="#_evalhub_tentants_and_openshift_projects"></a>EvalHub tentants and OpenShift projects</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Lorem ipsum</p>
+<p>An EvalHub tenant is the environment where an evaluation runs.
+It corresponds to an OpenShift project or Kubernetes namespace.</p>
+</div>
+<div class="paragraph">
+<p>Users and applications (pods) from a tenant need access to the EvalHub server, through Kubernetes RBAC.
+The easy way of granting access is by setting the label <code>evalhub.trustyai.opendatahub.io/tenant</code> on a namespace, as long as you have deployed your EvalHub resource on the <code>redhat-ods-applications</code> namespace from RHOAI.</p>
+</div>
+<div class="paragraph">
+<p>This label triggers the TrustyAI operator to add service accounts and role bindings which enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
+You may require additional role bindings to access EvalHub from your Jupyter Labs and KubeFlow pipeline pods.</p>
+</div>
+<div class="paragraph">
+<p>The same label enables network connections from pods in a namespace to the EvalHub server, which are restricted by Kubernetes network policies.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_evalhub_from_the_rhoai_dashboard"><a class="anchor" href="#_using_evalhub_from_the_rhoai_dashboard"></a>Using EvalHub from the RHOAI dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The RHOAI dashboard offers the <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> page to browse available benchmarks and create or monitor evaluation jobs.
+It offers options to run either a single benchmark or an entire benchmark suite, that is, an evaluation collection.</p>
+</div>
+<div class="paragraph">
+<p>When selecting a single benchmark to run, it does not filter benchmarks by their providers, but by categories and tags present on the metadata of each benchmark.</p>
+</div>
+<div class="paragraph">
+<p>In either case (single benchmark or benchmark suite), the RHOAI dashboard displays a form where the user provides a display name for the evaluation job and required arguments: a model name, URL, and token.
+Additional benchmark or collection parameters can be provided as a JSON strong.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using the RHOAI dashboard, it is mandatory to select either a new MLflow experiment or create a new one for an evaluation job.
+This is not mandatory when using the EvalHub SDK and CLI.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> page list evaluation jobs, which can be pending, running, complete, or failed.
+Job details include a final pass/fail score and individual metrics recorded by the benchmark.
+Notice that an evaluation with a complete status might have failed, meaning it didn&#8217;t meet the threshold set for its key metrics.
+On the other hand, an evaluation with a failed status registers score or metrics because it failed with a runtime error.</p>
+</div>
+<div class="paragraph">
+<p>Creating new collections, registering new profiles, and other operations other than running a single benchmark or suite require using either the EvalHub SDK or the EvalHub CLI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_evalhub_from_the_cli"><a class="anchor" href="#_using_evalhub_from_the_cli"></a>Using EvalHub from the CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the EvalHub CLI, included with the EvalHub SDK for Python, you can create evaluation jobs running multiple benchmarks from the same provider, or all benchmarks from a collection.
+You can also list available providers and their benchmarks, with or without descriptions.</p>
+</div>
+<div class="paragraph">
+<p>It is recommended that you install the EvalHub CLI in a Python virtual environment, using the <code>pip</code> command.
+Refer to the next activity in this course for the complete syntax of installation command and examples of using the EvalHub CLI.</p>
+</div>
+<div class="paragraph">
+<p>Most operations using the CLI follow a command structure of two words plus arguments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub <em>resource</em> <em>operation</em></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples of <em>resource</em> are <code>config</code>, <code>collections</code>, <code>providers</code>, and <code>eval</code>.
+Valid <em>operation</em> varies with the resource, for example <code>create</code> and <code>list</code> for <code>providers</code> or <code>run</code> and <code>status</code> for <code>evals</code>.</p>
+</div>
+<div class="paragraph">
+<p>The EvalHub CLI also takes some single-word commands, such as <code>health</code> and <code>version</code> and takes the <code>--help</code> switch.
+Try the following.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub --help
+$ evalhub eval --help
+$ evalhub eval run --help</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the output of the last command, pay special attention to the <code>-p</code> switch, which enables passing of provider and benchmark-specific parameters to the evaluation job using the <code>key=value</code> format.
+A typical <code>evalhub eval run</code> command line may be quite long, including multiple switches, especially multiple <code>-p</code> switches.</p>
+</div>
+<div class="paragraph">
+<p>The <code>evalhub eval</code> command will be the most used, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
+It also enables monitoring the status such jobs, canceling them, and viewing their results, once they are complete.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_evaluation_runs"><a class="anchor" href="#_troubleshooting_evaluation_runs"></a>Troubleshooting evaluation runs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If an evaluation job fails unexpectedly it may be necessary to collect logs from its Kubernetes pod for troubleshooting.</p>
+</div>
+<div class="paragraph">
+<p>For each EvalHub evaluation job there is a Kubernetes job, and for each of such Kubernetes jobs there might be one or more pods.
+If an evaluation pod terminates unexpectedly, its Kubernetes job will retry, by creating another pod, and you might see new pods which also fail.</p>
+</div>
+<div class="paragraph">
+<p>EvalHub evaluation jobs are identified by an autogenerated ID which is set to the <code>job_id</code> label of its associated Kubernetes resources.</p>
+</div>
+<div class="paragraph">
+<p>So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and them use the ID to filter for Kubernetes jobs and pods using either the OpenShift web console or its <code>oc</code> command.</p>
+</div>
+<div class="paragraph">
+<p>From them, you perform troubleshooting using the usual Kubernetes and OpenShift features, such as viewing events from <code>oc describe</code> or container logs from <code>oc logs</code>.</p>
 </div>
 </div>
 </div>
