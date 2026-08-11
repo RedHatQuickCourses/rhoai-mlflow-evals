@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3948,
+  "totalSeconds": 3947,
   "pageCount": 17,
   "pages": [
     {
@@ -75,7 +75,7 @@
     {
       "module": "ch4-mlflow",
       "page": "s1-agentic-evaluation.adoc",
-      "seconds": 393
+      "seconds": 392
     },
     {
       "module": "ch4-mlflow",
