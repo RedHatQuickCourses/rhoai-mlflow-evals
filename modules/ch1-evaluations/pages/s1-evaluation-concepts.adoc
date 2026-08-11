@@ -2,29 +2,29 @@
 
 Objective::
 
-Describe how evaluating AI-enabled applications differs from testing traditional applications and identify the roles of MLFlow and EvalHub in Red Hat OpenShift AI.
+Describe how evaluating AI-enabled applications differs from testing traditional applications and identify the roles of MLflow and EvalHub in Red Hat OpenShift AI (RHOAI).
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Evaluating non-deterministic applications
 
-Traditional software engineering focuses on testing approaches for deterministic applications, such as unit tests and functional testings, and integrating that testing with other kinds of tests, such as performance tests and security scans.
+Traditional software engineering focuses on testing approaches for deterministic applications, such as unit tests and functional testing, and integrating that testing with other kinds of tests, such as performance tests and security scans.
 
-AI-enabled applications, such as chat bots and agents, benefit from those traditional testing approach but they require the addition of tests designed for their non-deterministic nature.
+AI-enabled applications, such as chat bots and agents, benefit from those traditional testing approaches but they require the addition of tests designed for their non-deterministic nature.
 Those tests are called _evaluations_.
 
-It is a known fact that large-language models (LLMs) are based on probabilistic pattern-matching.
+It is a known fact that large language models (LLMs) are based on probabilistic pattern-matching.
 They may produce different outputs from the same input data.
 Sometimes those differences are inconsequential, such as a different wording of the same statements, but sometimes those differences make their answers factually incorrect or open to misleading interpretation.
 
-Aproaches such as guard rails can mitigate the probabilistic nature of LLMs, but cannot sove it entirely.
-Other approaches, such as setting the _temperature_ parameter to zero, to force a model to always provide the same response, also degrates a model performance when planning, exploring, and researching.
-The randomness of LLMs actually enable them to work in imprecise scenarios and  emulate creativity, probem-solving, or finding new insights.
-Without randomness, LLMs can only output facts which are alredy explicity stated in their training data.
+Approaches such as guard rails can mitigate the probabilistic nature of LLMs, but cannot solve it entirely.
+Other approaches, such as setting the _temperature_ parameter to zero, to force a model to always provide the same response, also degrades a model's performance when planning, exploring, and researching.
+The randomness of LLMs actually enable them to work in imprecise scenarios and emulate creativity, problem-solving, or finding new insights.
+Without randomness, LLMs can only output facts which are already explicitly stated in their training data.
 
-Model evaluations become popular quite early as a way of demonstrating the capabilities of LLMs and comparing them with each other based on criteria such as ability to provide correct answers to general knowledge questions, science questions, and other domain areas.
+Model evaluations became popular quite early as a way of demonstrating the capabilities of LLMs and comparing them with each other based on criteria such as ability to provide correct answers to general knowledge questions, science questions, and other domain areas.
 
-Other popular use cases for model evaluations include assessing how easy is to trick a model into providing a harmful response, or how capable they are at following instructions.
+Other popular use cases for model evaluations include assessing how easy it is to trick a model into providing a harmful response, or how capable they are at following instructions.
 
 === Evaluating models and applications
 
@@ -33,13 +33,13 @@ Even chat bots are nowadays expected to function as _agentic applications_ and r
 
 * A _System prompt_ with general instructions regarding the application's intended usage.
 
-* Varios _skills_ which guide the model on performing specific tasks, and which are seleled by the model based on the received prompt.
+* Various _skills_ which guide the model on performing specific tasks, and which are selected by the model based on the received prompt.
 
-* Collections of _tools_, some provided by the agentic application itself, and some provided by external MCP servers.
+* Collections of _tools_, some provided by the agentic application itself, and some provided by external Model Context Protocol (MCP) servers.
 
-* Data from _retrieval augumented generation (RAG)_ sources, for example documentation of processes and legal or financial rules.
+* Data from _retrieval augmented generation (RAG)_ sources, for example documentation of processes and legal or financial rules.
 
-* Various levels of _memory_ which add to the request information about the current user, past interactions, or the what's in the end user applications's screen.
+* Various levels of _memory_ which add to the request information about the current user, past interactions, or what is in the end user application's screen.
 
 Evaluating models, by themselves, is useful and necessary because the capabilities and performance of an LLM vary with their target hardware and configuration settings.
 You should assess that, on your specific environment, a model performs as expected regarding correctness of its outputs, resistance to bad prompts, frequency of hallucinations, and tool capability.
@@ -50,12 +50,12 @@ You must also evaluate the harness as a whole and experiment with different comb
 
 * Among different MCP servers that integrate with the same back-end systems, the most powerful MCP server may perform worse when combined with other elements of a harness.
 
-* A simpler MCP server, which performs worst individually, may be better when combined with a specific system prompt or set of skills.
+* A simpler MCP server, which performs worse individually, may be better when combined with a specific system prompt or set of skills.
 
 * Preloading data from memory and RAG may be better or worse than letting the model request such data on-demand from MCP servers.
 
 Most applications require multiple evaluations, of different kinds, to assess a good enough performance and quality of their responses.
-They also require repeated evaluations to catch regressions when any piece of their harnesses change, and their evaluations sets will grow over time, as you discover different usage scenarios and failure modes.
+They also require repeated evaluations to catch regressions when any piece of their harnesses changes, and their evaluation sets will grow over time, as you discover different usage scenarios and failure modes.
 
 === Evaluations during development and production
 
@@ -64,14 +64,14 @@ You cannot just test one example of "good" input plus one example of each known 
 You must test multiple "good" inputs and also multiple examples of each corner case, because of the non-deterministic nature of LLMs.
 You may require large evaluation data sets and also curate custom data sets which are specific for your usage scenarios and business processes.
 
-Besides, your evaluations are constrained by the availability of specialized hardware such as GPUs and specialized memory for storing models and tokens.
+Besides, your evaluations are constrained by the availability of specialized hardware such as graphics processing units (GPUs) and specialized memory for storing models and tokens.
 You will not run them for every commit.
 
-Early during development, you evaluations will be exploratory and interactive, intended to select an optimal harness, and use a small data set.
+Early during development, your evaluations will be exploratory and interactive, intended to select an optimal harness, and use a small data set.
 Once your harness and model selections are more solid, you will increase the size of your evaluation data sets and add a larger variety of evaluations to assess performance, correctness, and the need for specialized guardrails.
-You will also start to run evaluations automatically, as part of your CI/CD processes.
+You will also start to run evaluations automatically, as part of your continuous integration and continuous delivery (CI/CD) processes.
 
-Once you release your agent to production, or to its first external test users, you will collect samples (traces) of actual inputs and outputs to assess actual performance of your harness, and feedback some of that data to improve the evaluations for the next development interaction of your agent.
+Once you release your agent to production, or to its first external test users, you will collect samples (traces) of actual inputs and outputs to assess actual performance of your harness, and feedback some of that data to improve the evaluations for the next development iteration of your agent.
 
 It is recommended that you work proactively: instead of relying just on user feedback about the quality of your application, such as thumbs up and down, and customer support tickets complaining about errors, you should take samples of actual usage data as additional evaluation data sets and compare the results with evaluations from your synthetic and development evaluation data sets.
 
@@ -82,13 +82,13 @@ You may learn that actual behavior differs significantly from intended and teste
 MLflow provides fundamental observability and experiment-tracking capabilities that enable developers and data scientists to ensure their applications work beyond a demonstration and perform as expected in production.
 
 MLflow is a popular library for agentic evaluations.
-It requires encapsulating your agent and its harness as a _predictor function_, and them creating custom code to invoke your prediction function together with  _scorers_ and _judges_, some of which are themselves based on LLMs.
+It requires encapsulating your agent and its harness as a _predictor function_, and then creating custom code to invoke your prediction function together with _scorers_ and _judges_, some of which are themselves based on LLMs.
 
-It is up to the developer packaging their custom evaluation code, based on the MLflow SDK, as a KubeFlow pipeline or as a Tekton task (for OpenShift Pipelines), among other ways of operationalizing reproducible execution of MLflow evaluations.
+It is up to the developer packaging their custom evaluation code, based on the MLflow SDK, as a Kubeflow pipeline or as a Tekton task (for OpenShift Pipelines), among other ways of operationalizing reproducible execution of MLflow evaluations.
 
 MLflow is also a popular library for tracing agentic applications, including their usage of RAG sources, tools, and multi-turn conversations with LLMs.
 
-Typical usage of MLflow libraries store evaluation results as part of a trace, and multiple traces are part of an _experiment_.
+MLflow libraries typically store evaluation results as part of a trace, and multiple traces are part of an _experiment_.
 An MLflow experiment could include other kinds of data and other kinds of experiment runs besides traces.
 
 Using the MLflow SDK, you can also retrieve data from traces as evaluation data sets for running evaluations, closing the loop from development to production, or from early development tests to test users.
@@ -104,7 +104,7 @@ EvalHub standardizes how you operationalize and store results of your evaluation
 It provides a number of _evaluation providers_, each specific for an _evaluation framework_ and their specific _benchmarks_.
 EvalHub also offers a standard syntax to combine multiple providers and select a subset of their benchmarks in a _collection_, which makes it easier to reproduce evaluation runs.
 
-EvalHub also improves governance of your evaluations by storing their results on on OCI container images, for immutable auditability storage.
+EvalHub also improves governance of your evaluations by storing their results on Open Container Initiative (OCI) container images, for immutable auditability storage.
 
 As included with RHOAI 3.4, EvalHub supports a number of providers focused on evaluating models, such as Garak and LightEval.
 The EvalHub community is very active and it is expanding its set of community-supported providers, which add capabilities for running other kinds of evaluations, including agent evaluations.
@@ -113,7 +113,7 @@ As these community providers mature, some of them will be included and supported
 == Comparing and integrating EvalHub with MLflow
 
 It is not a choice of using either EvalHub or MLflow for your evaluations.
-Most of the times, it is about how you will use each of them, and sometimes them together, during your AI applicaiton lifecycle.
+Most of the times, it is about how you will use each of them, and sometimes them together, during your AI application lifecycle.
 
 While MLflow provides building blocks for creating custom evaluations for your agents and its business needs, EvalHub provides standard benchmark collections which are ready to run and compare how different models perform on your specific deployment environment. 
 EvalHub also enables customizing those collections, by selecting different benchmarks or the weights and thresholds from each individual benchmark to compose the overall evaluation score.
@@ -121,14 +121,14 @@ EvalHub also enables customizing those collections, by selecting different bench
 RHOAI uses MLflow as its main observability feature.
 Multiple components of RHOAI integrate with MLflow to store traces and metrics as MLflow experiments.
 Among those components, EvalHub can store evaluation results from any provider and benchmark as MLflow experiments.
-This way, results from all your evaluations, be them managed by EvalHub or not, are stored and visualized together in MLflow.
+This way, results from all your evaluations, whether managed by EvalHub or not, are stored and visualized together in MLflow.
 
-Unfortunately, at the time of RHOAI 3.4, EvalHub is not yet cappable of running MLflow evaluations directly.
+Unfortunately, at the time of RHOAI 3.4, EvalHub is not yet capable of running MLflow evaluations directly.
 It would require building custom code using the bring your own framework (BYOF) API from EvalHub to run an MLflow evaluation.
 
-This course does not present BYOF, but provides you with sufficient information so you could use EvalHub for run model evaluations and MLflow for agent evaluations, and combine both as dicrete steps in a KubeFlow pipeline, while aggregating results of all these evaluations in MLflow.
+This course does not present BYOF, but provides you with sufficient information so you could use EvalHub for run model evaluations and MLflow for agent evaluations, and combine both as discrete steps in a Kubeflow pipeline, while aggregating results of all these evaluations in MLflow.
 
-== What's Next
+== What is next
 
 Now that you understand the key evaluation concepts for AI applications, the next activity explores the hands-on lab environment and the next chapter deploys MLflow and EvalHub on Red Hat OpenShift AI.
 

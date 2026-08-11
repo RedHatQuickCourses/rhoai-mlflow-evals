@@ -2,7 +2,7 @@
 
 Objective::
 
-Navigate the provided demo environment, identify enabled features of Red Hat OpenShift AI 3.4, and verify the predeployed llama model.
+Navigate the provided demo environment, identify enabled features of Red Hat OpenShift AI 3.4, and verify the predeployed Llama model.
 
 WARNING: Pending Review
 
@@ -54,14 +54,14 @@ WARNING: The project previously selected in one page of the RHOAI dashboard may 
 In the *Configure* pane, select the menu:Model[] tab and verify that the selected model is named `llama-32-3b-instruct`.
 Ignore the prefix on the model name.
 
-.. In the right pane, click menu:Send a message...[] and type a prompt, for example:
+.. In the right pane, click menu:Send a message...[] and enter a prompt, for example:
 +
 [source,none,subs="verbatim,quotes"]
 ----
 What is RHEL?
 ----
 
-.. Type kbd:[Enter] to submit the prompt and see the response from the model.
+.. Press kbd:[Enter] to submit the prompt and see the response from the model.
 The model may return different answers if you attempt the same prompt again, but they all should be correct and reasonable.
 
 === Confirm that MLflow and EvalHub are not deployed in RHOAI
@@ -87,17 +87,17 @@ The page should list no MCP servers.
 
 .. In the left pane select the menu:Develop & train[Evaluations].
 
-.. The *Evaluations* page display the messages `Evaluations unavailable` and `To use evaluations, enable the evaluation service using the Trusty AI operator`.
+.. The *Evaluations* page displays the messages `Evaluations unavailable` and `To use evaluations, enable the evaluation service using the Trusty AI operator`.
 
 === Summary 
 
-After completing these steps, you verified that you have a functional RHOAI instance with a pre-deployed model, which is available only for internal access, and that you can submit prompts to the model using an RHOAI playground. 
+After completing these steps, you verified that you have a functional RHOAI instance with a predeployed model, which is available only for internal access, and that you can submit prompts to the model using an RHOAI playground. 
 
-In addition, you have also verified that MLflow and EvalHub are is not installed on your RHOAI instance, and that there are no MCP servers deployed.
+In addition, you have also verified that MLflow and EvalHub are not installed on your RHOAI instance, and that there are no MCP servers deployed.
 
-== What's next
+== What is next
 
-Now that you are familiar with the learning environment, the next chapter covers how to deploy MLFlow and EvalHub for development and testing usage on Red Hat OpenShift AI.
+Now that you are familiar with the learning environment, the next chapter covers how to deploy MLflow and EvalHub for development and testing usage on Red Hat OpenShift AI.
 
 ////
 Explore the learning environment
