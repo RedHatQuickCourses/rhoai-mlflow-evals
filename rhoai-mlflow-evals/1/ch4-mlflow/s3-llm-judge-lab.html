@@ -112,7 +112,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Agent Evaluation with MLFlow</a>
+    <a class="nav-link" href="index.html">Agent Evaluation with MLflow</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s1-agentic-evaluation.html">Agentic Evaluation Concepts</a>
@@ -164,7 +164,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
-    <li><a href="index.html">Agent Evaluation with MLFlow</a></li>
+    <li><a href="index.html">Agent Evaluation with MLflow</a></li>
     <li><a href="s3-llm-judge-lab.html">Lab: Evaluate an Agent with an LLM Judge</a></li>
   </ul>
 </nav>
@@ -181,7 +181,7 @@
 <dl>
 <dt class="hdlist1">Objective</dt>
 <dd>
-<p>Perform evaluations using built-in and custom LLM judges with self-hosted models, and inspect evaluation results through MLFlow traces.</p>
+<p>Perform evaluations using built-in and custom LLM judges with self-hosted models, and inspect evaluation results through MLflow traces.</p>
 </dd>
 </dl>
 </div>
@@ -192,7 +192,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Work In Progrees
+Pending Review
 </td>
 </tr>
 </table>
@@ -219,7 +219,7 @@ Work In Progrees
 </ul>
 </div>
 <div class="paragraph">
-<p>Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from <a href="../ch2-deployment/s2-mlflow-deploy-lab.html" class="xref page">chapter 2</a>, and that you already cloned the sample notebooks from the coure samples repository, by following the instructions from the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.</p>
+<p>Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from <a href="../ch2-deployment/s2-mlflow-deploy-lab.html" class="xref page">chapter 2</a>, and that you already cloned the sample notebooks from the course samples repository, by following the instructions from the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.</p>
 </div>
 </div>
 </div>
@@ -228,7 +228,7 @@ Work In Progrees
 <div class="sectionbody">
 <div class="paragraph">
 <p>You will create and test two LLM judges, one provided by MLflow and another using your custom prompt.
-You will use them together for an MLflow evaluation of a simplistic agentic application that is provided to you</p>
+You will use them together for an MLflow evaluation of a simplistic agentic application that is provided to you.</p>
 </div>
 <div class="paragraph">
 <p>As you perform this activity, you will alternate between two browser tabs:</p>
@@ -244,7 +244,7 @@ You will use them together for an MLflow evaluation of a simplistic agentic appl
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_create_and_test_a_llm_judge_using_one_of_the_judges_provided_by_mlflow"><a class="anchor" href="#_create_and_test_a_llm_judge_using_one_of_the_judges_provided_by_mlflow"></a>Create and test a LLM judge using one of the judges provided by MLflow</h3>
+<h3 id="_create_and_test_an_llm_judge_using_one_of_the_judges_provided_by_mlflow"><a class="anchor" href="#_create_and_test_an_llm_judge_using_one_of_the_judges_provided_by_mlflow"></a>Create and test an LLM judge using one of the judges provided by MLflow</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -252,7 +252,7 @@ You will use them together for an MLflow evaluation of a simplistic agentic appl
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Open the RHOAI work bench and, in the left navigation pane, click <b class="menuref">Projects</b>.
+<p>Open the RHOAI workbench and, in the left navigation pane, click <b class="menuref">Projects</b>.
 Select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
 Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.</p>
 </li>
@@ -261,13 +261,13 @@ Then enter <code>my</code> in the <strong>Filter by name</strong> field and clic
 </li>
 <li>
 <p>Copy the <code>simple-agent</code> notebook to a new file which you will edit.
-In the left pane of the jupyter notebook, enter the <b class="menuref">rhoai-mlflow-samples/evals</b> directory, right click <b class="menuref">simple-agent.ipynb</b>, and select <b class="menuref">Duplicate</b>.
-Then right-click the new file <b class="menuref">simple-agent-Copy1.ipnyb</b> and select <b class="menuref">Rename</b>.
-Enter <code>llm-eval.ipnyb</code> as the new file name.
-Finally, double-click <b class="menuref">llm-eval.ipnyb.ipnyb</b> to open the notebook in a new editor tab.</p>
+In the left pane of JupyterLab, enter the <b class="menuref">rhoai-mlflow-samples/evals</b> directory, right-click <b class="menuref">simple-agent.ipynb</b>, and select <b class="menuref">Duplicate</b>.
+Then right-click the new file <b class="menuref">simple-agent-Copy1.ipynb</b> and select <b class="menuref">Rename</b>.
+Enter <code>llm-eval.ipynb</code> as the new file name.
+Finally, double-click <b class="menuref">llm-eval.ipynb</b> to open the notebook in a new editor tab.</p>
 </li>
 <li>
-<p>In the toolbar of the notebook, click the <b class="menuref">fast-forward icon</b> with tooltip <code>Restart the kernel and run all cells</code>.
+<p>In the toolbar of the notebook, click the <b class="menuref">fast forward</b> icon, with tooltip "Restart the kernel and run all cells".
 In the <strong>Restart kernel</strong> pop-up, click <b class="menuref">Restart</b>.
 The output of the last cell should provide a short explanation about the differences between RHEL and CentOS.</p>
 <div class="admonitionblock note">
@@ -287,7 +287,7 @@ the code uses the prompt added to the MLflow prompt registry during the <a href=
 </div>
 </li>
 <li>
-<p>Create and test an LLM judge to assess the correctdness of a response.</p>
+<p>Create and test an LLM judge to assess the correctness of a response.</p>
 <div class="paragraph">
 <p>You can see the complete code, ready to use the built-in LLM judge, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-builtin.ipynb" target="_blank" rel="noopener">llm-eval-builtin.ipynb</a> notebook, in the course samples repository.</p>
 </div>
@@ -321,14 +321,14 @@ os.environ["OPENAI_API_KEY"] = "no token"</strong></code></pre>
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the new variables.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the new variables.
 Running the cell produces no output.</p>
 </li>
 <li>
-<p>Enter the code to instantiate a <code>Correctdness</code> judge from MLflow.</p>
+<p>Enter the code to instantiate a <code>Correctness</code> judge from MLflow.</p>
 <div class="paragraph">
 <p>In the <code>llm-eval.ipynb</code> notebook, select the last cell, having the comment <code>###Cell 6: run the agent</code>.
-Then click, in the cell&#8217;s toolbar, the icon to <b class="menuref">Insert a cell bellow</b>.
+Then click, in the cell&#8217;s toolbar, the icon to <b class="menuref">Insert a cell below</b>.
 Inside the new cell, enter the following code.</p>
 </div>
 <div class="listingblock">
@@ -345,7 +345,7 @@ correctness_judge = Correctness(
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the function and create a new notebook cell.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -371,7 +371,7 @@ feedback = correctness_judge(
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the test code.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -391,11 +391,11 @@ Running the cell produces an output similar to the following.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_and_test_a_llm_judge_using_a_custom_prompt"><a class="anchor" href="#_create_and_test_a_llm_judge_using_a_custom_prompt"></a>Create and test a LLM judge using a custom prompt</h3>
+<h3 id="_create_and_test_an_llm_judge_using_a_custom_prompt"><a class="anchor" href="#_create_and_test_an_llm_judge_using_a_custom_prompt"></a>Create and test an LLM judge using a custom prompt</h3>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>Create and test an LLM judge to assess that a reponse contains no acronyms</p>
+<p>Create and test an LLM judge to assess that a response contains no acronyms.</p>
 <div class="paragraph">
 <p>You can see the complete code, ready to use the built-in LLM judge, in the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-custom.ipynb" target="_blank" rel="noopener">llm-eval-custom.ipynb</a> notebook, in the course samples repository.</p>
 </div>
@@ -438,7 +438,7 @@ from mlflow.genai.judges import make_judge
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the function and create a new notebook cell.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -474,7 +474,7 @@ print(f"• Test judge with RHEL (expanded)': {feedback.value}\n  {feedback.rati
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the test code.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -538,7 +538,7 @@ eval_dataset = [
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to define the array and create a new notebook cell.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -567,8 +567,8 @@ except Exception as e:
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip <code>Run this cell and advance</code> to run the evaluation.
-Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scoreres over the complete evaluation data set.
+<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the evaluation.
+Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scorers over the complete evaluation data set.
 When done, you should see an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -585,14 +585,14 @@ Evaluating: 100%|██████████| 2/2 [Elapsed: 00:08, Remaining:
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Switch to your RHOAI dashboard, which should already be in the details page for the <code>simple-agent</code> experiment. If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <strong>Project</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
+<p>Switch to your RHOAI dashboard, which should already be in the details page for the <code>simple-agent</code> experiment. If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <b class="menuref">Project</b> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
 </li>
 <li>
-<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides a few new traces, the new colums <code>Correctdness</code> and <code>expanded_acronyms</code>.
-If you do not see these changes, clich the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
+<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides a few new traces, the new colums <code>Correctness</code> and <code>expanded_acronyms</code>.
+If you do not see these changes, click the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
 </li>
 <li>
-<p>Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their <code>Correctdness</code> column to view the reasoning for the <code>Fail</code> and <code>Pass</code> grades of each trace.</p>
+<p>Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their <code>Correctness</code> column to view the reasoning for the <code>Fail</code> and <code>Pass</code> grades of each trace.</p>
 </li>
 <li>
 <p>On the same traces, mouse over the values of their <code>expanded_acronyms</code> column to view the reasoning between their <code>True</code> or <code>False</code> scores.</p>
@@ -619,17 +619,17 @@ Feel free to run the evaluation multiple times, compare the responses of each at
 <div class="sect2">
 <h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
-<p>You two LLM judges, one to verify if an response is correct, by comparing with a correct response provided in the evaluation data set, and another to verify if a response expands acronyms, which would make it longer than necessary.
+<p>You created two LLM judges, one to verify if a response is correct, by comparing with a correct response provided in the evaluation data set, and another to verify if a response expands acronyms, which would make it longer than necessary.
 After testing each judge, you combined both in a single evaluation again, demonstrating that you can use multiple judges on the same evaluation data and visualize the results of multiple judges in the same MLflow trace.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
+<h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congratulations on completing this course! You are now able to deploy MLFlow and EvalHub on Red Hat OpenShift AI, evaluate both models and agentic applications, and visualize results using the RHOAI dashboard.</p>
+<p>Congratulations on completing this course! You are now able to deploy MLflow and EvalHub on Red Hat OpenShift AI, evaluate both models and agentic applications, and visualize results using the RHOAI dashboard.</p>
 </div>
 </div>
 </div>
