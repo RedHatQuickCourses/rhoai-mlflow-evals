@@ -316,12 +316,12 @@ Do not remove any of its other labels!</p>
 <p>Click <b class="menuref">Create new evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
 </li>
 <li>
-<p>In <strong>Single benchmark</strong> page, select <b class="menuref">Name</b> in the filter, and enter <code>quick</code> in the search field.
-You should see three benchmarks, each with a different label of <code>Safety</code>, <code>Performance</code>, and <code>Security</code>.</p>
+<p>In the <strong>Single benchmark</strong> page, select <b class="menuref">Name</b> in the filter, and enter <code>quick</code> in the search field.
+You should see three benchmarks, each with a different label of <strong>Safety</strong>, <strong>Performance</strong>, and <strong>Security</strong>.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Quick security smoke test</b> to open a right pane with details of that benchmark.
-Verify that this benchmark comes from the <code>Garak</code> evaluation framework, which is unlikely to require large data sets from HuggingFaces.</p>
+Verify that this benchmark comes from the Garak evaluation framework, which is unlikely to require large data sets from Hugging Face.</p>
 </li>
 </ol>
 </div>
@@ -331,7 +331,7 @@ Verify that this benchmark comes from the <code>Garak</code> evaluation framewor
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>In the left pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> and, in the <strong>Project</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
+<p>In the left pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> and, in the <b class="menuref">Project</b> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Single benchmark</b>, select <b class="menuref">Name</b> and enter <code>quick</code>.
@@ -355,7 +355,7 @@ If you use the EvalHub CLI, you can either add to existing experiments or create
 </div>
 </li>
 <li>
-<p>Enter <code>llama-32-3b-instruct</code> in the <strong>Model or agent name</strong> field, and paste the URL you copied in the previous step in the <code>Endpoint URL</code> field.
+<p>Enter <code>llama-32-3b-instruct</code> in the <strong>Model or agent name</strong> field, and paste the URL you copied in the previous step in the <strong>Endpoint URL</strong> field.
 Append <code>/v1</code> to the URL so it is a valid OpenAI endpoint.
 The model is not configured to require authentication, so there is no need to provide an API key.</p>
 </li>
@@ -370,7 +370,7 @@ You should see a message <code>Evaluation "garak-quick" has been started.</code>
 </td>
 <td class="content">
 If there is any error, the error message might disappear before you can read it and it might seem that nothing happened.
-In that case, try starting the the evaluation run again, without making changes.
+In that case, try starting the evaluation run again, without making changes.
 </td>
 </tr>
 </table>
@@ -384,8 +384,8 @@ In that case, try starting the the evaluation run again, without making changes.
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>You should be still on the <strong>Evaluations</strong> page, which now displays a single row named <b class="menuref">garak-quick</b> with a <code>Pending</code> status.
-Be patient while EvalHub downloads the container images required by the bebchmark.</p>
+<p>You should still be on the <strong>Evaluations</strong> page, which now displays a single row named <b class="menuref">garak-quick</b> with a <code>Pending</code> status.
+Be patient while EvalHub downloads the container images required by the benchmark.</p>
 </li>
 <li>
 <p>Once the evaluation run starts, it should terminate very quickly, and you are likely to <em>not</em> see its <code>Running</code> status, but only see it transition to <code>Complete</code>.
@@ -395,11 +395,11 @@ If it takes more than a few minutes without any change, refresh your RHOAI dashb
 <p>Click <b class="menuref">garak-quick</b> to review details of the evaluation run.
 That evaluation is expected to fail.
 Notice that its metrics indicate only one attack was attempted and it was successful.
-It&#8217;s a common attack of "asking a model to do something it shouldn&#8217;t do", which you would prevent, in production deployments, by enabling guard rails.</p>
+It is a common attack of "asking a model to do something it should not do", which you would prevent, in production deployments, by enabling guardrails.</p>
 </li>
 <li>
-<p>Optionally, you can switch to the OpenShift web console and enter <span class="menuseq"><b class="menu">Workloads</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Jobs</b></span> to monitor Kubernetes jobs in the <code>my-first-model</code> project.
-Notice that the name of the Job contains the ID of the EvalHub evaluation run, which unfortunately you <em>cannot</em> get from the RHOAI dashboard.
+<p>Optionally, you can switch to the OpenShift web console and select <span class="menuseq"><b class="menu">Workloads</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Jobs</b></span> to monitor Kubernetes jobs in the <code>my-first-model</code> project.
+Notice that the name of the job contains the ID of the EvalHub evaluation run, which unfortunately you <em>cannot</em> get from the RHOAI dashboard.
 You can also click <b class="menuref">1 of 1</b> under <strong>Completions</strong> to view the Kubernetes pod managed by the job.</p>
 </li>
 </ol>
@@ -413,11 +413,11 @@ You can also click <b class="menuref">1 of 1</b> under <strong>Completions</stro
 <div class="olist arabic">
 <ol class="arabic" start="6">
 <li>
-<p>Select a differfent benchmark to run.</p>
+<p>Select a different benchmark to run.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Open a shell, log in to OpenShift using the <code>oc</code> command, and activate the Python virtual environment you created in a <a href="../ch2-deployment/s4-evalhub-deploy-lab.html" class="xref page">previous lab</a>, then give to the EvalHub CLI your OpenShift authentication token.</p>
+<p>Open a shell, log in to OpenShift using the <code>oc</code> command, and activate the Python virtual environment you created in a <a href="../ch2-deployment/s4-evalhub-deploy-lab.html" class="xref page">previous lab</a>, then pass your OpenShift authentication token to the EvalHub CLI.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>source ~/venv/evalhub/bin/activate</strong>
@@ -432,7 +432,7 @@ Set 'token' in profile 'default'</code></pre>
 <p>List the benchmarks from the <code>garak</code> provider.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub providers describe garak
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub providers describe garak</strong>
 Provider: Garak
 ID:       garak
 Description: LLM vulnerability scanner and red-teaming framework
@@ -464,7 +464,7 @@ Benchmarks (8):
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Submit an evaliation job and save its ID in a shell variable.</p>
+<p>Submit an evaluation job and save its ID in a shell variable.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval run --name garak-cwe \
@@ -479,7 +479,7 @@ $ <strong>ID=11c1e53a-0086-4b22-9e5a-7c8ef0e07d50</strong></code></pre>
 </li>
 <li>
 <p>Monitor the status of your second evaluation job.
-This time, it should transition to <code>running</code> very quickly because the Garak container images were already downloaded.</p>
+This time, it should transition to <code>running</code> very quickly because EvalHub already downloaded the Garak container images.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval status</strong>
@@ -493,8 +493,8 @@ This time, it should transition to <code>running</code> very quickly because the
 </div>
 </li>
 <li>
-<p>if you prefer, refer to the evaluation ID to view its status unencumbered by other jobs.
-Repeat this command until it displays a state of <code>completed</code>, which shouldn&#8217;t take more than a few seconds.</p>
+<p>If you prefer, refer to the evaluation ID to view its status unencumbered by other jobs.
+Repeat this command until it displays a state of <code>completed</code>, which should not take more than a few seconds.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ <strong>evalhub eval status $ID</strong>
@@ -565,20 +565,20 @@ NAME                                                              READY   STATUS
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Return to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MFflow)</b></span>.
-In the <strong>Projects</strong> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
+<p>Return to the RHOAI dashboard and, in its left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>.
+In the <b class="menuref">Projects</b> field, enter <code>my</code> and select <b class="menuref">my-first-model</b>.</p>
 </li>
 <li>
 <p>The experiments page should display a single experiment.
 Click <b class="menuref">garak-evalhub</b>.</p>
 </li>
 <li>
-<p>In <strong>Experiments</strong> page for the <code>garak-evalhub</code> experiment, click <b class="menuref">Evaluation runs</b>.
+<p>In the <strong>Experiments</strong> page for the <code>garak-evalhub</code> experiment, select <b class="menuref">Evaluation runs</b>.
 It should display two runs, and their names match their EvalHub evaluation IDs.
-Click the one with a green ball, which is the most recent and corresponds to the second experiment, that got a <code>Pass</code> score.</p>
+Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that got a <code>Pass</code> score.</p>
 </li>
 <li>
-<p>That experiment contains no metrics, but select its <b class="menuref">Overview</b> tab to visualized the same metrics you seen with the EvalHub CLI or with the <strong>Evaluations</strong> page of the RHOAI dashboard.</p>
+<p>That experiment contains no metrics, but select its <b class="menuref">Overview</b> tab to visualize the same metrics you saw with the EvalHub CLI or with the <strong>Evaluations</strong> page of the RHOAI dashboard.</p>
 </li>
 </ol>
 </div>
@@ -589,7 +589,7 @@ Click the one with a green ball, which is the most recent and corresponds to the
 <div class="sect2">
 <h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
-<p>You performed two evaluation runs, using the Garak provider or evaluation framework: once using the RHOAI dashboard, and other using the EvalHub CLI.
+<p>You performed two evaluation runs, using the Garak evaluation framework: once using the RHOAI dashboard, and the other using the EvalHub CLI.
 Then you visualized their results using both EvalHub and MLflow.</p>
 </div>
 </div>
@@ -599,7 +599,7 @@ Then you visualized their results using both EvalHub and MLflow.</p>
 <h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Having evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLFlow SDK.</p>
+<p>Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLflow SDK.</p>
 </div>
 </div>
 </div>

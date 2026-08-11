@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3953,
+  "totalSeconds": 3954,
   "pageCount": 17,
   "pages": [
     {
@@ -55,17 +55,17 @@
     {
       "module": "ch3-evalhub",
       "page": "index.adoc",
-      "seconds": 20
+      "seconds": 21
     },
     {
       "module": "ch3-evalhub",
       "page": "s1-model-evaluation.adoc",
-      "seconds": 373
+      "seconds": 372
     },
     {
       "module": "ch3-evalhub",
       "page": "s2-evaluate-model-lab.adoc",
-      "seconds": 390
+      "seconds": 391
     },
     {
       "module": "ch4-mlflow",
