@@ -33,6 +33,8 @@ If the field is clickable, such as a combo box or check box, tag with the `menu:
 
 - Use "enter" instead of "type" when describing text a user type in an edit box.
 
+- In terminal or console blocks, anything that the user types, such as shell commands and answers to Y/n prompts, must be bold.
+
 == The following rules apply to prose, anywhere
 
 - "MLflow" must be capitalized with uppercase ML and lowercase flow, except in links and code blocks.
