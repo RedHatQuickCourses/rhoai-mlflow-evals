@@ -59,15 +59,15 @@ Do not remove any of its other labels!
 
 .. Click menu:Create new evaluation[] and, on the *New evaluation run* page, click menu:Single benchmark[]. 
 
-.. In *Single benchmark* page, select menu:Name[] in the filter, and enter `quick` in the search field.
-You should see three benchmarks, each with a different label of `Safety`, `Performance`, and `Security`.
+.. In the *Single benchmark* page, select menu:Name[] in the filter, and enter `quick` in the search field.
+You should see three benchmarks, each with a different label of *Safety*, *Performance*, and *Security*.
 
 .. Click menu:Quick security smoke test[] to open a right pane with details of that benchmark.
-Verify that this benchmark comes from the `Garak` evaluation framework, which is unlikely to require large data sets from HuggingFaces.
+Verify that this benchmark comes from the Garak evaluation framework, which is unlikely to require large data sets from Hugging Face.
 
 4. Submit an evaluation job for the `Quick security smoke test` benchmark.
 
-.. In the left pane, select menu:Develop & train[Evaluations] and, in the *Project* field, enter `my` and select menu:my-first-model[].
+.. In the left pane, select menu:Develop & train[Evaluations] and, in the menu:Project[] field, enter `my` and select menu:my-first-model[].
 
 .. Click menu:Single benchmark[], select menu:Name[] and enter `quick`.
 In the menu:Quick security smoke test[] card, click menu:Use this benchmark[].
@@ -78,7 +78,7 @@ NOTE: There is an issue with the RHOAI dashboard which prevents it from retrievi
 You must always create a new experiment, and ensure the name does not match any existing experiment in the same project nor the name of experiments that were marked for deletion.
 If you use the EvalHub CLI, you can either add to existing experiments or create new ones.
 
-.. Enter `llama-32-3b-instruct` in the *Model or agent name* field, and paste the URL you copied in the previous step in the `Endpoint URL` field.
+.. Enter `llama-32-3b-instruct` in the *Model or agent name* field, and paste the URL you copied in the previous step in the *Endpoint URL* field.
 Append `/v1` to the URL so it is a valid OpenAI endpoint.
 The model is not configured to require authentication, so there is no need to provide an API key.
 
@@ -86,12 +86,12 @@ The model is not configured to require authentication, so there is no need to pr
 You should see a message `Evaluation "garak-quick" has been started.`
 +
 NOTE: If there is any error, the error message might disappear before you can read it and it might seem that nothing happened.
-In that case, try starting the the evaluation run again, without making changes.
+In that case, try starting the evaluation run again, without making changes.
 
 5. Monitor the evaluation job.
 
-.. You should be still on the *Evaluations* page, which now displays a single row named menu:garak-quick[] with a `Pending` status.
-Be patient while EvalHub downloads the container images required by the bebchmark.
+.. You should still be on the *Evaluations* page, which now displays a single row named menu:garak-quick[] with a `Pending` status.
+Be patient while EvalHub downloads the container images required by the benchmark.
 
 .. Once the evaluation run starts, it should terminate very quickly, and you are likely to _not_ see its `Running` status, but only see it transition to `Complete`.
 If it takes more than a few minutes without any change, refresh your RHOAI dashboard page.
@@ -99,19 +99,19 @@ If it takes more than a few minutes without any change, refresh your RHOAI dashb
 .. Click menu:garak-quick[] to review details of the evaluation run.
 That evaluation is expected to fail.
 Notice that its metrics indicate only one attack was attempted and it was successful.
-It's a common attack of "asking a model to do something it shouldn't do", which you would prevent, in production deployments, by enabling guard rails.
+It is a common attack of "asking a model to do something it should not do", which you would prevent, in production deployments, by enabling guardrails.
 
-.. Optionally, you can switch to the OpenShift web console and enter menu:Workloads[Jobs] to monitor Kubernetes jobs in the `my-first-model` project.
-Notice that the name of the Job contains the ID of the EvalHub evaluation run, which unfortunately you _cannot_ get from the RHOAI dashboard.
+.. Optionally, you can switch to the OpenShift web console and select menu:Workloads[Jobs] to monitor Kubernetes jobs in the `my-first-model` project.
+Notice that the name of the job contains the ID of the EvalHub evaluation run, which unfortunately you _cannot_ get from the RHOAI dashboard.
 You can also click menu:1 of 1[] under *Completions* to view the Kubernetes pod managed by the job.
 
 === Submit an evaluation job using the CLI
 
 [start=6]
 
-6. Select a differfent benchmark to run.
+6. Select a different benchmark to run.
 
-.. Open a shell, log in to OpenShift using the `oc` command, and activate the Python virtual environment you created in a xref:ch2-deployment:s4-evalhub-deploy-lab.adoc[previous lab], then give to the EvalHub CLI your OpenShift authentication token.
+.. Open a shell, log in to OpenShift using the `oc` command, and activate the Python virtual environment you created in a xref:ch2-deployment:s4-evalhub-deploy-lab.adoc[previous lab], then pass your OpenShift authentication token to the EvalHub CLI.
 +
 [source,console,subs="verbatim,quotes"]
 --
@@ -126,7 +126,7 @@ Set 'token' in profile 'default'
 +
 [source,console,subs="verbatim,quotes"]
 --
-$ evalhub providers describe garak
+$ *evalhub providers describe garak*
 Provider: Garak
 ID:       garak
 Description: LLM vulnerability scanner and red-teaming framework
@@ -150,7 +150,7 @@ Benchmarks (8):
 
 7. Submit an evaluation job for the `cwe` benchmark.
 
-.. Submit an evaliation job and save its ID in a shell variable.
+.. Submit an evaluation job and save its ID in a shell variable.
 +
 [source,console,subs="verbatim,quotes"]
 --
@@ -164,7 +164,7 @@ $ *ID=11c1e53a-0086-4b22-9e5a-7c8ef0e07d50*
 --
 
 .. Monitor the status of your second evaluation job.
-This time, it should transition to `running` very quickly because the Garak container images were already downloaded.
+This time, it should transition to `running` very quickly because EvalHub already downloaded the Garak container images.
 +
 [source,console,subs="verbatim,quotes"]
 --
@@ -177,8 +177,8 @@ $ *evalhub eval status*
 └──────────────────────────────────────┴─────────────┴───────────┴──────────┴────────────┴──────────────────────────────────┘
 --
 
-.. if you prefer, refer to the evaluation ID to view its status unencumbered by other jobs.
-Repeat this command until it displays a state of `completed`, which shouldn't take more than a few seconds.
+.. If you prefer, refer to the evaluation ID to view its status unencumbered by other jobs.
+Repeat this command until it displays a state of `completed`, which should not take more than a few seconds.
 +
 [source,console,subs="verbatim,quotes"]
 --
@@ -238,26 +238,26 @@ NAME                                                              READY   STATUS
 
 8. View the two experiments from EvalHub in MLflow.
 
-.. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (MFflow)].
-In the *Projects* field, enter `my` and select menu:my-first-model[].
+.. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (MLflow)].
+In the menu:Projects[] field, enter `my` and select menu:my-first-model[].
 
 .. The experiments page should display a single experiment.
 Click menu:garak-evalhub[].
 
-.. In *Experiments* page for the `garak-evalhub` experiment, click menu:Evaluation runs[]. 
+.. In the *Experiments* page for the `garak-evalhub` experiment, select menu:Evaluation runs[]. 
 It should display two runs, and their names match their EvalHub evaluation IDs.
-Click the one with a green ball, which is the most recent and corresponds to the second experiment, that got a `Pass` score.
+Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that got a `Pass` score.
 
-.. That experiment contains no metrics, but select its menu:Overview[] tab to visualized the same metrics you seen with the EvalHub CLI or with the *Evaluations* page of the RHOAI dashboard.
+.. That experiment contains no metrics, but select its menu:Overview[] tab to visualize the same metrics you saw with the EvalHub CLI or with the *Evaluations* page of the RHOAI dashboard.
 
 === Summary
 
-You performed two evaluation runs, using the Garak provider or evaluation framework: once using the RHOAI dashboard, and other using the EvalHub CLI.
+You performed two evaluation runs, using the Garak evaluation framework: once using the RHOAI dashboard, and the other using the EvalHub CLI.
 Then you visualized their results using both EvalHub and MLflow.
 
 == What's next
 
-Having evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLFlow SDK.
+Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLflow SDK.
 
 ////
 Evaluate a self-hosted model
