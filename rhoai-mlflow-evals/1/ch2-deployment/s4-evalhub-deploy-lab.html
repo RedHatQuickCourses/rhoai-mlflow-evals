@@ -75,10 +75,10 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Deploy MLFlow and EvalHub</a>
+    <a class="nav-link" href="index.html">Deploy MLflow and EvalHub</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="s1-mlflow-architecture.html">MLFlow Architecture and Integration</a>
+    <a class="nav-link" href="s1-mlflow-architecture.html">MLflow Architecture and Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a>
@@ -165,7 +165,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
-    <li><a href="index.html">Deploy MLFlow and EvalHub</a></li>
+    <li><a href="index.html">Deploy MLflow and EvalHub</a></li>
     <li><a href="s4-evalhub-deploy-lab.html">Lab: Deploy EvalHub for Development</a></li>
   </ul>
 </nav>
@@ -259,7 +259,7 @@ Pending review
 <div class="sectionbody">
 <div class="paragraph">
 <p>You will enable TrustyAI on your Data Science Cluster singleton resource and deploy a development instance of the EvalHub server.
-Then you will use a shell to test connectivity and healthy of your EvalHub server.</p>
+Then you will use a shell to test connectivity and health of your EvalHub server.</p>
 </div>
 <div class="paragraph">
 <p>As you perform this activity, you will alternate between three browser tabs:</p>
@@ -278,7 +278,7 @@ Then you will use a shell to test connectivity and healthy of your EvalHub serve
 <p>Once you open one of these tabs, keep it open because you may return to it later.</p>
 </div>
 <div class="sect2">
-<h3 id="_install_and_configure_the_evalhub_server"><a class="anchor" href="#_install_and_configure_the_evalhub_server"></a>Install and configure the EvalHub Server</h3>
+<h3 id="_install_and_configure_the_evalhub_server"><a class="anchor" href="#_install_and_configure_the_evalhub_server"></a>Install and configure the EvalHub server</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -324,7 +324,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Deploy a PosgreSQL database.</p>
+<p>Deploy a PostgreSQL database.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -339,7 +339,7 @@ Copy the entire contents of the manifest to the clipboard.</p>
 <td class="content">
 <div class="paragraph">
 <p>This manifest provides a minimal PostgreSQL deployment.
-It is not listed here because if its size, but you would not use such a simplisitic database deployment for a real development or production instance of EvalHub.</p>
+It is not listed here because of its size, but you would not use such a simplistic database deployment for a real development or production instance of EvalHub.</p>
 </div>
 <div class="paragraph">
 <p>You are free to use your preferred OpenShift template, helm chart, or database operator instead.
@@ -351,22 +351,22 @@ Ideally, use something that is supported by your organization IT department, and
 </div>
 </li>
 <li>
-<p>In the left pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Projects</b></span> and, in the search field, enter <code>redhat-ods</code>.
+<p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Projects</b></span> and, in the search field, enter <code>redhat-ods</code>.
 Then click the <b class="menuref">redhat-ods-applications</b> project.</p>
 </li>
 <li>
-<p>In the toolbar, click the <b class="menuref">&#43;</b> icon, with tooltip <code>Quick create</code> and select <b class="menuref">Import YAML</b>.</p>
+<p>In the toolbar, click the <b class="menuref">&#43;</b> icon, with tooltip "Quick create" and select <b class="menuref">Import YAML</b>.</p>
 </li>
 <li>
-<p>In the Import YAML page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:[Create].</p>
+<p>In the <strong>Import YAML</strong> page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
 </li>
 <li>
 <p>You should see a page with the message <code>Resources successfully created</code>.
 Click on the <b class="menuref">evalhubdb</b> deployment, the one with a "D" icon.</p>
 </li>
 <li>
-<p>In its deployment details page, wait until you see a blue cicle with a label of "1 Pod", indicating one pod from that deployment is running.
-Then scrool down to the <strong>Conditions</strong> table, and verify there is a row of type <code>Available</code> with status <code>True</code>.</p>
+<p>In its deployment details page, wait until you see a blue circle with a label of "1 Pod", indicating one pod from that deployment is running.
+Then scroll down to the <strong>Conditions</strong> table, and verify there is a row of type <code>Available</code> with status <code>True</code>.</p>
 </li>
 </ol>
 </div>
@@ -394,11 +394,11 @@ stringData:
 </div>
 </li>
 <li>
-<p>In the left navigation pane, select <span class="menuseq"><b class="menu">Workloads</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Secrets</b></span>  and verify that the selected project is still <code>redhat-ods-applications</code>.
+<p>In the left navigation pane, select <span class="menuseq"><b class="menu">Workloads</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Secrets</b></span> and verify that the selected project is still <code>redhat-ods-applications</code>.
 Then click <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">From YAML</b></span>.</p>
 </li>
 <li>
-<p>In the <strong>Create Secret</strong> page, enter the manifests for a secret which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
+<p>In the <strong>Create Secret</strong> page, enter the manifest for a secret which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
 </li>
 <li>
 <p>In the <strong>Secret details</strong> page, you can scroll down and click <b class="menuref">Reveal values</b> to see the database connection URL.
@@ -406,7 +406,7 @@ It contains the database user name, password, and other connection parameters wh
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">API Explorer</b></span>.
-Then enter <code>EvalHb</code> in the search field.
+Then enter <code>EvalHub</code> in the search field.
 You will see only one resource, so click <b class="menuref">EvalHub</b>.</p>
 </li>
 <li>
@@ -420,7 +420,7 @@ Copy the entire contents of the manifest to the clipboard.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>That manifest  corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate" target="_blank" rel="noopener">2.3. Deploy EvalHub with the TrustyAI Operator</a> in the Red Hat OpenShift AI product documentation with a couple changes:</p>
+<p>That manifest corresponds to the example from <a href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate" target="_blank" rel="noopener">2.3. Deploy EvalHub with the TrustyAI Operator</a> in the Red Hat OpenShift AI product documentation with a couple changes:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -468,7 +468,7 @@ spec:
 Then click <b class="menuref">Create EvalHub</b>.</p>
 </li>
 <li>
-<p>In the YAML text editor, delete all of its sample contents and paste the evalhub manifest which you already copied to the clipboard.</p>
+<p>In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest which you already copied to the clipboard.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Create</b> and, in the EvalHub details page, wait until the <code>Ready</code> condition is <code>True</code>.</p>
@@ -489,14 +489,14 @@ Then click <b class="menuref">Create EvalHub</b>.</p>
 <ol class="loweralpha" type="a">
 <li>
 <p>Open your RHOAI dashboard.
-If it is already open, refresh your browser window so it picks changes to the dashoard pages and navigation.</p>
+If it is already open, refresh your browser window so it picks up changes to the dashboard pages and navigation.</p>
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span>.
 The <strong>Evaluations</strong> page now displays the message <code>No existing evaluation runs</code>.</p>
 </li>
 <li>
-<p>Click <b class="menuref">Create Evaluation</b> and, on the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
+<p>Click <b class="menuref">Create Evaluation</b> and, in the <strong>New evaluation run</strong> page, click <b class="menuref">Single benchmark</b>.</p>
 </li>
 <li>
 <p>The <strong>Single benchmark</strong> page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource.
@@ -572,7 +572,7 @@ Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 clic
 <li>
 <p>Configure the EvalHub CLI to access your RHOAI instance.</p>
 <div class="paragraph">
-<p>Notice these commands refer to the <code>EVALHUB_URL</code> shell variable you set during the previoius step.</p>
+<p>Notice these commands refer to the <code>EVALHUB_URL</code> shell variable you set during the previous step.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -623,7 +623,7 @@ $ <strong>evalhub providers list</strong>
 <h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With both MLFlow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.</p>
+<p>With both MLflow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.</p>
 </div>
 </div>
 </div>

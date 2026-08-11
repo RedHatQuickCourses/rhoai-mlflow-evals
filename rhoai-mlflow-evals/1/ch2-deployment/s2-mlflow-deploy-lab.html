@@ -75,10 +75,10 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Deploy MLFlow and EvalHub</a>
+    <a class="nav-link" href="index.html">Deploy MLflow and EvalHub</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="s1-mlflow-architecture.html">MLFlow Architecture and Integration</a>
+    <a class="nav-link" href="s1-mlflow-architecture.html">MLflow Architecture and Integration</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a>
@@ -165,7 +165,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
-    <li><a href="index.html">Deploy MLFlow and EvalHub</a></li>
+    <li><a href="index.html">Deploy MLflow and EvalHub</a></li>
     <li><a href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a></li>
   </ul>
 </nav>
@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Work In Progress
+Pending Review
 </td>
 </tr>
 </table>
@@ -279,7 +279,7 @@ You will use the MLflow SDK for Python.</p>
 <p>Once you open one of these tabs, keep it open because you may return to it later.</p>
 </div>
 <div class="sect2">
-<h3 id="_install_and_configure_the_mlflow_server"><a class="anchor" href="#_install_and_configure_the_mlflow_server"></a>Install and configure the MLflow Server</h3>
+<h3 id="_install_and_configure_the_mlflow_server"><a class="anchor" href="#_install_and_configure_the_mlflow_server"></a>Install and configure the MLflow server</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -329,11 +329,12 @@ spec:
 </div>
 </li>
 <li>
-<p>Configure your MLflow instance by creating a MLflow resource.</p>
+<p>Configure your MLflow instance by creating an MLflow resource.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml" target="_blank" rel="noopener">sample MLflow manifest</a> from the course samples repository. Copy the entire contents of the <code>scripts/mlflow.yaml</code> manifest to the clipboard.</p>
+<p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml" target="_blank" rel="noopener">sample MLflow manifest</a> from the course samples repository.
+Copy the entire contents of the <code>scripts/mlflow.yaml</code> manifest to the clipboard.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -403,7 +404,7 @@ If it is already open, refresh your browser window.</p>
 </li>
 <li>
 <p>In the left navigation pane, expand <b class="menuref">Develop &amp; train</b>.
-Notice the new item named <b class="menuref">Experiments (mlflow)</b> and click it.</p>
+Notice the new item named <b class="menuref">Experiments (mlflow)</b> and select it.</p>
 </li>
 <li>
 <p>In the <b class="menuref">Project</b> field, select the <b class="menuref">my-first-model</b> project.</p>
@@ -441,7 +442,7 @@ If you have trouble typing the Python code in this and other activities of this 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>In the left navigation pane, click <b class="menuref">Projects</b> and select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
+<p>In the left navigation pane, select <b class="menuref">All projects</b> in the <b class="menuref">Project</b> field.
 Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.</p>
 </li>
 <li>
@@ -454,7 +455,7 @@ Then enter <code>my</code> in the <strong>Filter by name</strong> field and clic
 <p>Leave all other fields with their default values and click <b class="menuref">Create workbench</b>.</p>
 </li>
 <li>
-<p>In the Workbenches list, wait until the row for the <code>test-mlflow</code> workbench displays a <code>Ready</code> state and then click <b class="menuref">test-mlflow</b> to open its Jupyter Lab in a new browser tab.</p>
+<p>In the Workbenches list, wait until the row for the <code>test-evals</code> workbench displays a <code>Ready</code> state and then click <b class="menuref">test-evals</b> to open its Jupyter Lab in a new browser tab.</p>
 </li>
 <li>
 <p>Click the <b class="menuref">Python 3.12</b> Notebook icon to create an empty notebook.
@@ -532,12 +533,12 @@ It connects using the service account of the <code>test-evals</code> workbench, 
 <h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With MLFlow deployed and verified, the next section introduces the architecture and setup of EvalHub.</p>
+<p>With MLflow deployed and verified, the next section introduces the architecture and setup of EvalHub.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="s1-mlflow-architecture.html">MLFlow Architecture and Integration</a></span>
+  <span class="prev"><a href="s1-mlflow-architecture.html">MLflow Architecture and Integration</a></span>
   <span class="next"><a href="s3-evalhub-architecture.html">EvalHub Architecture and CLI</a></span>
 </nav>
 </article>

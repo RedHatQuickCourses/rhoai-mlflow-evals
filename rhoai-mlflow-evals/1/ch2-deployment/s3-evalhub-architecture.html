@@ -75,10 +75,10 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Deploy MLFlow and EvalHub</a>
+    <a class="nav-link" href="index.html">Deploy MLflow and EvalHub</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="s1-mlflow-architecture.html">MLFlow Architecture and Integration</a>
+    <a class="nav-link" href="s1-mlflow-architecture.html">MLflow Architecture and Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s2-mlflow-deploy-lab.html">Lab: Deploy MLflow for Development</a>
@@ -165,7 +165,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI</a></li>
-    <li><a href="index.html">Deploy MLFlow and EvalHub</a></li>
+    <li><a href="index.html">Deploy MLflow and EvalHub</a></li>
     <li><a href="s3-evalhub-architecture.html">EvalHub Architecture and CLI</a></li>
   </ul>
 </nav>
@@ -193,7 +193,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Work In Progress
+Pending Review
 </td>
 </tr>
 </table>
@@ -231,11 +231,11 @@ Standalone deployments of EvalHub are <em>not</em> supported by Red Hat OpenShif
 </div>
 <div class="paragraph">
 <p>A client uses the EvalHub API to submit requests to create and query the state of evaluation runs, evaluation providers, and collections.
-The RHOAI dashboard acts an an EvalHub client, and there is an EvalHub CLI tool included with the EvalHub SDK for Python.
-Among other potential clients for the EvalHub server are Jupyter notebooks and KubeFlow pipelines.</p>
+The RHOAI dashboard acts as an EvalHub client, and there is an EvalHub CLI tool included with the EvalHub SDK for Python.
+Among other potential clients for the EvalHub server are Jupyter notebooks and Kubeflow pipelines.</p>
 </div>
 <div class="paragraph">
-<p>The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and  OCI container image which also store their evaluation results.</p>
+<p>The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and OCI container image which also store their evaluation results.</p>
 </div>
 </div>
 </div>
@@ -245,8 +245,8 @@ Among other potential clients for the EvalHub server are Jupyter notebooks and K
 <div class="paragraph">
 <p>There is no EvalHub operator in RHOAI.
 The TrustyAI operator manages EvalHub servers in RHOAI.
-The TrustyAI operator, in turn, is managed by the RHOAI operator.
-Consequently, the the TustyAI is not visible from the Operator Lifecycle Manager (OLM).</p>
+The RHOAI operator manages the TrustyAI operator, in turn.
+Consequently, the Operator Lifecycle Manager (OLM) does not display the TrustyAI operator.</p>
 </div>
 <div class="paragraph">
 <p>To deploy an EvalHub server, you must perform two actions:</p>
@@ -289,7 +289,7 @@ Consequently, the the TustyAI is not visible from the Operator Lifecycle Manager
 </div>
 <div class="paragraph">
 <p>Without that label, network policies would prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
-It doesn&#8217;t matter the value assigned to the label.
+The value assigned to the label does not matter.
 Only its key is necessary.</p>
 </div>
 </div>
@@ -308,7 +308,7 @@ Such users have access to EvalHub tenants and their evaluation runs based on the
 </div>
 <div class="paragraph">
 <p>Service accounts also get access to EvalHub, so pods running in OpenShift can access the EvalHub server in RHOAI.
-These pods include Jupyter Labs and KubeFlow pipeline tasks.</p>
+These pods include JupyterLab and Kubeflow pipeline tasks.</p>
 </div>
 <div class="paragraph">
 <p>If you must connect to EvalHub from an application running outside of its OpenShift cluster, for example the EvalHub CLI, you can take the same user token you would use for access to Kubernetes APIs and use it to authenticate to the EvalHub server.</p>
@@ -319,7 +319,7 @@ These pods include Jupyter Labs and KubeFlow pipeline tasks.</p>
 <h2 id="_installing_the_evalhub_cli"><a class="anchor" href="#_installing_the_evalhub_cli"></a>Installing the EvalHub CLI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The EvalHub CLI is provided as part of the EvalHub SDK, which is a Python library.
+<p>The EvalHub SDK, which is a Python library, includes the EvalHub CLI.
 The recommended approach is creating a Python virtual environment and installing the EvalHub SDK and CLI inside it.</p>
 </div>
 <div class="paragraph">
@@ -328,7 +328,7 @@ The recommended approach is creating a Python virtual environment and installing
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s Next</h2>
+<h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Next, you deploy and configure EvalHub on your Red Hat OpenShift AI instance.</p>
