@@ -29,7 +29,7 @@ If you already deployed MLflow, and you are in a hurry and need to quickly enabl
 == Instructions
 
 You will enable TrustyAI on your Data Science Cluster singleton resource and deploy a development instance of the EvalHub server.
-Then you will use a shell to test connectivity and healthy of your EvalHub server.
+Then you will use a shell to test connectivity and health of your EvalHub server.
 
 As you perform this activity, you will alternate between three browser tabs:
 
@@ -38,7 +38,7 @@ As you perform this activity, you will alternate between three browser tabs:
 
 Once you open one of these tabs, keep it open because you may return to it later.
 
-=== Install and configure the EvalHub Server
+=== Install and configure the EvalHub server
 
 1. Verify that TrustyAI is already enabled in the data science cluster resource.
 
@@ -72,7 +72,7 @@ spec:
 
 .. Click menu:Cancel[] to leave the YAML editor without making changes.
 
-2. Deploy a PosgreSQL database.
+2. Deploy a PostgreSQL database.
 
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhubdb.yaml[sample evalhub db deployment^] from the course samples repository with a web browser and open the manifest `scripts/evalhubdb.yaml`.
 Copy the entire contents of the manifest to the clipboard.
@@ -80,24 +80,24 @@ Copy the entire contents of the manifest to the clipboard.
 [NOTE]
 ====
 This manifest provides a minimal PostgreSQL deployment.
-It is not listed here because if its size, but you would not use such a simplisitic database deployment for a real development or production instance of EvalHub. 
+It is not listed here because of its size, but you would not use such a simplistic database deployment for a real development or production instance of EvalHub.
 
 You are free to use your preferred OpenShift template, helm chart, or database operator instead.
 Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.
 ====
 
-.. In the left pane, select menu:Home[Projects] and, in the search field, enter `redhat-ods`.
+.. In the left navigation pane, select menu:Home[Projects] and, in the search field, enter `redhat-ods`.
 Then click the menu:redhat-ods-applications[] project.
 
-.. In the toolbar, click the menu:&#43;[] icon, with tooltip `Quick create` and select menu:Import YAML[].
+.. In the toolbar, click the menu:&#43;[] icon, with tooltip "Quick create" and select menu:Import YAML[].
 
-.. In the Import YAML page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:[Create].
+.. In the *Import YAML* page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:Create[].
 
 .. You should see a page with the message `Resources successfully created`. 
 Click on the menu:evalhubdb[] deployment, the one with a "D" icon.
 
-.. In its deployment details page, wait until you see a blue cicle with a label of "1 Pod", indicating one pod from that deployment is running.
-Then scrool down to the *Conditions* table, and verify there is a row of type `Available` with status `True`.
+.. In its deployment details page, wait until you see a blue circle with a label of "1 Pod", indicating one pod from that deployment is running.
+Then scroll down to the *Conditions* table, and verify there is a row of type `Available` with status `True`.
 
 3. Configure your EvalHub instance by creating a secret and an EvalHub resource.
 
@@ -111,16 +111,16 @@ The full secret manifest is listed here, just for your reference:
 include::1@samples:scripts:example$evalhub-db-credentials.yaml[]
 ----
 
-.. In the left navigation pane, select menu:Workloads[Secrets]  and verify that the selected project is still `redhat-ods-applications`.
+.. In the left navigation pane, select menu:Workloads[Secrets] and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create[From YAML].
 
-.. In the *Create Secret* page, enter the manifests for a secret which you already copied to your clipboard, and click menu:Create[].
+.. In the *Create Secret* page, enter the manifest for a secret which you already copied to your clipboard, and click menu:Create[].
 
 .. In the *Secret details* page, you can scroll down and click menu:Reveal values[] to see the database connection URL.
 It contains the database user name, password, and other connection parameters which match the database deployment you created in the previous step.
 
 .. In the left navigation pane, select menu:Home[API Explorer].
-Then enter `EvalHb` in the search field.
+Then enter `EvalHub` in the search field.
 You will see only one resource, so click menu:EvalHub[].
 
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub.yaml[sample evalhub manifest^] from the course samples repository with a web browser and open the manifest `scripts/evalhub.yaml`.
@@ -128,7 +128,7 @@ Copy the entire contents of the manifest to the clipboard.
 +
 [NOTE]
 ====
-That manifest  corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate[2.3. Deploy EvalHub with the TrustyAI Operator^] in the Red Hat OpenShift AI product documentation with a couple changes:
+That manifest corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/evaluating_ai_systems/evaluating-llms-with-evalhub_evaluate#evalhub-deploy-with-the-trustyai-operator_evaluate[2.3. Deploy EvalHub with the TrustyAI Operator^] in the Red Hat OpenShift AI product documentation with a couple changes:
 
 * Addition of `lighteval` to the list of providers
 * The correct internal URL of the MLflow server
@@ -144,7 +144,7 @@ include::1@samples:scripts:example$evalhub.yaml[]
 .. In the EvalHub resource details page, select the menu:Instances[] tab and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create EvalHub[].
 
-.. In the YAML text editor, delete all of its sample contents and paste the evalhub manifest which you already copied to the clipboard.
+.. In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest which you already copied to the clipboard.
 
 .. Click menu:Create[] and, in the EvalHub details page, wait until the `Ready` condition is `True`.
 
@@ -154,12 +154,12 @@ Then click menu:Create EvalHub[].
 3. Verify that EvalHub is available from the RHOAI dashboard.
 
 .. Open your RHOAI dashboard.
-If it is already open, refresh your browser window so it picks changes to the dashoard pages and navigation.
+If it is already open, refresh your browser window so it picks up changes to the dashboard pages and navigation.
 
 .. In the left navigation pane, select menu:Develop & train[Evaluations].
 The *Evaluations* page now displays the message `No existing evaluation runs`.
 
-.. Click menu:Create Evaluation[] and, on the *New evaluation run* page, click menu:Single benchmark[]. 
+.. Click menu:Create Evaluation[] and, in the *New evaluation run* page, click menu:Single benchmark[]. 
 
 .. The *Single benchmark* page shows a long, paginated list of benchmarks offered by the providers configured on your EvalHub resource. 
 Do _not_ click any of them: Just seeing the list is sufficient to prove that your EvalHub server is functional.
@@ -207,7 +207,7 @@ Successfully installed annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 clic
 
 .. Configure the EvalHub CLI to access your RHOAI instance.
 +
-Notice these commands refer to the `EVALHUB_URL` shell variable you set during the previoius step.
+Notice these commands refer to the `EVALHUB_URL` shell variable you set during the previous step.
 +
 [source,console,subs="verbatim,quotes"]
 ----
@@ -244,7 +244,7 @@ After completing these steps, you have verified that you have a minimal but func
 
 == What's next
 
-With both MLFlow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.
+With both MLflow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.
 
 ////
 Deploy EvalHub on Red Hat OpenShift AI for development

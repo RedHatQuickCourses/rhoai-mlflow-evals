@@ -1,10 +1,10 @@
-= Deploy MLFlow and EvalHub
+= Deploy MLflow and EvalHub
 
 Goal::
 
-Deploy a development environment with MLFlow and EvalHub on Red Hat OpenShift AI.
+Deploy a development environment with MLflow and EvalHub on Red Hat OpenShift AI.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 This chapter describes how to deploy MLflow and EvalHub using operators from RHOAI.
-It also describes the architecture of MLflow and EvalHub and how they integrate with the authentication and authorization model of RHOAI and OpenShift.
+It also describes the architecture of MLflow and EvalHub and how they integrate with the authentication and authorization model of Red Hat OpenShift AI (RHOAI) and OpenShift.

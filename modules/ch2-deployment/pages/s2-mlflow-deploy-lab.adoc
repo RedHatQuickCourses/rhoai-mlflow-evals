@@ -4,7 +4,7 @@ Objective::
 
 Deploy and verify a development instance of MLflow in Red Hat OpenShift AI.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Before you begin
 
@@ -38,7 +38,7 @@ As you perform this activity, you will alternate between three browser tabs:
 
 Once you open one of these tabs, keep it open because you may return to it later.
 
-=== Install and configure the MLflow Server
+=== Install and configure the MLflow server
 
 1. Enable MLflow on RHOAI by editing its data science cluster resource.
 
@@ -75,9 +75,10 @@ alert:default-dsc has been updated to version 1186240
 
 .. If you receive an error message, fix the errors in your YAML and try saving again.
 
-2. Configure your MLflow instance by creating a MLflow resource.
+2. Configure your MLflow instance by creating an MLflow resource.
 
-.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml[sample MLflow manifest^] from the course samples repository. Copy the entire contents of the `scripts/mlflow.yaml` manifest to the clipboard.
+.. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/mlflow.yaml[sample MLflow manifest^] from the course samples repository.
+Copy the entire contents of the `scripts/mlflow.yaml` manifest to the clipboard.
 +
 NOTE: That manifest corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow[Minimal development or test deployment^] in the Red Hat OpenShift AI product documentation with no changes.
 +
@@ -107,7 +108,7 @@ You will see three resource types; click menu:MLflow[].
 If it is already open, refresh your browser window.
 
 .. In the left navigation pane, expand menu:Develop & train[].
-Notice the new item named menu:Experiments (mlflow)[] and click it.
+Notice the new item named menu:Experiments (mlflow)[] and select it.
 
 .. In the menu:Project[] field, select the menu:my-first-model[] project.
 
@@ -124,7 +125,7 @@ You should not need it: all functionality you need for this course is available 
 +
 NOTE: If you have trouble typing the Python code in this and other activities of this course, or you cannot cut-and-paste from the course page, you can access the complete source code for all Jupyter notebooks in the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/tree/main/traces[course samples git repository^].
 
-.. In the left navigation pane, click menu:Projects[] and select menu:All projects[] in the menu:Project[] field.
+.. In the left navigation pane, select menu:All projects[] in the menu:Project[] field.
 Then enter `my` in the *Filter by name* field and click menu:my-first-model[] in the list of projects.
 
 .. In the Projects page for `my-first-model`, select the menu:Workbenches[] tab and click menu:Create workbench[].
@@ -133,7 +134,7 @@ Then enter `my` in the *Filter by name* field and click menu:my-first-model[] in
 
 .. Leave all other fields with their default values and click menu:Create workbench[].
 
-.. In the Workbenches list, wait until the row for the `test-mlflow` workbench displays a `Ready` state and then click menu:test-mlflow[] to open its Jupyter Lab in a new browser tab.
+.. In the Workbenches list, wait until the row for the `test-evals` workbench displays a `Ready` state and then click menu:test-evals[] to open its Jupyter Lab in a new browser tab.
 
 .. Click the menu:Python 3.12[] Notebook icon to create an empty notebook.
 In the left navigation pane of the Jupyter Lab, right-click the menu:Untitled.ipynb[] file, which is your new notebook, and select menu:Rename[].
@@ -182,7 +183,7 @@ After completing these steps, you have verified that you have a minimal but func
 
 == What's next
 
-With MLFlow deployed and verified, the next section introduces the architecture and setup of EvalHub.
+With MLflow deployed and verified, the next section introduces the architecture and setup of EvalHub.
 
 ////
 Deploy MLFlow on Red Hat OpenShift AI for development
