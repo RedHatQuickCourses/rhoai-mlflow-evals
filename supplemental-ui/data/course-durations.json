@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3954,
+  "totalSeconds": 3962,
   "pageCount": 17,
   "pages": [
     {
@@ -75,17 +75,17 @@
     {
       "module": "ch4-mlflow",
       "page": "s1-agentic-evaluation.adoc",
-      "seconds": 392
+      "seconds": 393
     },
     {
       "module": "ch4-mlflow",
       "page": "s2-deterministic-lab.adoc",
-      "seconds": 606
+      "seconds": 614
     },
     {
       "module": "ch4-mlflow",
       "page": "s3-llm-judge-lab.adoc",
-      "seconds": 516
+      "seconds": 515
     }
   ]
 }

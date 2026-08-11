@@ -2,9 +2,9 @@
 
 Objective::
 
-Perform evaluations using built-in and custom LLM judges with self-hosted models, and inspect evaluation results through MLFlow traces.
+Perform evaluations using built-in and custom LLM judges with self-hosted models, and inspect evaluation results through MLflow traces.
 
-WARNING: Work In Progrees
+WARNING: Pending Review
 
 == Before you begin
 
@@ -14,41 +14,41 @@ You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provide
 * A web browser to access the RHOAI dashboard
 * Access credentials for the OpenShift web console
 
-Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from xref:ch2-deployment:s2-mlflow-deploy-lab.adoc[chapter 2], and that you already cloned the sample notebooks from the coure samples repository, by following the instructions from the xref:s2-deterministic-lab.adoc[previous lab].
+Also ensure that you already deployed MLflow and created a RHOAI workbench by following the instructions from xref:ch2-deployment:s2-mlflow-deploy-lab.adoc[chapter 2], and that you already cloned the sample notebooks from the course samples repository, by following the instructions from the xref:s2-deterministic-lab.adoc[previous lab].
 
 == Instructions
 
 You will create and test two LLM judges, one provided by MLflow and another using your custom prompt.
-You will use them together for an MLflow evaluation of a simplistic agentic application that is provided to you
+You will use them together for an MLflow evaluation of a simplistic agentic application that is provided to you.
 
 As you perform this activity, you will alternate between two browser tabs:
 
 * The Red Hat OpenShift AI (RHOAI) dashboard
 * The Jupyter Lab from a RHOAI workbench
 
-=== Create and test a LLM judge using one of the judges provided by MLflow
+=== Create and test an LLM judge using one of the judges provided by MLflow
 
 1. If you do not have a browser tab already open with the `test-mlflow` workbench, open it and, in its Jupyter Lab, enter the `rhoai-mlflow-samples/evals` directory.
 
-.. Open the RHOAI work bench and, in the left navigation pane, click menu:Projects[].
+.. Open the RHOAI workbench and, in the left navigation pane, click menu:Projects[].
 Select menu:All projects[] in the menu:Project[] field.
 Then enter `my` in the *Filter by name* field and click menu:my-first-model[] in the list of projects.
 
 .. In the *Projects* page for `my-first-model`, select the menu:Workbenches[] tab and click menu:test-mlflow[] to open its Jupyter Lab in a new browser tab.
 
 .. Copy the `simple-agent` notebook to a new file which you will edit.
-In the left pane of the jupyter notebook, enter the menu:rhoai-mlflow-samples/evals[] directory, right click menu:simple-agent.ipynb[], and select menu:Duplicate[].
-Then right-click the new file menu:simple-agent-Copy1.ipnyb[] and select menu:Rename[].
-Enter `llm-eval.ipnyb` as the new file name.
-Finally, double-click menu:llm-eval.ipnyb.ipnyb[] to open the notebook in a new editor tab.
+In the left pane of JupyterLab, enter the menu:rhoai-mlflow-samples/evals[] directory, right-click menu:simple-agent.ipynb[], and select menu:Duplicate[].
+Then right-click the new file menu:simple-agent-Copy1.ipynb[] and select menu:Rename[].
+Enter `llm-eval.ipynb` as the new file name.
+Finally, double-click menu:llm-eval.ipynb[] to open the notebook in a new editor tab.
 
-.. In the toolbar of the notebook, click the menu:fast-forward icon[] with tooltip `Restart the kernel and run all cells`.
+.. In the toolbar of the notebook, click the menu:fast forward[] icon, with tooltip "Restart the kernel and run all cells".
 In the *Restart kernel* pop-up, click menu:Restart[].
 The output of the last cell should provide a short explanation about the differences between RHEL and CentOS.
 +
 NOTE: the code uses the prompt added to the MLflow prompt registry during the xref:s2-deterministic-lab.adoc[previous lab].
 
-2. Create and test an LLM judge to assess the correctdness of a response.
+2. Create and test an LLM judge to assess the correctness of a response.
 +
 You can see the complete code, ready to use the built-in LLM judge, in the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-builtin.ipynb[llm-eval-builtin.ipynb^] notebook, in the course samples repository. 
 
@@ -77,13 +77,13 @@ os.environ["OPENAI_API_BASE"] = JUDGE_URL
 os.environ["OPENAI_API_KEY"] = "no token"*
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to define the new variables.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to define the new variables.
 Running the cell produces no output.
 
-.. Enter the code to instantiate a `Correctdness` judge from MLflow.
+.. Enter the code to instantiate a `Correctness` judge from MLflow.
 +
 In the `llm-eval.ipynb` notebook, select the last cell, having the comment `###Cell 6: run the agent`.
-Then click, in the cell's toolbar, the icon to menu:Insert a cell bellow[].
+Then click, in the cell's toolbar, the icon to menu:Insert a cell below[].
 Inside the new cell, enter the following code.
 +
 [source,python,subs="verbatim,quotes"]
@@ -98,7 +98,7 @@ correctness_judge = Correctness(
 )
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to define the function and create a new notebook cell.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.
 
 .. Inside the new cell, enter the code to test the LLM judge from hardcoded examples.
@@ -122,7 +122,7 @@ feedback = correctness_judge(
 )
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to run the test code.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.
 +
 [source,,subs="verbatim,quotes"]
@@ -135,10 +135,10 @@ Test built-in judge:
   The claim states RHEL is a Linux distribution. The document does not mention Linux distribution, it mentions a pun on IT struggles.
 --
 
-=== Create and test a LLM judge using a custom prompt
+=== Create and test an LLM judge using a custom prompt
 
 [start=3]
-3. Create and test an LLM judge to assess that a reponse contains no acronyms
+3. Create and test an LLM judge to assess that a response contains no acronyms.
 +
 You can see the complete code, ready to use the built-in LLM judge, in the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/evals/llm-eval-custom.ipynb[llm-eval-custom.ipynb^] notebook, in the course samples repository. 
 
@@ -177,7 +177,7 @@ from mlflow.genai.judges import make_judge
 )
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to define the function and create a new notebook cell.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.
 
 .. Select the second cell that you just added to the notebook, the one starting with `###Cell 8: test judges` and append code to test the custom judge.
@@ -211,7 +211,7 @@ feedback = acronyms_judge(
 print(f"• Test judge with RHEL (expanded)': {feedback.value}\n  {feedback.rationale}")*
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to run the test code.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.
 +
 [source,,subs="verbatim,quotes"]
@@ -264,7 +264,7 @@ eval_dataset = [
 ]
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to define the array and create a new notebook cell.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
 Running the cell produces no output.
 
 .. Inside the new cell, enter the code to wrap the agent inside a predictor function and run an MLflow evaluation using your scorer function.
@@ -291,8 +291,8 @@ except Exception as e:
     print(f"An error occurred: {e}")
 --
 
-.. Click, in the cell's toolbar, the menu:play[] icon with tooltip `Run this cell and advance` to run the evaluation.
-Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scoreres over the complete evaluation data set.
+.. Click, in the cell's toolbar, the menu:play[] icon, with tooltip "Run this cell and advance" to run the evaluation.
+Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scorers over the complete evaluation data set.
 When done, you should see an output similar to the following.
 +
 [source,,subs="verbatim"]
@@ -303,12 +303,12 @@ Evaluating: 100%|██████████| 2/2 [Elapsed: 00:08, Remaining:
 
 5. View evaluation results on MLflow traces
 
-.. Switch to your RHOAI dashboard, which should already be in the details page for the `simple-agent` experiment. If it is not, select menu:Develop & train[Experiments (MLflow)], in the left navigation pane, and, in the *Project* field, enter `my` and select menu:my-first-model[] and click menu:simple-agent[].
+.. Switch to your RHOAI dashboard, which should already be in the details page for the `simple-agent` experiment. If it is not, select menu:Develop & train[Experiments (MLflow)], in the left navigation pane, and, in the menu:Project[] field, enter `my` and select menu:my-first-model[] and click menu:simple-agent[].
 
-.. In the `simple-agent` experiment details page, click menu:Traces[] and notice, besides a few new traces, the new colums `Correctdness` and `expanded_acronyms`.
-If you do not see these changes, clich the menu:Refresh[] icon next to the menu:Time range[] field.
+.. In the `simple-agent` experiment details page, click menu:Traces[] and notice, besides a few new traces, the new colums `Correctness` and `expanded_acronyms`.
+If you do not see these changes, click the menu:Refresh[] icon next to the menu:Time range[] field.
 
-.. Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their `Correctdness` column to view the reasoning for the `Fail` and `Pass` grades of each trace.
+.. Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their `Correctness` column to view the reasoning for the `Fail` and `Pass` grades of each trace.
 
 .. On the same traces, mouse over the values of their `expanded_acronyms` column to view the reasoning between their `True` or `False` scores.
 
@@ -324,12 +324,12 @@ Feel free to run the evaluation multiple times, compare the responses of each at
 
 === Summary
 
-You two LLM judges, one to verify if an response is correct, by comparing with a correct response provided in the evaluation data set, and another to verify if a response expands acronyms, which would make it longer than necessary.
+You created two LLM judges, one to verify if a response is correct, by comparing with a correct response provided in the evaluation data set, and another to verify if a response expands acronyms, which would make it longer than necessary.
 After testing each judge, you combined both in a single evaluation again, demonstrating that you can use multiple judges on the same evaluation data and visualize the results of multiple judges in the same MLflow trace.
 
-== What's next
+== What is next
 
-Congratulations on completing this course! You are now able to deploy MLFlow and EvalHub on Red Hat OpenShift AI, evaluate both models and agentic applications, and visualize results using the RHOAI dashboard.
+Congratulations on completing this course! You are now able to deploy MLflow and EvalHub on Red Hat OpenShift AI, evaluate both models and agentic applications, and visualize results using the RHOAI dashboard.
 
 ////
 Evaluate an agent with an LLM judge
