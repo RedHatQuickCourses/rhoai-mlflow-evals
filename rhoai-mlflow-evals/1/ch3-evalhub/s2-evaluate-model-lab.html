@@ -346,8 +346,8 @@ In the <b class="menuref">Quick security smoke test</b> card, click <b class="me
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-There is an issue with the RHOAI dashboard which prevents it from retrieving names of existing experiments with MLflow.
-You must always create a new experiment, and ensure the name does not match any existing experiment in the same project nor the name of experiments that were marked for deletion.
+There is an issue with the RHOAI dashboard that prevents it from retrieving names of existing experiments with MLflow.
+You must always create a new experiment and ensure the name does not match any existing experiment in the same project or the name of experiments that were marked for deletion in MLflow.
 If you use the EvalHub CLI, you can either add to existing experiments or create new ones.
 </td>
 </tr>
@@ -574,8 +574,8 @@ Click <b class="menuref">garak-evalhub</b>.</p>
 </li>
 <li>
 <p>In the <strong>Experiments</strong> page for the <code>garak-evalhub</code> experiment, select <b class="menuref">Evaluation runs</b>.
-It should display two runs, and their names match their EvalHub evaluation IDs.
-Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that got a <code>Pass</code> score.</p>
+It should display two runs, and their names should match their EvalHub evaluation IDs.
+Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that received a <code>Pass</code> score.</p>
 </li>
 <li>
 <p>That experiment contains no metrics, but select its <b class="menuref">Overview</b> tab to visualize the same metrics you saw with the EvalHub CLI or with the <strong>Evaluations</strong> page of the RHOAI dashboard.</p>
@@ -589,17 +589,17 @@ Click the one with a green ball, which is the most recent and corresponds to the
 <div class="sect2">
 <h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
-<p>You performed two evaluation runs, using the Garak evaluation framework: once using the RHOAI dashboard, and the other using the EvalHub CLI.
+<p>You performed two evaluation runs, using the Garak evaluation framework: first using the RHOAI dashboard, and then using the EvalHub CLI.
 Then you visualized their results using both EvalHub and MLflow.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
+<h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLflow SDK.</p>
+<p>Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications by using the MLflow SDK.</p>
 </div>
 </div>
 </div>

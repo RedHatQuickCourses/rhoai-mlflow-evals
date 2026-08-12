@@ -258,7 +258,7 @@ It does not yet offer discoverability of the arguments required by each provider
 They may also require authentication credentials to access those sources and LLMs, which are provided as Kubernetes secrets.</p>
 </div>
 <div class="paragraph">
-<p>In this course, we do not present the EvalHub APIs and SDK.
+<p>This course does not present the EvalHub APIs and SDK.
 It focuses instead on the front-ends offered by the RHOAI dashboard and the EvalHub CLI.
 Refer to the <a href="https://eval-hub.github.io" target="_blank" rel="noopener">EvalHub community docs</a> for information about using the SDK in your Jupyter notebooks and Kubeflow pipelines.</p>
 </div>
@@ -276,7 +276,7 @@ It corresponds to an OpenShift project or Kubernetes namespace.</p>
 The easy way of granting access is by setting the label <code>evalhub.trustyai.opendatahub.io/tenant</code> on a namespace, as long as you have deployed your EvalHub resource on the <code>redhat-ods-applications</code> namespace from RHOAI.</p>
 </div>
 <div class="paragraph">
-<p>This label triggers the TrustyAI operator to add service accounts and role bindings which enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
+<p>This label triggers the TrustyAI operator to add service accounts and role bindings that enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
 You may require additional role bindings to access EvalHub from your JupyterLab and Kubeflow pipeline pods.</p>
 </div>
 <div class="paragraph">
@@ -331,19 +331,19 @@ You can also list available providers and their benchmarks, with or without desc
 </div>
 <div class="paragraph">
 <p>It is recommended that you install the EvalHub CLI in a Python virtual environment, using the <code>pip</code> command.
-Refer to the next activity in this course for the complete syntax of installation command and examples of using the EvalHub CLI.</p>
+Refer to the next activity in this course for the complete syntax of installation commands and examples of using the EvalHub CLI.</p>
 </div>
 <div class="paragraph">
-<p>Most operations using the CLI follow a command structure of two words plus arguments:</p>
+<p>Most operations using the CLI follow a command structure of two words, plus optional arguments:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub <em>resource</em> <em>operation</em></code></pre>
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ evalhub <em>resource</em> <em>operation</em> [<em>arguments</em>]</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Examples of <em>resource</em> are <code>config</code>, <code>collections</code>, <code>providers</code>, and <code>eval</code>.
-Valid <em>operation</em> varies with the resource, for example <code>create</code> and <code>list</code> for <code>providers</code> or <code>run</code> and <code>status</code> for <code>evals</code>.</p>
+Valid <em>operation</em> values vary with the resource, for example <code>create</code> and <code>list</code> for <code>providers</code> or <code>run</code> and <code>status</code> for <code>evals</code>.</p>
 </div>
 <div class="paragraph">
 <p>The EvalHub CLI also accepts single-word commands, such as <code>health</code> and <code>version</code>, and the <code>--help</code> switch.
@@ -357,12 +357,12 @@ $ evalhub eval run --help</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In the output of the last command, pay special attention to the <code>-p</code> switch, which enables passing of provider and benchmark-specific parameters to the evaluation job using the <code>key=value</code> format.
+<p>In the output of the last command, pay special attention to the <code>-p</code> switch, which enables passing of provider- and benchmark-specific parameters to the evaluation job using the <code>key=value</code> format.
 A typical <code>evalhub eval run</code> command line may be quite long, including multiple switches, especially multiple <code>-p</code> switches.</p>
 </div>
 <div class="paragraph">
-<p>The <code>evalhub eval</code> command will be the most used, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
-It also enables monitoring the status such jobs, canceling them, and viewing their results, once they are complete.</p>
+<p>You will like use the <code>evalhub eval</code> command the most, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
+It also enables monitoring the status of such jobs, canceling them, and viewing their results, once they are complete.</p>
 </div>
 </div>
 </div>
@@ -370,17 +370,17 @@ It also enables monitoring the status such jobs, canceling them, and viewing the
 <h2 id="_troubleshooting_evaluation_runs"><a class="anchor" href="#_troubleshooting_evaluation_runs"></a>Troubleshooting evaluation runs</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If an evaluation job fails unexpectedly it may be necessary to collect logs from its Kubernetes pod for troubleshooting.</p>
+<p>If an evaluation job fails unexpectedly, it may be necessary to collect logs from its Kubernetes pod for troubleshooting.</p>
 </div>
 <div class="paragraph">
-<p>For each EvalHub evaluation job there is a Kubernetes job, and for each such Kubernetes job there might be one or more pods.
+<p>For each EvalHub evaluation job, there is a Kubernetes job, and for each such Kubernetes job, there might be one or more pods.
 If an evaluation pod terminates unexpectedly, its Kubernetes job will retry, by creating another pod, and you might see new pods which also fail.</p>
 </div>
 <div class="paragraph">
-<p>EvalHub evaluation jobs are identified by an autogenerated ID which is set to the <code>job_id</code> label of its associated Kubernetes resources.</p>
+<p>EvalHub evaluation jobs are identified by an autogenerated ID, which is set to the <code>job_id</code> label of its associated Kubernetes resources.</p>
 </div>
 <div class="paragraph">
-<p>So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and then use the ID to filter for Kubernetes jobs and pods using either the OpenShift web console or its <code>oc</code> command.</p>
+<p>So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and then use the ID to filter for Kubernetes jobs and pods by using either the OpenShift web console or its <code>oc</code> command.</p>
 </div>
 <div class="paragraph">
 <p>From there, you perform troubleshooting using the usual Kubernetes and OpenShift features, such as viewing events from <code>oc describe</code> or container logs from <code>oc logs</code>.</p>
