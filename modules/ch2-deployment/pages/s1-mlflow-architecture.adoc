@@ -21,7 +21,7 @@ It just needs to send observability data to an MLflow server.
 The MLflow server makes use of a relational database and an artifact store to record artifacts such as prompts and responses.
 Use an S3 service for the artifact store, for scalability.
 
-The relational database stores metadata and tags which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
+The relational database stores metadata and tags, which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
 PostgreSQL is a popular option for the MLflow database.
 
 == MLflow experiments and workspaces
@@ -40,7 +40,7 @@ Then, inside an experiment, each run connects an input to its output, and provid
 
 == The MLflow operator and RHOAI
 
-There is an MLflow operator included with Red Hat OpenShift AI (RHOAI), but this operator will not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
+There is an MLflow operator included with Red Hat OpenShift AI (RHOAI); however this operator does not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
 The MLflow operator is managed by the RHOAI operator itself.
 
 To deploy an MLflow server, you must perform two actions:

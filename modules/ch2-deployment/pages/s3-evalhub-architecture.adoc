@@ -8,7 +8,7 @@ WARNING: Pending Review
 
 == Architecture of EvalHub
 
-The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs which are ultimately implemented as Kubernetes jobs.
+The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs that are ultimately implemented as Kubernetes jobs.
 
 image::evalhub-arch.svg[title="Architecture of EvalHub"]
 
@@ -22,7 +22,7 @@ A client uses the EvalHub API to submit requests to create and query the state o
 The RHOAI dashboard acts as an EvalHub client, and there is an EvalHub CLI tool included with the EvalHub SDK for Python.
 Among other potential clients for the EvalHub server are Jupyter notebooks and Kubeflow pipelines.
 
-The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and OCI container image which also store their evaluation results.
+The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and OCI container image, which also store their evaluation results.
 
 == EvalHub and TrustyAI in RHOAI
 
@@ -37,7 +37,7 @@ To deploy an EvalHub server, you must perform two actions:
 
 . Create an EvalHub resource, which configures the database, MLflow server, and optional OCI container registry associated with the EvalHub server.
 
-Once the EvalHub resource is available, the menu:Develop & train[Evaluations] page of the RHOAI dashboard becomes functional and exhibits the menu:Create new evaluation[] button.
+When the EvalHub resource is available, the menu:Develop & train[Evaluations] page of the RHOAI dashboard becomes functional and exhibits the menu:Create new evaluation[] button.
 
 [IMPORTANT]
 ====
@@ -50,7 +50,7 @@ If you install EvalHub in the standard namespace for RHOAI applications, as reco
 
 `evalhub.trustyai.opendatahub.io/tenant`
 
-Without that label, network policies would prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
+Without that label, network policies prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
 The value assigned to the label does not matter.
 Only its key is necessary.
 

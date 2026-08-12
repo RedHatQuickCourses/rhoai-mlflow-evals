@@ -82,7 +82,7 @@ Copy the entire contents of the `scripts/mlflow.yaml` manifest to the clipboard.
 +
 NOTE: That manifest corresponds to the example from https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.4/html/working_with_mlflow/installing-mlflow_mlflow#mlflow-configuration-parameters_mlflow[Minimal development or test deployment^] in the Red Hat OpenShift AI product documentation with no changes.
 +
-The full manifest is listed here, just for your reference:
+The full manifest is listed here, for your reference:
 +
 [source,YAML,subs="verbatim,quotes"]
 ----
@@ -104,7 +104,7 @@ You will see three resource types; click menu:MLflow[].
 [start=3]
 3. Verify MLflow is available from RHOAI and create an empty experiment.
 
-.. Open your RHOAI dashboard.
+.. Open the RHOAI dashboard.
 If it is already open, refresh your browser window.
 
 .. In the left navigation pane, expand menu:Develop & train[].
@@ -114,9 +114,9 @@ Notice the new item named menu:Experiments (mlflow)[] and select it.
 
 .. Click menu:Create Experiment[] and enter `dummy experiment` as its name.
 
-.. Verify that you see the Experiments page for `dummy experiment` but there is no data on any of its pages, such as menu:Traces[], menu:Sessions[], or menu:Prompts[].
-
-.. Creating an empty experiment is sufficient to prove that your MLflow instance can connect to its database and artifacts storage.
+.. Verify that you see the Experiments page for `dummy experiment` and that there is no data on any of its pages, such as menu:Traces[], menu:Sessions[], or menu:Prompts[].
++
+Creating an empty experiment is sufficient to prove that your MLflow instance can connect to its database and artifacts storage.
 
 .. You can, alternatively, open the upstream MLflow web interface by clicking the menu:applications[] menu, near the top right of the navigation bar close to the help icon, and selecting menu:MLflow[].
 You should not need it: all functionality you need for this course is available from the RHOAI dashboard.

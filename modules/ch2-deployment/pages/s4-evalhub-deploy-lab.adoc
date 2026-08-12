@@ -31,7 +31,7 @@ If you already deployed MLflow, and you are in a hurry and need to quickly enabl
 You will enable TrustyAI on your Data Science Cluster singleton resource and deploy a development instance of the EvalHub server.
 Then you will use a shell to test connectivity and health of your EvalHub server.
 
-As you perform this activity, you will alternate between three browser tabs:
+As you perform this activity, you will alternate between two browser tabs:
 
 * The Red Hat OpenShift web console
 * The Red Hat OpenShift AI (RHOAI) dashboard
@@ -83,7 +83,7 @@ This manifest provides a minimal PostgreSQL deployment.
 It is not listed here because of its size, but you would not use such a simplistic database deployment for a real development or production instance of EvalHub.
 
 You are free to use your preferred OpenShift template, helm chart, or database operator instead.
-Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.
+Ideally, use something that is supported by your organization's IT department, and for which you can expect product support from a vendor.
 ====
 
 .. In the left navigation pane, select menu:Home[Projects] and, in the search field, enter `redhat-ods`.
@@ -91,20 +91,20 @@ Then click the menu:redhat-ods-applications[] project.
 
 .. In the toolbar, click the menu:&#43;[] icon, with tooltip "Quick create" and select menu:Import YAML[].
 
-.. In the *Import YAML* page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:Create[].
+.. On the *Import YAML* page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click menu:Create[].
 
 .. You should see a page with the message `Resources successfully created`. 
-Click on the menu:evalhubdb[] deployment, the one with a "D" icon.
+Click the menu:evalhubdb[] deployment, the one with a "D" icon.
 
 .. In its deployment details page, wait until you see a blue circle with a label of "1 Pod", indicating one pod from that deployment is running.
-Then scroll down to the *Conditions* table, and verify there is a row of type `Available` with status `True`.
+Then scroll down to the *Conditions* table and verify there is a row of type `Available` with status `True`.
 
 3. Configure your EvalHub instance by creating a secret and an EvalHub resource.
 
 .. Open the https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub-db-credentials.yaml[sample evalhub db secret^] from the course samples repository with a web browser and open the manifest `scripts/evalhub-db-credentials.yaml`.
 Copy the entire contents of the manifest to the clipboard.
 +
-The full secret manifest is listed here, just for your reference:
+The full secret manifest is listed here, for your reference:
 +
 [source,YAML,subs="verbatim,quotes"]
 ----
@@ -117,7 +117,7 @@ Then click menu:Create[From YAML].
 .. In the *Create Secret* page, enter the manifest for a secret which you already copied to your clipboard, and click menu:Create[].
 
 .. In the *Secret details* page, you can scroll down and click menu:Reveal values[] to see the database connection URL.
-It contains the database user name, password, and other connection parameters which match the database deployment you created in the previous step.
+It contains the database user name, password, and other connection parameters that match the database deployment you created in the previous step.
 
 .. In the left navigation pane, select menu:Home[API Explorer].
 Then enter `EvalHub` in the search field.
@@ -134,7 +134,7 @@ That manifest corresponds to the example from https://docs.redhat.com/en/documen
 * The correct internal URL of the MLflow server
 ====
 +
-The full manifest is listed here, just for your reference:
+The full manifest is listed here, for your reference:
 +
 [source,YAML,subs="verbatim,quotes"]
 ----
@@ -144,14 +144,14 @@ include::1@samples:scripts:example$evalhub.yaml[]
 .. In the EvalHub resource details page, select the menu:Instances[] tab and verify that the selected project is still `redhat-ods-applications`.
 Then click menu:Create EvalHub[].
 
-.. In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest which you already copied to the clipboard.
+.. In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest, which you already copied to the clipboard.
 
 .. Click menu:Create[] and, in the EvalHub details page, wait until the `Ready` condition is `True`.
 
 === Test your EvalHub server using the RHOAI dashboard
 
-[start=3]
-3. Verify that EvalHub is available from the RHOAI dashboard.
+[start=4]
+4. Verify that EvalHub is available from the RHOAI dashboard.
 
 .. Open your RHOAI dashboard.
 If it is already open, refresh your browser window so it picks up changes to the dashboard pages and navigation.
@@ -166,8 +166,8 @@ Do _not_ click any of them: Just seeing the list is sufficient to prove that you
 
 === Test your EvalHub server using a shell
 
-[start=4]
-4. Verify that your EvalHub server is healthy.
+[start=5]
+5. Verify that your EvalHub server is healthy.
 +
 NOTE: The shell commands in this course assume a Bash shell on Fedora Linux.
 If your work machine runs Windows or macOS, you should either install a Bash shell or connect to the bastion host of your demo environment using SSH.
@@ -186,7 +186,7 @@ $ *curl -sk $EVALHUB_URL/api/v1/health*
 {"status":"healthy","timestamp":"2026-07-27T23:24:06.894598885Z","build":"0.3.0"}
 ----
 
-5. Install the EvalHub CLI in a Python virtual environment.
+6. Install the EvalHub CLI in a Python virtual environment.
 
 .. Install the EvalHub CLI using `pip`.
 It should work with any version of Python from 3.12 on.
@@ -242,7 +242,7 @@ $ *evalhub providers list*
 
 After completing these steps, you have verified that you have a minimal but functional EvalHub instance, which you can use to run evaluation jobs.
 
-== What's next
+== What is next
 
 With both MLflow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.
 
