@@ -186,47 +186,35 @@
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending Review
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_mlflow_assessments_and_evaluations"><a class="anchor" href="#_mlflow_assessments_and_evaluations"></a>MLflow assessments and evaluations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>MLflow provides observability of gen AI applications in the form of <em>traces</em> which record data about the conversation between an application and an LLM, such as:</p>
+<p>MLflow provides observability of gen AI applications in the form of <em>traces</em>, which record data about the conversation between an application and an LLM, such as:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>inputs: system prompts, user prompts, tools lists, and other data in the context of an LLM.</p>
+<p>Inputs: system prompts, user prompts, tools lists, and other data in the context of an LLM.</p>
 </li>
 <li>
-<p>outputs: responses returned by an LLM.</p>
+<p>Outputs: responses returned by an LLM.</p>
 </li>
 <li>
-<p>attributes: model name, context window size, and user-defined values.</p>
+<p>Attributes: model name, context window size, and user-defined values.</p>
 </li>
 <li>
-<p>metrics: time to first token, execution time in the LLM, token cost.</p>
+<p>Metrics: time to first token, execution time in the LLM, and token cost.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Traces record multiple <em>spans</em> which are internal conversations between an application and an LLM before it produces the final response, for example when an LLM requests tool calls, and they can be grouped into <em>sessions</em> for interactive conversations.</p>
+<p>Traces record multiple <em>spans</em>, which are internal conversations between an application and an LLM before it produces the final response, for example, when an LLM requests tool calls, and they can be grouped into <em>sessions</em> for interactive conversations.</p>
 </div>
 <div class="paragraph">
-<p>Traces and sessions are grouped in <em>experiments</em> which in turn are grouped in <em>workspaces</em>.
+<p>Traces and sessions are grouped in <em>experiments</em>, which, in turn, are grouped in <em>workspaces</em>.
 A workspace in MLflow maps to an OpenShift project or Kubernetes namespace.</p>
 </div>
 <div class="paragraph">
@@ -246,15 +234,15 @@ And that is assuming your agent deals only with text.
 MLflow also supports the concept of <em>LLM judges</em> where you use an LLM to perform an assessment.</p>
 </div>
 <div class="paragraph">
-<p>The LLM which runs a judge is usually different from the LLM used by an application, though it could be the same one.
+<p>The LLM that runs a judge is usually different from the LLM used by an application, though it could be the same one.
 Some models perform better as judges than at tool calling, for example.
-Or some tasks may perform well with a small model, but judging their responses require a larger model.</p>
+Or some tasks may perform well with a small model, but judging their responses requires a larger model.</p>
 </div>
 <div class="paragraph">
 <p>MLflow provides a number of predefined LLM judges, which are basically prompts which are ready to use, but you can create your custom judges and define their prompts yourself.</p>
 </div>
 <div class="paragraph">
-<p>An MLflow evaluation uses an <em>evaluation data set</em> which provides not only inputs (prompts) for the application being evaluated, but also expected responses.
+<p>An MLflow evaluation uses an <em>evaluation data set</em>, which provides not only inputs (prompts) for the application being evaluated, but also expected responses.
 LLM judges usually perform their assessments by comparing the actual response with the expected response from the evaluation data set.</p>
 </div>
 <div class="paragraph">
@@ -264,7 +252,7 @@ LLM judges usually perform their assessments by comparing the actual response wi
 <p>The upstream MLflow also supports other ways of running evaluations, such as defining jobs that perform post-processing of stored traces, but these capabilities are not yet supported as part of Red Hat OpenShift AI (RHOAI) because they depend on components of MLflow, such as its own AI gateway, which are not included with RHOAI.</p>
 </div>
 <div class="paragraph">
-<p>Despite that limitation, nothing prevents you from emulating such capability by creating custom code using the MLflow SDK and running it from Jupyter notebooks, Kubeflow pipelines, or even OpenShift pipelines, among other alternatives.</p>
+<p>Despite that limitation, nothing prevents you from emulating such capability by creating custom code ny using the MLflow SDK and running it from Jupyter notebooks, Kubeflow pipelines, or even OpenShift pipelines, among other alternatives.</p>
 </div>
 </div>
 </div>
@@ -310,11 +298,11 @@ The list can mix custom scorers and built-in scorers.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>Evaluation data sets could contain many other keys, some of which are specific to LLM judges, for example to indicate you expect a helpful or formal tone, or to indicate that you expect that the response includes a plan or reasoning before delivering the final response.</p>
+<p>Evaluation data sets could contain many other keys, some of which are specific to LLM judges, for example, to indicate you expect a helpful or formal tone, or to indicate that you expect that the response includes a plan or reasoning before delivering the final response.</p>
 </div>
 <div class="paragraph">
 <p>Finally, a predictor function takes a single string argument, which is the user prompt, and returns a string result, which is the final response.
-It is responsible for setting up your agentic harness, for example its system prompt, tool lists, and RAG sources.</p>
+It is responsible for setting up your agentic harness, for example, its system prompt, tool lists, and RAG sources.</p>
 </div>
 <div class="paragraph">
 <p>A predictor function is also expected to set up MLflow tracing, if the actual application does not.</p>
@@ -355,7 +343,7 @@ results = mlflow.genai.evaluate(
 They usually consider only the responses from LLMs, ignoring everything else from either the trace or evaluation data sets.</p>
 </div>
 <div class="paragraph">
-<p>A scorer function is decorated with <code>@scorer</code> and could just return a boolean or numeric value, but it is recommended that scorer functions return a <code>Feedback</code> object which includes a reasoning for its assessment.
+<p>A scorer function is decorated with <code>@scorer</code> and could just return a boolean or numeric value, but it is recommended that scorer functions return a <code>Feedback</code> object that includes a reasoning for its assessment.
 MLflow evaluations record that reasoning in traces to support human verification and troubleshooting.</p>
 </div>
 </div>
@@ -365,7 +353,7 @@ MLflow evaluations record that reasoning in traces to support human verification
 <div class="sectionbody">
 <div class="paragraph">
 <p>MLflow provides a number of <a href="https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined/#available-judges" target="_blank" rel="noopener">built-in judges</a>, from generic ones such as <code>RelevanceToQuery</code> or <code>Correctness</code> to very specific ones that assess the usage of RAG sources and tool calls.
-They also include judges specialized in multi-turn conversations, for example <code>UserFrustration</code>.</p>
+They also include judges specialized in multi-turn conversations, for example, <code>UserFrustration</code>.</p>
 </div>
 <div class="paragraph">
 <p>Those built-in judges use the OpenAI API to invoke a model and by default require valid OpenAI keys for cloud-based models, but can be configured by setting standard OpenAI environment variables to invoke self-hosted models.</p>
@@ -382,7 +370,7 @@ You do not require setting OpenAI environment variables to use self-hosted model
 <div class="paragraph">
 <p>Creating an MLflow evaluation requires writing some code using the MLflow SDK, which is available for Python and TypeScript.
 Does that mean developers using other programming languages are excluded from tapping into MLflow evaluations?
-No!</p>
+No.</p>
 </div>
 <div class="paragraph">
 <p>Because the predictor function encapsulates your entire AI application and its harness, it could invoke your actual application directly, by using the operating system <code>exec</code> system call or by invoking a REST API endpoint.</p>
@@ -393,8 +381,8 @@ If your application does not, it is worth considering such a refactoring.
 Improving testability of an application usually brings numerous maintenance benefits.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, you can write code which retrieves traces of your application from MLflow and run evaluations on those traces.
-This course will not provide an example of either approach, but the <a href="https://mlflow.org/docs/latest/genai/" target="_blank" rel="noopener">upstream documentation</a> of MLflow should provide sufficient information for implementing those approaches.</p>
+<p>Alternatively, you can write code that retrieves traces of your application from MLflow and run evaluations on those traces.
+This course does not provide an example of either approach, but the <a href="https://mlflow.org/docs/latest/genai/" target="_blank" rel="noopener">upstream documentation</a> of MLflow should provide sufficient information for implementing those approaches.</p>
 </div>
 </div>
 </div>
@@ -402,7 +390,7 @@ This course will not provide an example of either approach, but the <a href="htt
 <h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Next, you evaluate a chat application using a deterministic scorer and view the results as MLflow traces.</p>
+<p>Next, you evaluate a chat application by using a deterministic scorer and view the results as MLflow traces.</p>
 </div>
 </div>
 </div>

@@ -185,18 +185,6 @@
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending Review
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -257,10 +245,10 @@ Select <b class="menuref">All projects</b> in the <b class="menuref">Project</b>
 Then enter <code>my</code> in the <strong>Filter by name</strong> field and click <b class="menuref">my-first-model</b> in the list of projects.</p>
 </li>
 <li>
-<p>In the <strong>Projects</strong> page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">test-mlflow</b> to open its Jupyter Lab in a new browser tab.</p>
+<p>On the <strong>Projects</strong> page for <code>my-first-model</code>, select the <b class="menuref">Workbenches</b> tab and click <b class="menuref">test-mlflow</b> to open its Jupyter Lab in a new browser tab.</p>
 </li>
 <li>
-<p>Copy the <code>simple-agent</code> notebook to a new file which you will edit.
+<p>Copy the <code>simple-agent</code> notebook to a new file that you will edit.
 In the left pane of JupyterLab, enter the <b class="menuref">rhoai-mlflow-samples/evals</b> directory, right-click <b class="menuref">simple-agent.ipynb</b>, and select <b class="menuref">Duplicate</b>.
 Then right-click the new file <b class="menuref">simple-agent-Copy1.ipynb</b> and select <b class="menuref">Rename</b>.
 Enter <code>llm-eval.ipynb</code> as the new file name.
@@ -277,7 +265,7 @@ The output of the last cell should provide a short explanation about the differe
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-the code uses the prompt added to the MLflow prompt registry during the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.
+The code uses the prompt added to the MLflow prompt registry during the <a href="s2-deterministic-lab.html" class="xref page">previous lab</a>.
 </td>
 </tr>
 </table>
@@ -321,7 +309,7 @@ os.environ["OPENAI_API_KEY"] = "no token"</strong></code></pre>
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the new variables.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the new variables.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -345,7 +333,7 @@ correctness_judge = Correctness(
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -371,7 +359,7 @@ feedback = correctness_judge(
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -402,7 +390,7 @@ Running the cell produces an output similar to the following.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Select the first cell that you just added to the notebook, the one starting with <code>###Cell 7: LLM judges</code> and append code to create a custom judge.</p>
+<p>Select the first cell that you just added to the notebook, the one starting with <code>###Cell 7: LLM judges</code>, and append code to create a custom judge.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 7: LLM judges
@@ -438,11 +426,11 @@ from mlflow.genai.judges import make_judge
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
-<p>Select the second cell that you just added to the notebook, the one starting with <code>###Cell 8: test judges</code> and append code to test the custom judge.</p>
+<p>Select the second cell that you just added to the notebook, the one starting with <code>###Cell 8: test judges</code>, and append code to test the custom judge.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">###Cell 8: test judges
@@ -474,7 +462,7 @@ print(f"• Test judge with RHEL (expanded)': {feedback.value}\n  {feedback.rati
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -503,7 +491,7 @@ Test LLM judge:
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>Create code for running an MLflow evaluation using the two LLM judges you just tested.</p>
+<p>Create code for running an MLflow evaluation using the two LLM judges you tested in the previous steps.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -538,7 +526,7 @@ eval_dataset = [
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -567,9 +555,9 @@ except Exception as e:
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the evaluation.
-Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it run all scorers over the complete evaluation data set.
-When done, you should see an output similar to the following.</p>
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon, with tooltip "Run this cell and advance" to run the evaluation.
+Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it ran all scorers over the complete evaluation data set.
+When it is done, you should see an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">2026/08/03 16:47:51 INFO mlflow.models.evaluation.utils.trace: Auto tracing is temporarily enabled during the model evaluation for computing some metrics and debugging. To disable tracing, call `mlflow.autolog(disable=True)`.
@@ -581,18 +569,18 @@ Evaluating: 100%|██████████| 2/2 [Elapsed: 00:08, Remaining:
 </div>
 </li>
 <li>
-<p>View evaluation results on MLflow traces</p>
+<p>View evaluation results on MLflow traces.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
 <p>Switch to your RHOAI dashboard, which should already be in the details page for the <code>simple-agent</code> experiment. If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <b class="menuref">Project</b> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
 </li>
 <li>
-<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides a few new traces, the new colums <code>Correctness</code> and <code>expanded_acronyms</code>.
+<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides a few new traces, the new columns <code>Correctness</code> and <code>expanded_acronyms</code>.
 If you do not see these changes, click the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
 </li>
 <li>
-<p>Consider just the two most recent traces, which contains the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their <code>Correctness</code> column to view the reasoning for the <code>Fail</code> and <code>Pass</code> grades of each trace.</p>
+<p>Consider just the two most recent traces, which contain the results of the last MLflow evaluation run on a sample of two prompts, and mouse over the values on their <code>Correctness</code> column to view the reasoning for the <code>Fail</code> and <code>Pass</code> grades of each trace.</p>
 </li>
 <li>
 <p>On the same traces, mouse over the values of their <code>expanded_acronyms</code> column to view the reasoning between their <code>True</code> or <code>False</code> scores.</p>
@@ -607,7 +595,7 @@ It is frequent to use different models or even larger models for judges than the
 </li>
 <li>
 <p>You may get assessments and reasonings which seem odd or incorrect.
-It is the nature of LLMs that sometimes they hallucinate.
+It is the nature of LLMs to sometimes hallucinate.
 Feel free to run the evaluation multiple times, compare the responses of each attempt, and how the LLM judges assess each one.</p>
 </li>
 </ol>

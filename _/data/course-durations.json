@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3955,
+  "totalSeconds": 3949,
   "pageCount": 17,
   "pages": [
     {
@@ -30,52 +30,52 @@
     {
       "module": "ch2-deployment",
       "page": "index.adoc",
-      "seconds": 17
+      "seconds": 16
     },
     {
       "module": "ch2-deployment",
       "page": "s1-mlflow-architecture.adoc",
-      "seconds": 198
+      "seconds": 197
     },
     {
       "module": "ch2-deployment",
       "page": "s2-mlflow-deploy-lab.adoc",
-      "seconds": 142
+      "seconds": 141
     },
     {
       "module": "ch2-deployment",
       "page": "s3-evalhub-architecture.adoc",
-      "seconds": 207
+      "seconds": 206
     },
     {
       "module": "ch2-deployment",
       "page": "s4-evalhub-deploy-lab.adoc",
-      "seconds": 177
+      "seconds": 176
     },
     {
       "module": "ch3-evalhub",
       "page": "index.adoc",
-      "seconds": 21
+      "seconds": 20
     },
     {
       "module": "ch3-evalhub",
       "page": "s1-model-evaluation.adoc",
-      "seconds": 373
+      "seconds": 372
     },
     {
       "module": "ch3-evalhub",
       "page": "s2-evaluate-model-lab.adoc",
-      "seconds": 392
+      "seconds": 391
     },
     {
       "module": "ch4-mlflow",
       "page": "index.adoc",
-      "seconds": 18
+      "seconds": 17
     },
     {
       "module": "ch4-mlflow",
       "page": "s1-agentic-evaluation.adoc",
-      "seconds": 393
+      "seconds": 395
     },
     {
       "module": "ch4-mlflow",
@@ -85,7 +85,7 @@
     {
       "module": "ch4-mlflow",
       "page": "s3-llm-judge-lab.adoc",
-      "seconds": 515
+      "seconds": 516
     }
   ]
 }

@@ -182,21 +182,9 @@
 <dl>
 <dt class="hdlist1">Objective</dt>
 <dd>
-<p>Starting from an agent which already produces MLflow traces, create a deterministic scorer, and run an MLflow evaluation to verify response quality of that agent.</p>
+<p>Starting from an agent that already produces MLflow traces, create a deterministic scorer and run an MLflow evaluation to verify response quality of that agent.</p>
 </dd>
 </dl>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending review
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -267,7 +255,7 @@ Then enter <code>my</code> in the <strong>Filter by name</strong> field and clic
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>In the toolbar of the left pane of the Jupyter notebook, click the <b class="menuref">Git Clone</b> icon and, in the <strong>Clone a repo</strong> pop-up, enter <code>https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git</code> which is the URL of the course samples repository.
+<p>In the toolbar of the left pane of the Jupyter notebook, click the <b class="menuref">Git Clone</b> icon and, in the <strong>Clone a repo</strong> pop-up, enter <code>https://github.com/RedHatQuickCourses/rhoai-mlflow-samples.git</code>, which is the URL of the course samples repository.
 Click <b class="menuref">Clone</b>.
 You should see, in the bottom right, the message <code>successfully cloned</code>.</p>
 </li>
@@ -276,9 +264,9 @@ You should see, in the bottom right, the message <code>successfully cloned</code
 </li>
 <li>
 <p>Review the Python code for the agent.
-It is a simplistic chat application which sets a hardcoded system prompt and submits a hardcoded question to a llama model, which is predeployed on your demo instance, using the OpenAI API.</p>
+It is a simplistic chat application that sets a hardcoded system prompt and submits a hardcoded question to a llama model, which is predeployed on your demo instance, using the OpenAI API.</p>
 <div class="paragraph">
-<p>The code in the notebook is split into multiple cells for readability and it could be concatenated into a single Python script to run in a shell, but then it would require changes to use external URLs to access an inferenceservice and MLflow, and to use authentication tokens.</p>
+<p>The code in the notebook is split into multiple cells for readability, and it could be concatenated into a single Python script to run in a shell, but then it would require changes to use external URLs to access an inference service and MLflow, and to use authentication tokens.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -299,12 +287,23 @@ In the top toolbar of the notebook tab, click the <b class="menuref">fast-forwar
 In the <strong>Restart Kernel</strong> pop-up, click <b class="menuref">Restart</b>.</p>
 </li>
 <li>
-<p>Be patient while the first cell downloads Python packages from the RHOAI index, and the second cell submits to the Llama model a prompt asking what is RHEL.
-You can ignore any warnings about <code>IProgress</code> and <code>ipywidgets</code>.</p>
+<p>Be patient while the first cell downloads Python packages from the RHOAI index, and the second cell submits to the Llama model a prompt asking: "What is RHEL?"</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can ignore any warnings about <code>IProgress</code> and <code>ipywidgets</code>.
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>If all goes well, you should get a reasonable and correct response, though a rather long one.
-Follows an example from testing these instructions:</p>
+Following is an example from testing these instructions:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">**Red Hat Enterprise Linux (RHEL)**
@@ -336,7 +335,7 @@ In summary, RHEL is a commercial Linux distribution that requires a subscription
 <ol class="loweralpha" type="a">
 <li>
 <p>Switch to the RHOAI dashboard and, in the left navigation pane, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>.
-If the current project is not already <code>my-first-model</code> enter <code>my</code> in the <b class="menuref">Project</b> field and click <b class="menuref">my-first-model</b>.</p>
+If the current project is not already <code>my-first-model</code>, enter <code>my</code> in the <b class="menuref">Project</b> field and click <b class="menuref">my-first-model</b>.</p>
 </li>
 <li>
 <p>The <strong>Experiments</strong> page should display both the <code>garak-evalhub</code> experiment from the previous chapter and the <code>simple-agent</code> experiment from this activity.
@@ -382,16 +381,16 @@ You can see the complete code, ready to run evaluations, in the <code>determinis
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Copy the basic-agent notebook to a new file which you will edit.</p>
+<p>Copy the basic-agent notebook to a new file that you will edit.</p>
 <div class="paragraph">
-<p>Switch to your JupyterLab and, in its left pane, right click <b class="menuref">basic-agent.ipynb</b> and select <b class="menuref">Duplicate</b>.
+<p>Switch to your JupyterLab and, in its left pane, right-click <b class="menuref">basic-agent.ipynb</b> and select <b class="menuref">Duplicate</b>.
 Then right-click the new file <b class="menuref">basic-agent-Copy1.ipynb</b> and select <b class="menuref">Rename</b>.
 Enter <code>deterministic-eval.ipynb</code> as the new file name.
 Finally, double-click <b class="menuref">deterministic-eval.ipynb</b> to open the notebook in a new editor tab.</p>
 </div>
 </li>
 <li>
-<p>Enter, inside the cell, the code for a scorer function which checks the length of a response based on the number of words.</p>
+<p>In the cell, enter the code for a scorer function which checks the length of a response based on the number of words.</p>
 <div class="paragraph">
 <p>In the <code>deterministic-eval.ipynb</code> notebook, select the last cell, having the comment <code>###Cell 6: run the agent</code>.
 Then click, in the cell&#8217;s toolbar, the icon to <b class="menuref">Insert a cell bellow</b>.
@@ -439,7 +438,7 @@ def one_to_three_short_sentences(outputs: str) -&gt; Feedback:
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to define the function and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -473,7 +472,7 @@ print(f"Test scorer with a too long response: {feedback.value} - {feedback.ratio
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to run the test code.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to run the test code.
 Running the cell produces the following output.</p>
 <div class="listingblock">
 <div class="content">
@@ -518,7 +517,7 @@ eval_dataset = [
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to define the array and create a new notebook cell.
 Running the cell produces no output.</p>
 </li>
 <li>
@@ -556,8 +555,8 @@ except Exception as e:
 </div>
 </li>
 <li>
-<p>Click, in the cell&#8217;s toolbar, the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to run the evaluation.
-Monitor the evaluation progress meter, and wait until it reaches 100%, meaning it ran all scorers over the complete evaluation data set.
+<p>In the cell&#8217;s toolbar, click the <b class="menuref">play</b> icon with tooltip "Run this cell and advance" to run the evaluation.
+Monitor the evaluation progress meter and wait until it reaches 100%, meaning it ran all scorers over the complete evaluation data set.
 When done, you should see an output similar to the following.</p>
 <div class="listingblock">
 <div class="content">
@@ -577,7 +576,7 @@ When done, you should see an output similar to the following.</p>
 If it is not, select <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Experiments (MLflow)</b></span>, in the left navigation pane, and, in the <b class="menuref">Project</b> field, enter <code>my</code> and select <b class="menuref">my-first-model</b> and click <b class="menuref">simple-agent</b>.</p>
 </li>
 <li>
-<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides the two new traces, the new columns <code>short_response</code> which display results from the scorer function.
+<p>In the <code>simple-agent</code> experiment details page, click <b class="menuref">Traces</b> and notice, besides the two new traces, the new columns <code>short_response</code>, which display results from the scorer function.
 If you do not see these changes, click the <b class="menuref">Refresh</b> icon next to the <b class="menuref">Time range</b> field.</p>
 <div class="paragraph">
 <p>Also notice that the trace for the previous run of the agent, which did no evaluation, displays <code>null</code> for that column.</p>
@@ -587,7 +586,7 @@ If you do not see these changes, click the <b class="menuref">Refresh</b> icon n
 </div>
 </li>
 <li>
-<p>Click the trace ID or the request of the most recent trace, which is the first row of the traces table, to view its trace summary panel.
+<p>Click the trace ID, or the request of the most recent trace, which is the first row of the traces table, to view its trace summary panel.
 It should display an <strong>Assessment</strong> pane, with the value of the <code>short_response</code> scorer.
 Click the <b class="menuref">&gt;</b> icon to expand the feedback results and view the rationale for the result.</p>
 </li>
@@ -654,7 +653,7 @@ You can see the complete code, ready to use the new system prompt, in the <code>
 </li>
 <li>
 <p>Make the following changes to the code inside the cell to load and format the prompt from MLflow and use it as the system prompt.
-Even tough our new prompt contains no placeholders, it must still be formatted before passing to an LLM.</p>
+Even though our new prompt contains no placeholders, it must still be formatted before passing to an LLM.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">...
@@ -722,7 +721,7 @@ The summary at the top of the table should now split 50%/50% between <code>True<
 <div class="sect2">
 <h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
-<p>You created a scorer functions to assess the length of responses produced by the model, then you ran an evaluation which showed the responses were too long.
+<p>You created a scorer function to assess the length of responses produced by the model, then you ran an evaluation wthathich showed the responses were too long.
 Then you crafted a new system prompt, which you stored in the MLflow prompt registry, to direct the model to produce shorter responses.
 After testing the agent using the new system prompt, you ran the same evaluation again, proving that now responses are short, as desired.</p>
 </div>
@@ -730,7 +729,7 @@ After testing the agent using the new system prompt, you ran the same evaluation
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
+<h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Next, you evaluate the same application using built-in and custom LLM judges for more nuanced assessment.</p>
