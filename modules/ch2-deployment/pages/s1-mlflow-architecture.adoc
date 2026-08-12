@@ -4,9 +4,6 @@ Objective::
 
 Describe the architecture of MLflow and explain how to enable and access it in Red Hat OpenShift AI.
 
-
-WARNING: Pending Review.
-
 == Architecture of MLflow
 
 MLflow is based on a client/server architecture.

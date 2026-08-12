@@ -4,8 +4,6 @@ Objective::
 
 Describe the architecture of EvalHub and explain how to enable, access, and use its CLI with Red Hat OpenShift AI.
 
-WARNING: Pending Review
-
 == Architecture of EvalHub
 
 The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs that are ultimately implemented as Kubernetes jobs.
