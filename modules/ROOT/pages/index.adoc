@@ -25,7 +25,7 @@ On completing this course, you should be able to:
 
 * Deploy a development environment with MLflow and EvalHub
 
-* Evaluate LLMs using EvalHub
+* Evaluate large language models (LLMs) using EvalHub
 
 * Evaluate agents using MLflow
 
@@ -33,7 +33,7 @@ On completing this course, you should be able to:
 
 * Software developers working on agentic applications and agentic harnesses.
 
-* Red Hat and Partner roles that perform demonstrations, PoC and PoV of MLflow with Red Hat OpenShift AI, such as Solutions Architects.
+* Red Hat and Partner roles that perform demonstrations, PoC, and PoV of MLflow with Red Hat OpenShift AI, such as Solutions Architects.
 
 * Red Hat and Partner roles that implement and support MLflow and EvalHub with Red Hat OpenShift AI, such as Services Consultants, Technical Account Managers, and Customer Support Engineers.
 
