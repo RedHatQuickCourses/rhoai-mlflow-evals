@@ -4,8 +4,6 @@ Objective::
 
 Navigate the provided demo environment, identify enabled features of Red Hat OpenShift AI 3.4, and verify the predeployed Llama model.
 
-WARNING: Pending Review
-
 == Before you begin
 
 You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:
@@ -19,7 +17,7 @@ In this lab, you will log in to the RHOAI dashboard and explore its main feature
 
 === Inspect the existing projects and deployed models
 
-1. Access the RHOAI Dashboard.
+1. Access the RHOAI dashboard.
 
 .. Navigate to the RHOAI dashboard URL of your demo environment.
 
@@ -27,11 +25,11 @@ In this lab, you will log in to the RHOAI dashboard and explore its main feature
 
 2. Explore the precreated project.
 +
-Your RHOAI instance contains a model which is already deployed in a regular project named `my-first-model` -- which is *not* an AI project.
+Your RHOAI instance contains a model that is already deployed in a regular project named `my-first-model` -- which is *not* an AI project.
 +
 That model takes up all GPU capacity available to your RHOAI instance, so any change to the model deployment requires that you stop it and restart after making changes.
 
-.. In the left pane, select menu:AI hub[Models] and then select the menu:Deployments[] tab.
+.. In the left pane, select menu:AI hub[Models], and then select the menu:Deployments[] tab.
 
 .. In the menu:Project[] field, enter `my` and select the menu:my-first-model[] project.
 +
@@ -83,9 +81,9 @@ Select menu:Gen AI studio[AI asset endpoints] and then select the menu:MCP serve
 +
 The page should list no MCP servers.
 
-6. Verify that the Evaluations page from RHOAI dashboard is not functional.
+6. Verify that the Evaluations page from the RHOAI dashboard is not functional.
 
-.. In the left pane select the menu:Develop & train[Evaluations].
+.. In the left pane, select the menu:Develop & train[Evaluations].
 
 .. The *Evaluations* page displays the messages `Evaluations unavailable` and `To use evaluations, enable the evaluation service using the Trusty AI operator`.
 

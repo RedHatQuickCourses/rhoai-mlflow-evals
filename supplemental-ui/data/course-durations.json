@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 3962,
+  "totalSeconds": 3954,
   "pageCount": 17,
   "pages": [
     {
@@ -15,17 +15,17 @@
     {
       "module": "ch1-evaluations",
       "page": "index.adoc",
-      "seconds": 22
+      "seconds": 21
     },
     {
       "module": "ch1-evaluations",
       "page": "s1-evaluation-concepts.adoc",
-      "seconds": 559
+      "seconds": 553
     },
     {
       "module": "ch1-evaluations",
       "page": "s3-explore-lab.adoc",
-      "seconds": 141
+      "seconds": 140
     },
     {
       "module": "ch2-deployment",
