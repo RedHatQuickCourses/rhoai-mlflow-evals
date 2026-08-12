@@ -74,8 +74,8 @@ In the menu:Quick security smoke test[] card, click menu:Use this benchmark[].
 
 .. Enter `garak-quick` in the *Evaluation name* field and, in the *Create new experiment* field, enter `garak-evalhub`
 +
-NOTE: There is an issue with the RHOAI dashboard which prevents it from retrieving names of existing experiments with MLflow.
-You must always create a new experiment, and ensure the name does not match any existing experiment in the same project nor the name of experiments that were marked for deletion.
+NOTE: There is an issue with the RHOAI dashboard that prevents it from retrieving names of existing experiments with MLflow.
+You must always create a new experiment and ensure the name does not match any existing experiment in the same project or the name of experiments that were marked for deletion in MLflow.
 If you use the EvalHub CLI, you can either add to existing experiments or create new ones.
 
 .. Enter `llama-32-3b-instruct` in the *Model or agent name* field, and paste the URL you copied in the previous step in the *Endpoint URL* field.
@@ -108,7 +108,6 @@ You can also click menu:1 of 1[] under *Completions* to view the Kubernetes pod 
 === Submit an evaluation job using the CLI
 
 [start=6]
-
 6. Select a different benchmark to run.
 
 .. Open a shell, log in to OpenShift using the `oc` command, and activate the Python virtual environment you created in a xref:ch2-deployment:s4-evalhub-deploy-lab.adoc[previous lab], then pass your OpenShift authentication token to the EvalHub CLI.
@@ -235,7 +234,6 @@ NAME                                                              READY   STATUS
 === View evaluation results on MLflow
 
 [start=8]
-
 8. View the two experiments from EvalHub in MLflow.
 
 .. Return to the RHOAI dashboard and, in its left navigation pane, select menu:Develop & train[Experiments (MLflow)].
@@ -245,19 +243,19 @@ In the menu:Projects[] field, enter `my` and select menu:my-first-model[].
 Click menu:garak-evalhub[].
 
 .. In the *Experiments* page for the `garak-evalhub` experiment, select menu:Evaluation runs[]. 
-It should display two runs, and their names match their EvalHub evaluation IDs.
-Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that got a `Pass` score.
+It should display two runs, and their names should match their EvalHub evaluation IDs.
+Click the one with a green ball, which is the most recent and corresponds to the second evaluation run, that received a `Pass` score.
 
 .. That experiment contains no metrics, but select its menu:Overview[] tab to visualize the same metrics you saw with the EvalHub CLI or with the *Evaluations* page of the RHOAI dashboard.
 
 === Summary
 
-You performed two evaluation runs, using the Garak evaluation framework: once using the RHOAI dashboard, and the other using the EvalHub CLI.
+You performed two evaluation runs, using the Garak evaluation framework: first using the RHOAI dashboard, and then using the EvalHub CLI.
 Then you visualized their results using both EvalHub and MLflow.
 
-== What's next
+== What is next
 
-Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications using the MLflow SDK.
+Now that you have evaluated models with EvalHub, the next chapter focuses on evaluating agentic applications by using the MLflow SDK.
 
 ////
 Evaluate a self-hosted model

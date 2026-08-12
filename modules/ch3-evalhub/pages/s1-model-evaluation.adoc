@@ -35,7 +35,7 @@ It does not yet offer discoverability of the arguments required by each provider
 Some benchmarks might take a long time to run and require large data sets from public sources such as Hugging Face.
 They may also require authentication credentials to access those sources and LLMs, which are provided as Kubernetes secrets.
 
-In this course, we do not present the EvalHub APIs and SDK.
+This course does not present the EvalHub APIs and SDK.
 It focuses instead on the front-ends offered by the RHOAI dashboard and the EvalHub CLI.
 Refer to the https://eval-hub.github.io[EvalHub community docs^] for information about using the SDK in your Jupyter notebooks and Kubeflow pipelines.
 
@@ -47,7 +47,7 @@ It corresponds to an OpenShift project or Kubernetes namespace.
 Users and applications (pods) from a tenant need access to the EvalHub server, through Kubernetes RBAC.
 The easy way of granting access is by setting the label `evalhub.trustyai.opendatahub.io/tenant` on a namespace, as long as you have deployed your EvalHub resource on the `redhat-ods-applications` namespace from RHOAI.
 
-This label triggers the TrustyAI operator to add service accounts and role bindings which enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
+This label triggers the TrustyAI operator to add service accounts and role bindings that enable Kubernetes jobs from EvalHub, on that namespace, to connect to the EvalHub server and use its APIs.
 You may require additional role bindings to access EvalHub from your JupyterLab and Kubeflow pipeline pods.
 
 The same label enables network connections from pods in a namespace to the EvalHub server, which are restricted by Kubernetes network policies.
@@ -78,17 +78,17 @@ Using the EvalHub CLI, included with the EvalHub SDK for Python, you can create 
 You can also list available providers and their benchmarks, with or without descriptions.
 
 It is recommended that you install the EvalHub CLI in a Python virtual environment, using the `pip` command.
-Refer to the next activity in this course for the complete syntax of installation command and examples of using the EvalHub CLI.
+Refer to the next activity in this course for the complete syntax of installation commands and examples of using the EvalHub CLI.
 
-Most operations using the CLI follow a command structure of two words plus arguments:
+Most operations using the CLI follow a command structure of two words, plus optional arguments:
 
 [source,console,subs="verbatim,quotes"]
 --
-$ evalhub _resource_ _operation_
+$ evalhub _resource_ _operation_ [_arguments_]
 --
 
 Examples of _resource_ are `config`, `collections`, `providers`, and `eval`.
-Valid _operation_ varies with the resource, for example `create` and `list` for `providers` or `run` and `status` for `evals`.
+Valid _operation_ values vary with the resource, for example `create` and `list` for `providers` or `run` and `status` for `evals`.
 
 The EvalHub CLI also accepts single-word commands, such as `health` and `version`, and the `--help` switch.
 Try the following.
@@ -100,22 +100,22 @@ $ evalhub eval --help
 $ evalhub eval run --help
 --
 
-In the output of the last command, pay special attention to the `-p` switch, which enables passing of provider and benchmark-specific parameters to the evaluation job using the `key=value` format.
+In the output of the last command, pay special attention to the `-p` switch, which enables passing of provider- and benchmark-specific parameters to the evaluation job using the `key=value` format.
 A typical `evalhub eval run` command line may be quite long, including multiple switches, especially multiple `-p` switches.
 
-The `evalhub eval` command will be the most used, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
-It also enables monitoring the status such jobs, canceling them, and viewing their results, once they are complete.
+You will like use the `evalhub eval` command the most, because it allows creating jobs to run individual benchmarks, multiple benchmarks from the same provider, and benchmark collections.
+It also enables monitoring the status of such jobs, canceling them, and viewing their results, once they are complete.
 
 == Troubleshooting evaluation runs
 
-If an evaluation job fails unexpectedly it may be necessary to collect logs from its Kubernetes pod for troubleshooting.
+If an evaluation job fails unexpectedly, it may be necessary to collect logs from its Kubernetes pod for troubleshooting.
 
-For each EvalHub evaluation job there is a Kubernetes job, and for each such Kubernetes job there might be one or more pods. 
+For each EvalHub evaluation job, there is a Kubernetes job, and for each such Kubernetes job, there might be one or more pods. 
 If an evaluation pod terminates unexpectedly, its Kubernetes job will retry, by creating another pod, and you might see new pods which also fail.
 
-EvalHub evaluation jobs are identified by an autogenerated ID which is set to the `job_id` label of its associated Kubernetes resources.
+EvalHub evaluation jobs are identified by an autogenerated ID, which is set to the `job_id` label of its associated Kubernetes resources.
 
-So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and then use the ID to filter for Kubernetes jobs and pods using either the OpenShift web console or its `oc` command.
+So you retrieve the ID using either the RHOAI dashboard or the EvalHub CLI and then use the ID to filter for Kubernetes jobs and pods by using either the OpenShift web console or its `oc` command.
 
 From there, you perform troubleshooting using the usual Kubernetes and OpenShift features, such as viewing events from `oc describe` or container logs from `oc logs`.
 
