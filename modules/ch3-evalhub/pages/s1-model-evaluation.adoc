@@ -4,8 +4,6 @@ Objective::
 
 Describe the evaluation providers and benchmarks available in EvalHub and explain how to manage evaluation jobs and interpret their results.
 
-WARNING: Pending Review
-
 == Evaluation providers, benchmarks, and collections
 
 EvalHub runs evaluations as Kubernetes jobs, taking advantage of queuing, scheduling, and security from Red Hat OpenShift, but offers its own API for managing such jobs, instead of relying on Kubernetes custom resources.

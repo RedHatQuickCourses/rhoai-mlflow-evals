@@ -4,8 +4,6 @@ Objective::
 
 Run evaluation jobs on a self-hosted model using EvalHub, monitor their progress, and inspect results and metrics from the RHOAI dashboard.
 
-WARNING: Pending review
-
 == Before you begin
 
 You need access to the predeployed Red Hat OpenShift AI (RHOAI) instance provided in your lab environment. Ensure you have:
