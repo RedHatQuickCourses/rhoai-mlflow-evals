@@ -15,7 +15,7 @@ This is the second in a series of quick courses covering MLflow, which consists 
 
 . *Agent Evaluation with MLFLow and EvalHub on Red Hat OpenShift AI* (this course)
 
-IMPORTANT: Red Hat associates must enroll using the https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3DRHTP_COURSE_ID[Red Hat Learning Portal^], and Red Hat Partners must enroll using https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3DPTP_COURSE_ID[Red Hat Partner Connect^] to register this course in their learning history.
+IMPORTANT: Red Hat associates must enroll using the https://training-lms.redhat.com/sso/saml/auth/rhlpint?RelayState=deeplinkoffering%3D93435337[Red Hat Learning Portal^], and Red Hat Partners must enroll using https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D93435699[Red Hat Partner Connect^] to register this course in their learning history.
 
 == Objectives
 
