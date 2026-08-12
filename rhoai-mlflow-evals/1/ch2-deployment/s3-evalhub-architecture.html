@@ -204,7 +204,7 @@ Pending Review
 <h2 id="_architecture_of_evalhub"><a class="anchor" href="#_architecture_of_evalhub"></a>Architecture of EvalHub</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs which are ultimately implemented as Kubernetes jobs.</p>
+<p>The architecture of EvalHub is similar to that of Kubernetes controllers and operators in the sense that it manages and observes evaluation runs that are ultimately implemented as Kubernetes jobs.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -235,7 +235,7 @@ The RHOAI dashboard acts as an EvalHub client, and there is an EvalHub CLI tool 
 Among other potential clients for the EvalHub server are Jupyter notebooks and Kubeflow pipelines.</p>
 </div>
 <div class="paragraph">
-<p>The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and OCI container image which also store their evaluation results.</p>
+<p>The EvalHub server uses a PostgreSQL database to store the state of evaluation runs, including their metrics and pointers to the optional MLflow experiment and OCI container image, which also store their evaluation results.</p>
 </div>
 </div>
 </div>
@@ -262,7 +262,7 @@ Consequently, the Operator Lifecycle Manager (OLM) does not display the TrustyAI
 </ol>
 </div>
 <div class="paragraph">
-<p>Once the EvalHub resource is available, the <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> page of the RHOAI dashboard becomes functional and exhibits the <b class="menuref">Create new evaluation</b> button.</p>
+<p>When the EvalHub resource is available, the <span class="menuseq"><b class="menu">Develop &amp; train</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Evaluations</b></span> page of the RHOAI dashboard becomes functional and exhibits the <b class="menuref">Create new evaluation</b> button.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -288,7 +288,7 @@ Consequently, the Operator Lifecycle Manager (OLM) does not display the TrustyAI
 <p><code>evalhub.trustyai.opendatahub.io/tenant</code></p>
 </div>
 <div class="paragraph">
-<p>Without that label, network policies would prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
+<p>Without that label, network policies prevent pods in the project, including pods from Kubernetes jobs created by EvalHub itself to run evaluations, from connecting to the EvalHub server.
 The value assigned to the label does not matter.
 Only its key is necessary.</p>
 </div>

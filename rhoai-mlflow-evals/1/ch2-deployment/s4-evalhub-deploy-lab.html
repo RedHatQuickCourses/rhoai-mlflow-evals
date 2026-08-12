@@ -262,7 +262,7 @@ Pending review
 Then you will use a shell to test connectivity and health of your EvalHub server.</p>
 </div>
 <div class="paragraph">
-<p>As you perform this activity, you will alternate between three browser tabs:</p>
+<p>As you perform this activity, you will alternate between two browser tabs:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -343,7 +343,7 @@ It is not listed here because of its size, but you would not use such a simplist
 </div>
 <div class="paragraph">
 <p>You are free to use your preferred OpenShift template, helm chart, or database operator instead.
-Ideally, use something that is supported by your organization IT department, and for which you can expect product support from a vendor.</p>
+Ideally, use something that is supported by your organization&#8217;s IT department, and for which you can expect product support from a vendor.</p>
 </div>
 </td>
 </tr>
@@ -358,15 +358,15 @@ Then click the <b class="menuref">redhat-ods-applications</b> project.</p>
 <p>In the toolbar, click the <b class="menuref">&#43;</b> icon, with tooltip "Quick create" and select <b class="menuref">Import YAML</b>.</p>
 </li>
 <li>
-<p>In the <strong>Import YAML</strong> page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
+<p>On the <strong>Import YAML</strong> page, enter the manifests for a PVC, a deployment, and a service, which you already copied to your clipboard, and click <b class="menuref">Create</b>.</p>
 </li>
 <li>
 <p>You should see a page with the message <code>Resources successfully created</code>.
-Click on the <b class="menuref">evalhubdb</b> deployment, the one with a "D" icon.</p>
+Click the <b class="menuref">evalhubdb</b> deployment, the one with a "D" icon.</p>
 </li>
 <li>
 <p>In its deployment details page, wait until you see a blue circle with a label of "1 Pod", indicating one pod from that deployment is running.
-Then scroll down to the <strong>Conditions</strong> table, and verify there is a row of type <code>Available</code> with status <code>True</code>.</p>
+Then scroll down to the <strong>Conditions</strong> table and verify there is a row of type <code>Available</code> with status <code>True</code>.</p>
 </li>
 </ol>
 </div>
@@ -379,7 +379,7 @@ Then scroll down to the <strong>Conditions</strong> table, and verify there is a
 <p>Open the <a href="https://github.com/RedHatQuickCourses/rhoai-mlflow-samples/blob/main/scripts/evalhub-db-credentials.yaml" target="_blank" rel="noopener">sample evalhub db secret</a> from the course samples repository with a web browser and open the manifest <code>scripts/evalhub-db-credentials.yaml</code>.
 Copy the entire contents of the manifest to the clipboard.</p>
 <div class="paragraph">
-<p>The full secret manifest is listed here, just for your reference:</p>
+<p>The full secret manifest is listed here, for your reference:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -402,7 +402,7 @@ Then click <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa
 </li>
 <li>
 <p>In the <strong>Secret details</strong> page, you can scroll down and click <b class="menuref">Reveal values</b> to see the database connection URL.
-It contains the database user name, password, and other connection parameters which match the database deployment you created in the previous step.</p>
+It contains the database user name, password, and other connection parameters that match the database deployment you created in the previous step.</p>
 </li>
 <li>
 <p>In the left navigation pane, select <span class="menuseq"><b class="menu">Home</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">API Explorer</b></span>.
@@ -437,7 +437,7 @@ Copy the entire contents of the manifest to the clipboard.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>The full manifest is listed here, just for your reference:</p>
+<p>The full manifest is listed here, for your reference:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -468,7 +468,7 @@ spec:
 Then click <b class="menuref">Create EvalHub</b>.</p>
 </li>
 <li>
-<p>In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest which you already copied to the clipboard.</p>
+<p>In the YAML text editor, delete all of its sample contents and paste the EvalHub manifest, which you already copied to the clipboard.</p>
 </li>
 <li>
 <p>Click <b class="menuref">Create</b> and, in the EvalHub details page, wait until the <code>Ready</code> condition is <code>True</code>.</p>
@@ -482,7 +482,7 @@ Then click <b class="menuref">Create EvalHub</b>.</p>
 <div class="sect2">
 <h3 id="_test_your_evalhub_server_using_the_rhoai_dashboard"><a class="anchor" href="#_test_your_evalhub_server_using_the_rhoai_dashboard"></a>Test your EvalHub server using the RHOAI dashboard</h3>
 <div class="olist arabic">
-<ol class="arabic" start="3">
+<ol class="arabic" start="4">
 <li>
 <p>Verify that EvalHub is available from the RHOAI dashboard.</p>
 <div class="olist loweralpha">
@@ -511,7 +511,7 @@ Do <em>not</em> click any of them: Just seeing the list is sufficient to prove t
 <div class="sect2">
 <h3 id="_test_your_evalhub_server_using_a_shell"><a class="anchor" href="#_test_your_evalhub_server_using_a_shell"></a>Test your EvalHub server using a shell</h3>
 <div class="olist arabic">
-<ol class="arabic" start="4">
+<ol class="arabic" start="5">
 <li>
 <p>Verify that your EvalHub server is healthy.</p>
 <div class="admonitionblock note">
@@ -620,7 +620,7 @@ $ <strong>evalhub providers list</strong>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s next</h2>
+<h2 id="_what_is_next"><a class="anchor" href="#_what_is_next"></a>What is next</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>With both MLflow and EvalHub deployed, the next chapter introduces model evaluation using EvalHub providers and benchmarks.</p>

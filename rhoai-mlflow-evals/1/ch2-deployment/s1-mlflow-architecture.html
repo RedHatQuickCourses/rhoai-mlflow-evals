@@ -223,7 +223,7 @@ It just needs to send observability data to an MLflow server.</p>
 Use an S3 service for the artifact store, for scalability.</p>
 </div>
 <div class="paragraph">
-<p>The relational database stores metadata and tags which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
+<p>The relational database stores metadata and tags, which enables the MLflow server to relate all inputs, outputs, and observability data from a single conversation with an LLM to each other.
 PostgreSQL is a popular option for the MLflow database.</p>
 </div>
 </div>
@@ -250,7 +250,7 @@ Typically, a workspace corresponds to an application, and experiments correspond
 <h2 id="_the_mlflow_operator_and_rhoai"><a class="anchor" href="#_the_mlflow_operator_and_rhoai"></a>The MLflow operator and RHOAI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There is an MLflow operator included with Red Hat OpenShift AI (RHOAI), but this operator will not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
+<p>There is an MLflow operator included with Red Hat OpenShift AI (RHOAI); however this operator does not appear in the software catalog or in the list of installed operators managed by the Operator Lifecycle Manager (OLM).
 The MLflow operator is managed by the RHOAI operator itself.</p>
 </div>
 <div class="paragraph">
